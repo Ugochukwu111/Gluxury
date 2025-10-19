@@ -35,6 +35,15 @@ header ul li a:hover svg{
 header ul li a svg{
   margin-right: .5rem;
 }
+
+header ul li a.active{
+  background-color: var(--text-light-grey);
+}
+header ul li a.active svg{
+  transform: scale(.9);
+}
+
+
 .storage-number{
   font-weight: 700;
   position: absolute;
@@ -74,4 +83,8 @@ header ul li a svg{
 #sidebar-btn{
   padding: .5em;
   background-color: transparent;
+}
+
+.header-side-bar-container{
+  position: relative;
 }

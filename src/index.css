@@ -175,6 +175,11 @@ ul{
 .bg-light-red{background-color: var(--light-red);}
 
 
+/* font utils */
+.font-special{font-family:  var(--font-special);}
+.font-heading{font-family: var(--font-heading);}
+.font-body{font-family: var(--font-body);}
+
 
 /* ----- Shadows / Effects ----- */
 .shadow-card {

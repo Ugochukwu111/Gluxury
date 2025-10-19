@@ -6,7 +6,7 @@ export function Footer(){
       <div className="d-flex flex-column container">
         <div className="d-flex justify-s-around upper-container f-wrap">
           <div>
-            <h5>GLUXURY</h5>
+            <h5 className='font-special'>Gluxury</h5>
             <br />
             <p className='details'>
               Redefining luxury beauty with cutting-edge slegance. Experience the future of sophistication.
