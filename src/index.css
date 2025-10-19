@@ -1,0 +1,274 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+:root {
+  /* ===== Background ===== */
+  --bg-main: #fffafd;               /* soft pinkish-white background */
+  --bg-gradient-start: #fff3ff;     /* light pink top tone */
+  --bg-gradient-end: #f4e8ff;       /* light lavender bottom tone */
+
+  /* ===== Text Colors ===== */
+  --text-main: #2c2c2c;             /* main dark text */
+  --text-heading: #5e128d;          /* purple gradient text (GLUXURY logo) */
+  --text-subtle: #a48fb8;           /* soft gray-lavender for subtext */
+  --text-link: #f25cc0;             /* bright pink links/buttons */
+  --text-muted: #bdb1c7;  
+  --text-light-grey: #f5e3f3be;          /* muted footer or placeholder text */
+    /* ✅ Buy colors */
+  --green: #27ae60;          /* Vibrant emerald green background */
+  --light-green: #a8f0c1;        /* Light minty green text */
+
+  /* ❌ Delete colors */
+  --red: #e74c3c;       /* Bold coral red background */
+  --light-red: #f5b5ad; 
+
+  /* ===== Accent / UI Elements ===== */
+  --accent-pink: #f58ad8;           /* highlight pink (subscribe button, icons) */
+  --accent-purple: #b48eff;         /* secondary purple glow */
+  --accent-gold: #d4b252;           /* subtle gold for premium details */
+  --white: #ffffff;               /* white cards over gradient */
+  --card-shadow: rgba(212, 178, 255, 0.15); /* soft purple shadow */
+
+    /* ===== Gradient Buttons (Gluxury Signature) ===== */
+  --btn-gradient-start: var(--text-link);       /* bright pink #f25cc0 */
+  --btn-gradient-end: var(--accent-purple);     /* secondary purple glow #b48eff */
+
+  --btn-hover-gradient-start: var(--accent-pink);  /* soft highlight pink #f58ad8 */
+  --btn-hover-gradient-end: var(--text-heading);   /* deep purple #5e128d */
+
+  
+
+  /* FONT FAMILEIS */
+  --font-heading: "Outfit", serif;
+  --font-body: "Urbanist", sans-serif;
+  --font-special: "Great Vibes", cursive;
+}
+
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  line-height: 1.5;
+  min-height: 100svh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-heading);
+  line-height: 1.1;
+  letter-spacing: 0.5px;
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+
+/* HEADINGS */
+h1 {
+  font-size: clamp(2.2rem, 4vw + 1rem, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(1.8rem, 3vw + 0.8rem, 3.5rem);
+}
+
+h3 {
+  font-size: clamp(1.5rem, 2.5vw + 0.6rem, 2.5rem);
+}
+
+h4 {
+  font-size: clamp(1.3rem, 2vw + 0.4rem, 2rem);
+}
+
+h5 {
+  font-size: clamp(1.1rem, 1.5vw + 0.3rem, 1.6rem);
+}
+
+h6 {
+  font-size: clamp(1rem, 1vw + 0.2rem, 1.3rem);
+  font-weight: 600;
+}
+
+
+
+/* ===== Scrollbar Styling  ===== */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-pink);
+  border-radius: 10px;
+}
+
+a{
+  font-weight: 700;
+  display: block;
+   padding: .5em 1em;
+}
+svg{
+  transition: all 300ms ease;
+}
+a svg{
+  color: var(--text-main);
+}
+
+ul{
+  list-style: none;
+}
+
+
+
+/* BACKGROUND AND TEXT COLOR  UTILITIES*/
+.bg-main { background-color: var(--bg-main); }
+.bg-gradient {
+  background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
+}
+.bg-gradient:hover {
+  background: linear-gradient(90deg, var(--btn-hover-gradient-start), var(--btn-hover-gradient-end));
+  box-shadow: 0 6px 18px rgba(244, 158, 255, 0.35);
+  transform: translateY(-2px);
+}
+
+.bg-gradient-top {
+  background: linear-gradient(to top, var(--bg-gradient-end), var(--bg-gradient-start));
+}
+.bg-card { background-color: var(--card-bg); }
+
+/* ----- Text Colors ----- */
+.text-main { color: var(--text-main); }
+.text-heading { color: var(--text-heading); }
+.text-subtle { color: var(--text-subtle); }
+.text-link { color: var(--text-link); }
+.text-muted { color: var(--text-muted); }
+.text-white{  color:var(--white) ; }
+.text-green{color: var(--green);}
+.text-light-green{color:  var(--light-green);}
+.text-red{color: var(--red);}
+.text-light-red{color: var(--light-red);}
+.text-accent-pink { color: var(--accent-pink); }
+.text-accent-purple { color: var(--accent-purple); }
+.text-accent-gold { color: var(--accent-gold); }
+
+
+/* ----- Accent Colors ----- */
+.bg-accent-pink { background-color: var(--accent-pink); }
+.bg-accent-purple { background-color: var(--accent-purple); }
+.bg-accent-gold { background-color: var(--accent-gold); }
+.bg-green{background-color: var(--green);}
+.bg-light-green{background-color:  var(--light-green);}
+.bg-red{background-color: var(--red);}
+.bg-light-red{background-color: var(--light-red);}
+
+
+
+/* ----- Shadows / Effects ----- */
+.shadow-card {
+  box-shadow: 0 4px 20px var(--card-shadow);
+}
+.shadow-accent-purple {
+  box-shadow: 0 4px 20px rgba(180, 142, 255, 0.3);
+}
+
+/* ----- Buttons / Links (optional presets) ----- */
+.btn-link {
+  color: var(--text-link);
+  transition: all 0.3s ease;
+}
+.btn-link:hover {
+  color: var(--accent-pink);
+}
+
+.btn-accent {
+  background-color: var(--accent-pink);
+  color: #fff;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+.btn-accent:hover {
+  background-color: var(--accent-purple);
+}
+
+/* ===== Default Anchor & Button Reset ===== */
+a {
+  text-decoration: none;
+  color: var(--text-link);
+  transition: color 0.3s ease;
+}
+a:hover {
+  color: var(--accent-pink);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease;
+  padding: 1em  2em;
+  border-radius: 2rem;
+  margin: .25em;
+}
+
+input{
+  padding: .8em 2em;
+  width: 100%;
+  border-radius: 2rem;
+  border: 1px solid var(--text-muted);
+  transform: all 250ms ease;
+}
+input:focus{
+  outline: 1.5px solid var(--text-link);
+}
+
+/* LAYOUT UTILITIES */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ====== DISPLAYS ===== */
+.d-flex{display: flex;}
+.d-grid{display: grid;}
+.d-block{display: block;}
+.d-inline-b{display: inline-block;}
+
+/* FLEX DIRECTION */
+.flex-column{flex-direction: column;}
+.flex-row{flex-direction: row;}
+.f-wrap{flex-wrap: wrap;}
+.flex-1{flex: 1;}
+.bd{border: 2px solid red;}
+
+/* DISPLAY CENTERS */
+.flex-center{ display: flex; align-items: center; justify-content: center;}
+.grid-center{display: grid; place-items: center;}
+.block-center{display: block; margin-inline: auto;}
+
+
+/* FLEX PLACEMENTS */
+.justify-start{justify-content: start;}
+.justify-center{ justify-content: center; }
+.justify-s-between{justify-content: space-between;}
+.justify-s-around{justify-content: space-around;}
+.justify-s-evenly{justify-content: space-evenly;}
+.justify-end{justify-content: end;}
+.align-start{align-items: start;}
+.align-center{align-items: center;}
+.align-end{align-items: end;}
+
+.FWB{font-weight: 700;}

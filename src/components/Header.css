@@ -1,0 +1,77 @@
+.logo{
+  font-size: 1.5rem;
+  font-family: var(--font-special);
+  text-align: center;
+  padding: .5em;
+}
+
+header .lower-container{
+  padding: .8em 1.2em;
+  border: 1px solid var(--text-light-grey);
+}
+
+header ul{
+  list-style: none;
+}
+
+header ul li{
+  margin: 0 .25em;
+  border-radius: .8rem;
+}
+
+header ul li a{
+  align-items: center;
+  display: flex;
+  border-radius: inherit;
+  transition: all 250ms ease;
+  position: relative;
+}
+header ul li a:hover{
+  background-color: var(--text-light-grey);
+}
+header ul li a:hover svg{
+  transform: scale(.9);
+}
+header ul li a svg{
+  margin-right: .5rem;
+}
+.storage-number{
+  font-weight: 700;
+  position: absolute;
+  font-size: 1.1rem;
+  top: 0;
+  right: 0;
+  padding: .2em .3em;
+}
+
+ .searchProduct-container{
+  max-width: 600px;
+   margin-inline: .5em;
+   position: relative;
+}
+
+#searchProduct{
+  padding: .8em 4em;
+  width: 100%;
+  border-radius: 2rem;
+  border: 1px solid var(--text-muted);
+  transform: all 250ms ease;
+}
+#searchProduct:focus{
+  outline: 1.5px solid var(--text-link);
+}
+
+.lucide-search-icon{
+  color:  var(--text-muted);
+  position: absolute;
+  top: .6em;
+  left: 1em;
+}
+.searchProduct-container:focus-within .lucide-search-icon{
+  color: var(--text-link);
+  left: 1.5em;
+}
+#sidebar-btn{
+  padding: .5em;
+  background-color: transparent;
+}

@@ -1,0 +1,15 @@
+.announcement-container{
+  background-color: var(--text-heading);
+  display: flex;
+  justify-content: space-between;
+  padding: 2em 4.5em;
+  margin: 1em 2em;
+  border-radius: 1rem;
+  box-shadow: 2px 2px 18px var(--text-heading);
+}
+
+
+
+.announcement-container .details-container h2{
+  color: var(--);
+}
