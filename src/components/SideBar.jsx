@@ -27,7 +27,7 @@ export function SideBar({onToggleSideBar, ref}) {
 
         <div className="user-details-container">
           <figure>
-            <img src="" alt=" profile pic" />
+            <img src={null} alt=" profile pic" />
           </figure>
           <p className="user-name text-heading FWB">
             Gift Ugo

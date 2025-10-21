@@ -1,24 +1,47 @@
+/* REDEFINE GLOBAL STYLES  OF SOME MY HEADINGS*/
+h2 {
+  font-size: clamp(1.2rem, 3vw + 0.8rem, 2rem);
+  margin-bottom: .5em;
+}
+
+h3 {
+  font-size: clamp(.9rem, 2.5vw + 0.6rem, 1.3rem);
+}
+
+.cart-payment-container{
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+}
+
+.cart-payment-container >*{
+  margin: .5em;
+}
+
+.cart-details-card-container{
+  width: 100%;
+  max-width: 800px;
+}
+
+
+
 
 .cart-details-card{
-  border: 1px solid red;
-  margin: .5em;
+  border: 1px solid var(--text-main);
   display: flex;
-  align-items: stretch;
+  flex-direction: column;
   flex-wrap: wrap;
   padding: .8em;
-  border-radius: 1rem;
-  max-width: 900px;
-  margin-inline: auto;
+  margin: .25em;
 }
 
 .cart-details-card figure{
-  border: 2px solid red;
+  border: 1px solid var(--text-light-grey);
+  background-color: var(--text-light-grey);
   display: flex;
   border-radius: .5rem;
   min-width: 150px;
-
-
-  width: 280px; 
+  width: 180px; 
   aspect-ratio: 1/.8;
 }
 
@@ -31,23 +54,57 @@
 .cart-details-card .product-info-container{
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-  border-radius: inherit;
-  margin-inline: 1em;
-}
-
-.buy-product-btn-container{
-  flex-wrap: wrap;
-  margin-top: .5em;
-}
-
-.buy-product-btn-container button{
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   padding: .6em ;
-   min-width: 150px;
-}
-.buy-product-btn-container button svg{
   margin-left: .5em;
-} 
+}
+
+
+
+.delivery-options-container input{
+  display: flex;
+  width: 25px;
+  margin-right: .5em;
+}
+.delivery-options-container >*{
+  display: flex;
+  flex-direction: row;
+ margin: .5em 0;
+}
+
+
+.payment-summary-container{
+  border: 1px solid var(--text-main);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+}
+.payment-summary-container p{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: .25em 0;
+}
+
+@media(max-width: 1100px){
+  .cart-payment-container{
+    flex-direction: column-reverse;
+  }
+.cart-details-card-container{
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+}
+.payment-summary-container{
+  border: 1px solid var(--text-main);
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 700px;
+  margin-inline: auto;
+}
+.delivery-options-wrapper{
+  margin-top: 1em;
+}
+}

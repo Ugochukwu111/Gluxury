@@ -1,0 +1,31 @@
+/* this file is used for css of sign up and sign in pages  */
+
+
+
+form{
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid var(--text-link);
+  padding: 1.5em 1em;
+}
+
+form div {
+  width: 100%;
+  margin: .5em 0;
+}
+
+#submit-form-btn{
+  width: 100%;
+  font-weight: 700;
+  background-color: var(--text-heading);
+  color: var(--white);
+  margin: .5em 0;
+}
+
+
+#submit-form-btn svg{
+  margin-left: .5em;
+}

@@ -163,6 +163,7 @@ ul{
 .text-accent-pink { color: var(--accent-pink); }
 .text-accent-purple { color: var(--accent-purple); }
 .text-accent-gold { color: var(--accent-gold); }
+.text-grey{ color: var(--text-muted); }
 
 
 /* ----- Accent Colors ----- */
@@ -226,7 +227,21 @@ button {
   padding: 1em  2em;
   border-radius: 2rem;
   margin: .25em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+button svg{
+  margin-inline: .25em;
+}
+button:hover{
+  opacity: .9;
+}
+button:active{
+  opacity: .7;
+}
+
 
 input{
   padding: .8em 2em;
@@ -276,4 +291,13 @@ input:focus{
 .align-center{align-items: center;}
 .align-end{align-items: end;}
 
+
+.logo{
+  font-size: 1.5rem;
+  font-family: var(--font-special);
+  text-align: center;
+  padding: .5em;
+}
+
 .FWB{font-weight: 700;}
+.text-center{text-align: center;}
