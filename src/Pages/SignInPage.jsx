@@ -1,26 +1,23 @@
+// import './Auth.css'
 import { NavLink } from "react-router-dom";
 import './Auth.css'
 import GoogleIcon from '/images/google.png'
 
-export function SignUpPage() {
-  return (
-    <main className="grid-center">
+export function  SignInPage(){
+   return(
+      <main className="grid-center">
 
         <h1 className="logo">
-          Gluxury | Sign Up
+          Gluxury | Sign In
         </h1>
       
       <form>
         <p className="FWB text-heading text-center">
           <strong>
-            Made for women who value care, quality, and confidence.
+            Welcome Back Woman!
           </strong>
         </p>
         <br />
-        <div className="input-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-round-icon lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
-          <input type="text" placeholder="Full name:" id="name" name="name" autoComplete="fullname" />
-        </div>
 
         <div className="input-container">
           <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
@@ -32,7 +29,7 @@ export function SignUpPage() {
         </div>
       
         <button type="button" id="submit-form-btn" className="flex-center">
-          Sign Up for Free
+          Sign In
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send-horizontal-icon lucide-send-horizontal"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
         </button>
         <div className="flex-center">
@@ -41,8 +38,8 @@ export function SignUpPage() {
           </button>
         </div>
         <p className="text-center FWB text-heading">
-          Have an account ?  
-          <NavLink to = "/sign-in" >Sign in</NavLink>
+          <span>Already</span> Have an account ?  
+          <NavLink to = "/sign-up" >Sign Up</NavLink>
         </p>
 
         <div className="bottom-left-container "></div>
@@ -54,5 +51,5 @@ export function SignUpPage() {
         </div>
         </form>
     </main>
-  );
+   )
 }

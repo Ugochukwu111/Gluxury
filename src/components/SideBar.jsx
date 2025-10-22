@@ -1,6 +1,8 @@
 
 import "./SideBar.css";
 
+import ProfilePic from '../assets/images/Gluxury-anime-girl-profile.webp'
+
 export function SideBar({onToggleSideBar, ref}) {
 
 
@@ -27,7 +29,7 @@ export function SideBar({onToggleSideBar, ref}) {
 
         <div className="user-details-container">
           <figure>
-            <img src={null} alt=" profile pic" />
+            <img src={ProfilePic} alt=" profile pic" />
           </figure>
           <p className="user-name text-heading FWB">
             Gift Ugo

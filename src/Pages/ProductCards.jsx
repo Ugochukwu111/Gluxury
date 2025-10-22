@@ -1,4 +1,8 @@
 import './ProductCards.css'
+import bag1 from'../assets/images/bag.jpg';
+import bag2 from'../assets/images/bag2.jpg';
+import shoe from'../assets/images/shoe.jpg';
+import shoe2 from'../assets/images/shoe2.jpg';
 
 export function ProductCards() {
 
@@ -10,7 +14,7 @@ const products = [
     price: 120,
     rating: 4.8,
     description: "Elegant evening clutch with a soft gold chain and futuristic shimmer.",
-    image: "",
+    image: bag1,
   },
   {
     id: "2",
@@ -19,7 +23,7 @@ const products = [
     price: 65,
     rating: 4.9,
     description: "Hydrating face serum infused with pink quartz essence for radiant skin.",
-    image:  null,
+    image:  bag2,
   },
   {
     id: "3",
@@ -28,7 +32,7 @@ const products = [
     price: 150,
     rating: 4.7,
     description: "Classic pearl necklace reimagined with a modern metallic sheen.",
-    image: null,
+    image: shoe,
   },
   {
     id: "4",
@@ -37,7 +41,7 @@ const products = [
     price: 98,
     rating: 4.8,
     description: "A luxurious blend of rose, amber, and stardust tones — timeless allure.",
-    image: null,
+    image: shoe2,
   },
   {
     id: "5",
@@ -46,7 +50,7 @@ const products = [
     price: 180,
     rating: 4.6,
     description: "Soft rose-gold heels with a futuristic strap design and cushioned comfort.",
-    image: null,
+    image: bag1,
   },
   {
     id: "6",
@@ -55,7 +59,7 @@ const products = [
     price: 210,
     rating: 4.9,
     description: "Smart analog hybrid watch blending elegance and subtle tech brilliance.",
-    image: null,
+    image: bag2,
   },
   {
     id: "7",
@@ -64,7 +68,7 @@ const products = [
     price: 145,
     rating: 4.7,
     description: "Spacious tote bag crafted from vegan leather with gold-trimmed handles.",
-    image: null,
+    image: shoe2,
   },
   {
     id: "8",
@@ -73,7 +77,7 @@ const products = [
     price: 55,
     rating: 4.8,
     description: "Refreshing body mist that leaves a glowing scent of pink jasmine and musk.",
-    image: null,
+    image: shoe,
   },
   {
     id: "9",
@@ -82,7 +86,7 @@ const products = [
     price: 130,
     rating: 4.9,
     description: "Wireless earbuds designed with a metallic rose finish and premium clarity.",
-    image: null,
+    image: bag1,
   },
   {
     id: "10",
@@ -91,7 +95,7 @@ const products = [
     price: 75,
     rating: 4.8,
     description: "Illuminating compact powder that enhances natural glow with a silky touch.",
-    image: null,
+    image: bag2,
   },
 ];
 

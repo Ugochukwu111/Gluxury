@@ -1,4 +1,5 @@
 import './Announcement.css'
+import CartIcon from '../assets/images/gluxury-shoper.png'
 
 
 export function Announcement() {
@@ -21,7 +22,7 @@ export function Announcement() {
           </div>
 
           <figure className="text-white">
-            <img src={announcement.image} alt="anouncement illustration" />
+            <img src={CartIcon} alt="anouncement illustration" />
           </figure>
         </div>
       ))}
