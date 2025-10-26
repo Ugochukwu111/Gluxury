@@ -1,7 +1,7 @@
 /* this file is used for css of sign up and sign in pages  */
 
 
-form{
+.sign-in-up-container form{
   width: 100%;
   max-width: 450px;
   display: flex;
@@ -14,11 +14,11 @@ form{
   overflow: hidden;
 }
 
-form input{
+.sign-in-up-container form input{
   box-shadow: inset 1px 1px 4px var(--text-light-grey);
 }
 
-.bottom-left-container{
+.sign-in-up-container .bottom-left-container{
   width: 220px;
   height: 220px;
   background-color: var(--text-heading);

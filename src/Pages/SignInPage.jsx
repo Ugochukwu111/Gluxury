@@ -5,7 +5,7 @@ import GoogleIcon from '/images/google.png'
 
 export function  SignInPage(){
    return(
-      <main className="grid-center">
+      <main className="grid-center sign-in-up-container">
 
         <h1 className="logo">
           Gluxury | Sign In

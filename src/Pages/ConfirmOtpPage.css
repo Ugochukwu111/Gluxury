@@ -1,0 +1,81 @@
+
+.comfirm-otp-page-main{
+  padding: 0;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: space-evenly;
+   flex: 1;
+   height: 100svh;
+   min-height: 500px;
+  overflow: auto;
+  margin: 0;
+  text-align: center;
+}
+
+.comfirm-otp-page-main form{
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5em 1em;
+  border-radius: 1em;
+}
+
+.comfirm-otp-page-main .input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5em 0;
+
+}
+
+ .comfirm-otp-page-main .input-container input{
+  width: 45px;
+  aspect-ratio: 1;
+  margin-inline: .25em;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  border: 1px solid var(--text-subtle);
+  border-radius: .5rem;
+}
+ .comfirm-otp-page-main .input-container input:focus{
+  border: none;
+}
+ .comfirm-otp-page-main .input-container input:not(:placeholder-shown) {
+ outline: 2px solid var(--text-heading); 
+}
+
+.comfirm-otp-page-main .comfirm-otp-btn {
+  
+}
+
+.comfirm-otp-page-main .comfirm-otp-btn:hover svg{
+   transform: translateX(5px);
+}
+
+.comfirm-otp-page-main .resend-code-btn:hover {
+  background: var(--text-link);
+  color: var(--white);
+}
+
+.resend-code-btn svg {
+  transition: all 1s ease;
+}
+
+.resend-code-btn:hover svg{
+  transform: rotate(-460deg);
+}
+
+.chart-us-link svg{
+ margin-inline: .25em;
+}
+
+.input-container.error input{
+  
+}
+

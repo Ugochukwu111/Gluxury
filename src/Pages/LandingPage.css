@@ -1,0 +1,9 @@
+.landing-page-container{
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content{
+  flex: 1;
+}

@@ -4,8 +4,6 @@ import "./SideBar.css";
 import ProfilePic from '../assets/images/Gluxury-anime-girl-profile.webp'
 
 export function SideBar({onToggleSideBar, ref}) {
-
-
   return (
     <aside ref = {ref} aria-label = "sidebar closed">
       <div>
