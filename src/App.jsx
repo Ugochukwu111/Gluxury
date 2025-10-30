@@ -6,6 +6,7 @@ import { SignUpPage } from "./Pages/SignUpPage"
 import { SignInPage } from "./Pages/SignInPage"
 import { ConfirmOtpPage } from "./Pages/ConfirmOtpPage"
 import { LandingPage } from './Pages/LandingPage'
+import { OrderPage } from './Pages/OrderPage'
 
 import './App.css'
 
@@ -20,6 +21,7 @@ function App() {
         <Route path = "/sign-in" element = { <SignInPage /> } />
         <Route path="/confirm-otp" element = {<ConfirmOtpPage/>} />
         <Route path="/home" element = {<LandingPage/>}/>
+        <Route path="/order" element = {<OrderPage/>}/>
       </Routes>
     </>
   )

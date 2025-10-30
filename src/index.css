@@ -273,8 +273,20 @@ img{
 /* LAYOUT UTILITIES */
 .container {
   width: 100%;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+}
+/*
+ this contains lets the main content of the page strech
+ thereby keeping the footer always at the top and the footer always at the bottom
+*/
+.layout-container{
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+.layout-container main{
+  flex: 1;
 }
 
 /* ====== DISPLAYS ===== */

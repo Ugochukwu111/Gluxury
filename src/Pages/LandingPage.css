@@ -7,3 +7,252 @@
 .main-content{
   flex: 1;
 }
+
+
+.hero-section-content-container{
+  border: 2px solid red;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  padding-inline: 1em;
+  padding-bottom: 0;
+  min-height: 450px;
+}
+
+.hero-section-content-container h1 {
+  font-size: clamp(2rem, 4vw + 1rem, 3rem);
+}
+
+.hero-section-content-container .text-content-container{
+   width: 100%;
+   max-width: 500px;
+   text-align: start;
+}
+
+.hero-section-content-container figure{
+  display: flex;
+  align-items: end;
+  border: 2px solid red;
+  align-self: end;
+}
+
+.hero-section-content-container figure >*{
+  /* border: 2px solid red; */
+  max-width: 200px;
+  border-top-right-radius: 2rem;
+  border-top-left-radius: 2rem;
+  margin-top: 1em;
+}
+.first-hero-img{
+  border: 2px solid black;
+  height: 200px;
+}
+
+.section{
+  padding: 5em 2em;
+}
+
+
+/* TESTIMONIAL SECTION */
+.testimonial-section{
+    background-image: url('../assets/images/testimonial-card-bkg.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.testimonial-container .testimonial-card{
+  max-width: 700px;
+  margin: 1em auto;
+  padding: .7em .8em;
+  border-radius: 1rem;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  background-image: url('../assets/images/Gemini_Generated_Image_v0w6l2v0w6l2v0w6.png');
+  color: var(--text-heading);
+}
+
+.testimonial-container .testimonial-card figure{
+  width: 100px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-right:.5em ;
+  background-color: var(--text-link);
+}
+
+.testimonial-container .testimonial-card figure img{
+  text-align: center;
+}
+
+.clients-name{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 .5em;
+  flex-wrap: wrap;
+}
+
+.clients-comment{
+  max-width: 650px;
+
+}
+
+
+/* shipping services */
+.shipping-delivery-container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--text-light-grey);
+  padding: 1em;
+  border-radius: 2rem;
+}
+.shipping-delivery-container h4{
+  font-size: clamp(1.5rem, 2.5vw + 0.6rem, 3.5rem);
+}
+.shipping-delivery-container >*{
+  /* width: 45%; */
+}
+.shipping-delivery-content{
+  max-width: 500px;
+}
+
+.shipping-delivery-container .shipping-criteria-list li{
+   margin: .5em 0;
+}
+.shipping-delivery-container .shipping-criteria-list li strong{
+  color: var(--text-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-right: .25em;
+}
+
+.shipping-delivery-container figure{
+  border-radius: 2rem;
+  max-width: 600px;
+  align-self: stretch;
+}
+.shipping-btn-container button{
+  width: 300px;
+
+  background:   linear-gradient(90deg, var(--btn-hover-gradient-start), var(--btn-hover-gradient-end));
+  transform: translateY(-2px);
+}
+.shipping-btn-container button:hover svg{
+  transform: translateX(10px);
+}
+@media(max-width:800px){
+  .shipping-delivery-container{
+    flex-wrap: wrap;
+    text-align: center;
+    position: relative;
+  }
+  .shipping-delivery-container .shipping-criteria-list li strong {
+   display: block;
+}
+.shipping-btn-container{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 2em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+}
+
+
+/* refund styles */
+.refund-container{
+  display: flex;
+}
+
+.refund-container figure{
+  max-width: 600px;
+}
+
+.refund-container .refund-card{
+  top: 0;
+  border-radius: .5rem;
+  display: flex;
+  align-items:start;
+  padding:.5em;
+  margin: .5em;
+  background-color: var(--white);
+  box-shadow: 2px 2px 4px var(--btn-hover-gradient-end);
+   transition: all .5s ease;
+}
+
+.refund-container .refund-card-2{
+  transform: translateX(-50px);
+}
+
+.refund-container .refund-card-3{
+  transform: translateX(-100px);
+}
+
+.refund-container:has(.refund-card-1:hover) .refund-card-2{
+  transform: translateX( -100px);
+}
+.refund-container:has(.refund-card-1:hover) .refund-card-3{
+  transform: translateX( -150px);
+}
+
+.refund-container:has(.refund-card-2:hover) .refund-card-1{
+  transform: translateX( -100px);
+}
+.refund-container:has(.refund-card-2:hover) .refund-card-3{
+  transform: translateX( -150px);
+}
+.refund-container:has(.refund-card-3:hover) .refund-card-1{
+  transform: translateX( -100px);
+}
+.refund-container:has(.refund-card-3:hover) .refund-card-2{
+  transform: translateX( -100px);
+}
+.refund-container .refund-card-3:hover{
+  transform: translateX(0px)
+}
+
+.refund-container .refund-card span{
+  width:50px;
+  height: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  margin-right: .5em;
+  background-color: var( --accent-purple);
+  color: var(--white);
+  border: 1px solid var(--text-heading);
+}
+
+/* ============== FREQUENTLY ASKED SECTION ============= */
+.faq-section{
+  background:  linear-gradient(90deg, var(--btn-hover-gradient-start), var(--btn-hover-gradient-end));
+  box-shadow: 0 6px 18px rgba(244, 158, 255, 0.35);
+  transform: translateY(-2px);;
+}
+.faq-card{
+  max-width: 700px;
+  margin: .25em auto;
+  border: 1px solid var(--text-muted);
+  padding: .5em;
+  overflow: hidden;
+  background-color: var(--white);
+}
+
+.faq-header{
+  padding: .5em ;
+}
+
+.faq-card .faq-question{
+  height: 0;
+  overflow: hidden;
+  transition: all 200ms ease;
+}
+.faq-card.open .faq-question{
+  height: 100px;
+  
+}
