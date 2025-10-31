@@ -1,8 +1,8 @@
 import './ProductCards.css'
-import bag1 from'../assets/images/bag.jpg';
-import bag2 from'../assets/images/bag2.jpg';
-import shoe from'../assets/images/shoe.jpg';
-import shoe2 from'../assets/images/shoe2.jpg';
+import bag1 from'../../assets/images/bag.jpg';
+import bag2 from'../../assets/images/bag2.jpg';
+import shoe from'../../assets/images/shoe.jpg';
+import shoe2 from'../../assets/images/shoe2.jpg';
 
 export function ProductCards() {
 

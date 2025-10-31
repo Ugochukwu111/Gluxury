@@ -15,7 +15,7 @@ export function Faqs({faq}) {
                   <div className="d-flex justify-s-between align-center faq-header">
                     <h5>{faq.question}</h5>
                     <button onClick={()=> setOpen(!open)}>
-                      {open? <Minus/> : <Plus /> }
+                      {open? <Minus size={22}/> : <Plus size={22} /> }
                     </button>
                   </div>
 

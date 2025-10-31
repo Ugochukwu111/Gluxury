@@ -1,11 +1,11 @@
 
 import { Routes , Route } from "react-router-dom"
-import { ProductPage } from "./Pages/Product"
+import { ProductPage } from "./Pages/Product/Product"
 import { CartPage } from "./Pages/CartPage"
-import { SignUpPage } from "./Pages/SignUpPage"
-import { SignInPage } from "./Pages/SignInPage"
-import { ConfirmOtpPage } from "./Pages/ConfirmOtpPage"
-import { LandingPage } from './Pages/LandingPage'
+import { SignUpPage } from "./Pages/Auth/SignUpPage"
+import { SignInPage } from "./Pages/Auth/SignInPage"
+import { ConfirmOtpPage } from "./Pages/Auth/ConfirmOtpPage"
+import { LandingPage } from './Pages/LandingPage/LandingPage'
 import { OrderPage } from './Pages/OrderPage'
 
 import './App.css'

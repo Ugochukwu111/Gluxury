@@ -1,6 +1,6 @@
 import { Link } from "react-router";
-import { Footer } from "../components/Footer";
-import { SideBarHeader } from "../components/SideBarHeader";
+import { Footer } from "../../components/Footer.jsx";
+import { SideBarHeader } from "../../components/SideBarHeader.jsx";
 import {  Faqs } from "./Faqs.jsx"
 import {
   Star,
@@ -13,14 +13,14 @@ import {
   Plus,
 } from "lucide-react";
 
-import { faqs, testimonials } from "../utils/contentData.js";
+import { faqs, testimonials } from "../../utils/contentData.js";
 
-import bag1 from "../assets/images/bag.jpg";
-import bag2 from "../assets/images/bag2.jpg";
-import shoe from "../assets/images/shoe.jpg";
-import shoe2 from "../assets/images/shoe2.jpg";
-import shippingImage from "../assets/images/shipping.png";
-import reFundImage from "../assets/images/refund-illustration.png";
+import bag1 from "../../assets/images/bag.jpg";
+import bag2 from "../../assets/images/bag2.jpg";
+import shoe from "../../assets/images/shoe.jpg";
+import shoe2 from "../../assets/images/shoe2.jpg";
+import shippingImage from "../../assets/images/shipping.png";
+import reFundImage from "../../assets/images/refund-illustration.png";
 
 import "./LandingPage.css";
 
@@ -86,6 +86,17 @@ export function LandingPage() {
                 />
               </div>
             </figure>
+          </div>
+        </section>
+
+        <section className="section">
+          <div className="container">
+            <h2 className="text-center">
+              Every Piece, a Proof of Luxury and Confidence
+            </h2>
+            <p className="text-center ">
+  From timeless bags to captivating perfumes, each collection is crafted to make you feel effortlessly confident and beautifully seen.
+</p>
           </div>
         </section>
 
