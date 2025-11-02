@@ -1,0 +1,75 @@
+/* === Gluxury Premium Carousel === */
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  overflow: hidden;
+  padding: 0 40px;
+}
+
+.carousel-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* Nav buttons */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
+  background: rgba(255, 192, 203, 0.3);
+  backdrop-filter: blur(6px);
+  color: #2c2c2c;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 10px 18px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 182, 193, 0.5);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.nav-btn:hover {
+  background: rgba(255, 192, 203, 0.6);
+  box-shadow: 0 0 20px rgba(255, 105, 180, 0.6);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+  left: 10px;
+}
+
+.next-btn {
+  right: 10px;
+}
+
+/* Elegant fade edges */
+.carousel-container::before,
+.carousel-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 70px;
+  height: 100%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.carousel-container::before {
+  left: 0;
+  background: linear-gradient(to right, white, transparent);
+}
+
+.carousel-container::after {
+  right: 0;
+  background: linear-gradient(to left, white, transparent);
+}

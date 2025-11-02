@@ -1,7 +1,10 @@
-import { Link } from "react-router";
+import { NavLink, Link } from "react-router";
 import { Footer } from "../../components/Footer.jsx";
 import { SideBarHeader } from "../../components/SideBarHeader.jsx";
-import {  Faqs } from "./Faqs.jsx"
+import { ProductCard } from "../Product/ProductCard.jsx";
+import { Faqs } from "./Faqs.jsx";
+import { PremiumCarousel } from "./PremiumCarosel.jsx";
+
 import {
   Star,
   StarHalf,
@@ -10,7 +13,8 @@ import {
   RefreshCwOff,
   KeyRound,
   Timer,
-  Plus,
+  UserPen,
+  Store,
 } from "lucide-react";
 
 import { faqs, testimonials } from "../../utils/contentData.js";
@@ -21,10 +25,11 @@ import shoe from "../../assets/images/shoe.jpg";
 import shoe2 from "../../assets/images/shoe2.jpg";
 import shippingImage from "../../assets/images/shipping.png";
 import reFundImage from "../../assets/images/refund-illustration.png";
+import contactUsIllustration from "../../assets/images/gluxury-contact-us.png";
 
 import "./LandingPage.css";
 
-export function LandingPage() {
+export function LandingPage({ products }) {
   let images = [bag1, bag2, shoe, shoe2];
 
   function renderStars(count) {
@@ -48,11 +53,20 @@ export function LandingPage() {
     return stars;
   }
 
+  let displayedProducts = [];
+  function getFirstFiveProducts() {
+    for (let i = 0; i <= 5; i++) {
+      displayedProducts.push(products[i]);
+    }
+    return displayedProducts;
+  }
+  getFirstFiveProducts();
+
   return (
     <div className="landing-page-container">
       <SideBarHeader />
       <div className="main-content">
-        <section className="hero-se ction ">
+        <section className="hero-section ">
           <div className="container hero-section-content-container">
             <div className="text-content-container">
               <h1>Gluxury, Designed for the Woman Who Walks in Confidence.</h1>
@@ -61,9 +75,15 @@ export function LandingPage() {
                 value quality and love speed, we deliver a shopping experience
                 that feels elegant, reliable, and made just for you.
               </p>
-              <div>
-                <button>Sign Up</button>
-                <button>See product</button>
+              <div className="hero-btn-container">
+                <Link className="bg-heading" to="/">
+                Shop Now!
+                <Store />
+                </Link>
+                <Link className="bg-accent-pink" to="/sign-up">
+                Sign up
+                <UserPen />
+                </Link>
               </div>
             </div>
 
@@ -90,25 +110,37 @@ export function LandingPage() {
         </section>
 
         <section className="section">
+          <h2 className="text-center">
+            Every Piece, a Proof of Luxury and Confidence
+          </h2>
+          <p className="text-center ">
+            From timeless bags to captivating perfumes, each collection is
+            crafted to make you feel effortlessly confident and beautifully
+            seen.
+          </p>
+          <br />
+          <br />
           <div className="container">
-            <h2 className="text-center">
-              Every Piece, a Proof of Luxury and Confidence
-            </h2>
-            <p className="text-center ">
-  From timeless bags to captivating perfumes, each collection is crafted to make you feel effortlessly confident and beautifully seen.
-</p>
+            <PremiumCarousel products={products} />
           </div>
+          <br />
+          <br />
+          <Link to="/" className="text-center btn bg-accent-purple text-white">
+            See more
+          </Link>
         </section>
 
         <section className="testimonial-section section">
-          <div className=" container">
-            <h2 className="text-center text-link">
+          <div className=" container ">
+            <h2 className="text-center text-white">
               Loved by Women Who Walk in Confidence
             </h2>
-            <p className="text-center text-link">
+            <p className="text-center text-white">
               Discover what real women are saying about their Gluxury
               experience.
             </p>
+            <br />
+            <br />
 
             <div className="testimonial-container">
               {testimonials.map((testimonial) => {
@@ -256,18 +288,51 @@ export function LandingPage() {
           <br />
           <br />
           <div className="container">
-               {
-                faqs.map((faq)=>{
-                  console.log(faq)
-                  return(
-                    <Faqs  key = {faq.id} faq = {faq}/>
-                  )
-                })
-               }
+            {faqs.map((faq) => {
+              return <Faqs key={faq.id} faq={faq} />;
+            })}
           </div>
         </section>
 
+        <section className="section contact-us-section">
+          <h2 className="text-center text-white">
+            Contact &nbsp;
+            <span className="font-special">Gluxury</span>
+          </h2>
+          <p className="text-center text-white">
+            Your time is the ultimate luxury. Reach out to our dedicated client
+            advisor today and secure the exclusive partnership you deserve.
+          </p>
+          <br />
+          <br />
+          <div className="container contact-us-container">
+            <figure>
+              <img
+                src={contactUsIllustration}
+                alt="female hands reaching email logo"
+              />
+            </figure>
 
+            <form action="">
+               <h3 className="logo">
+                gluxury
+               </h3>
+               <p className="text-center">
+                Dedicated support is here. How can we assist?
+               </p>
+               <label htmlFor="name">Name:</label>
+              <input type="text" id="name" name ="name" placeholder="Eg: Gift Beauty" required />
+              <label htmlFor="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="Eg: giftbeauty@example.com" required />
+
+              <label htmlFor="Message"> Message:</label>
+              <textarea placeholder="Your Message" required></textarea>
+              <button>
+                Submit
+              </button>
+            </form>
+          </div>
+        </section>
       </div>
       <Footer />
     </div>

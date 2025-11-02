@@ -78,7 +78,7 @@ export function Footer(){
               Suscribe for early access, exclusive offers, and luxury updates
             </p>
             <br />
-            <div className='d-flex f-wrap justify-center'>
+            <div className='d-flex f-wrap M-auto'>
               <input type="text" />
               <button className='btn-accent'>
                 SUSCRIBE

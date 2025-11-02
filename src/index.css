@@ -176,6 +176,8 @@ ul{
 .bg-light-green{background-color:  var(--light-green);}
 .bg-red{background-color: var(--red);}
 .bg-light-red{background-color: var(--light-red);}
+.bg-heading{background-color: var(--text-heading);}
+
 
 
 /* font utils */
@@ -193,13 +195,21 @@ ul{
 }
 
 /* ----- Buttons / Links (optional presets) ----- */
-.btn-link {
-  color: var(--text-link);
+.btn{
+    font-family: inherit;
+  cursor: pointer;
+  border: none;
   transition: all 0.3s ease;
+  padding: 1em  2em;
+  border-radius: 2rem;
+  margin: .25em;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.btn-link:hover {
-  color: var(--accent-pink);
-}
+
+
 
 .btn-accent {
   background-color: var(--accent-pink);
@@ -324,8 +334,11 @@ img{
   font-size: 1.5rem;
   font-family: var(--font-special);
   text-align: center;
-  padding: .5em;
+  padding: .25em;
+  color: var(--accent-gold);
 }
 
 .FWB{font-weight: 700;}
 .text-center{text-align: center;}
+.w100{ width: 100%;}
+.M-auto{margin: 0 auto;}

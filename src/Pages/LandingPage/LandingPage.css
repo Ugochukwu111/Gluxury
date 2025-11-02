@@ -10,14 +10,14 @@
 
 
 .hero-section-content-container{
-  border: 2px solid red;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   text-align: center;
   padding-inline: 1em;
   padding-bottom: 0;
-  min-height: 450px;
+  min-height: 550px;
+  flex-wrap: wrap;
 }
 
 .hero-section-content-container h1 {
@@ -33,20 +33,34 @@
 .hero-section-content-container figure{
   display: flex;
   align-items: end;
-  border: 2px solid red;
+  border: 2px solid rgb(0, 255, 47);
   align-self: end;
 }
 
 .hero-section-content-container figure >*{
-  /* border: 2px solid red; */
-  max-width: 200px;
+  max-width: 180px;
   border-top-right-radius: 2rem;
   border-top-left-radius: 2rem;
   margin-top: 1em;
 }
 .first-hero-img{
-  border: 2px solid black;
-  height: 200px;
+  height: 250px;
+}
+.middle-hero-img{
+  height: 300px;
+}
+
+.hero-btn-container{
+  border: 2px solid red;
+  display: flex;
+  margin: 1em;
+  justify-content: end;
+}
+.hero-btn-container a{
+  box-shadow: 5px 5px 4px var(--text-muted);
+  margin: .2em;
+  padding: .8em 3em;
+  border-radius: 2rem;
 }
 
 .section{
@@ -54,28 +68,91 @@
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* TESTIMONIAL SECTION */
 .testimonial-section{
-    background-image: url('../assets/images/testimonial-card-bkg.png');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
+
+background: radial-gradient(
+    circle at center,
+    #8e24aa 0%,           
+    #5e128d 45%,           
+    #2a0a3d 100%           
+  );
+  background-size: 400% 400%;
+
+  /* 3. Apply the keyframe animation */
+  animation: gradientFlow 10s ease infinite;
 }
 
+/* 4. Define the Animation */
+@keyframes gradientFlow {
+  0% {
+    /* Start at the left/top of the huge background */
+    background-position: 0% 50%;
+  }
+  50% {
+    /* Move the background all the way to the right/bottom */
+    background-position: 100% 50%;
+  }
+  100% {
+    /* Move back to the start for a seamless loop */
+    background-position: 0% 50%;
+  }
+}
+.testimonial-container{
+   display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 1em;
+  scrollbar-width: none;
+  position: relative;
+}
+
+
 .testimonial-container .testimonial-card{
-  max-width: 700px;
-  margin: 1em auto;
+  margin: .8em ;
   padding: .7em .8em;
-  border-radius: 1rem;
   display: flex;
   align-items: start;
   justify-content: center;
-  background-image: url('../assets/images/Gemini_Generated_Image_v0w6l2v0w6l2v0w6.png');
-  color: var(--text-heading);
+  flex-direction: column-reverse;
+  justify-content: space-between;
+
+  color: var(--white);
+
+
+  flex: 0 0 400px; 
+  padding: 1em;
+  background-color: var(--text-heading);
+
+
+  /* 2. THE GLASS MORPHISM EFFECT (Crucial) */
+  background: rgba(41, 43, 79, 0.466); /* Very light, translucent background */
+  backdrop-filter: blur(12px);          /* FROSTED GLASS EFFECT */
+  -webkit-backdrop-filter: blur(12px);  /* For Safari compatibility */
+
+  /* 3. BORDER and SHADOW (Premium Look) */
+  /* Thin white/pink border for subtle definition */
+  border: 1px solid rgba(242, 92, 192, 0.2); /* Using a translucent version of --text-link */
+
+  /* Dark, floating shadow */
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+
 }
 
 .testimonial-container .testimonial-card figure{
-  width: 100px;
+  width: 70px;
   aspect-ratio: 1;
   border-radius: 50%;
   margin-right:.5em ;
@@ -94,7 +171,8 @@
 }
 
 .clients-comment{
-  max-width: 650px;
+font-size: 0.85em;
+  color: var(--text-muted, #bdb1c7);
 
 }
 
@@ -111,9 +189,7 @@
 .shipping-delivery-container h4{
   font-size: clamp(1.5rem, 2.5vw + 0.6rem, 3.5rem);
 }
-.shipping-delivery-container >*{
-  /* width: 45%; */
-}
+
 .shipping-delivery-content{
   max-width: 500px;
 }
@@ -263,3 +339,85 @@
   height: 100px;
   
 }
+
+/* CONTACT US STYLES */
+.contact-us-section{
+background: linear-gradient(
+    to bottom right, /* Diagonal from top-left to bottom-right */
+    #5e128d 0%,    /* Your core GLUXURY purple */
+    #ffffff 100%   /* Pure white */
+  );
+
+  padding-bottom: 0;
+}
+
+
+
+
+.contact-us-container{
+  display: flex;
+  align-items: center;
+  padding: 2em 0;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #2a0a3d;
+  border-top-left-radius: 15rem;
+  border-top-right-radius: 2rem;
+  padding-bottom: 0;
+}
+
+.contact-us-container >*{
+  width: 450px;
+  aspect-ratio: 1/1.2;
+  
+}
+
+.contact-us-container figure{
+    border-top-left-radius: 15rem;
+   
+}
+
+.contact-us-container form{
+   box-shadow: 5px -5px 5px var(--text-heading);
+   border-top-right-radius: 2rem;
+  display: flex;
+  flex-direction: column;
+  padding: 1em;
+  /* background-color:  #bb5fd475; */
+  justify-content: center;
+  color: var(--white);
+}
+
+.contact-us-container form button{
+  background-color: var(--accent-gold);
+}
+
+.contact-us-container form input::placeholder{
+  color: var(--white);
+}
+
+.contact-us-container input,
+.contact-us-container textarea{
+  padding: 1em;
+  margin: .5em 0;
+  border-radius: .5rem;
+  background-color: transparent;
+  color: var(--white);
+    border: 1px solid var(--text-light-grey);
+}
+
+.contact-us-container form textarea{
+  width: 100%;
+  resize: none;
+  box-sizing: border-box;
+  min-height: 100px;
+}
+
+
+
+
+
+
+
+
+

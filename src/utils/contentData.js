@@ -49,13 +49,21 @@ export const faqs = [
   }
 ];
 
+
+
+import femaleProfile1 from '../assets/images/testimonialProfile/female1.webp';
+import femaleProfile2 from '../assets/images/testimonialProfile/female2.jpg';
+import femaleProfile3 from '../assets/images/testimonialProfile/female3.jpg';
+import femaleProfile4 from '../assets/images/testimonialProfile/female4.jpg';
+import femaleProfile5 from '../assets/images/testimonialProfile/female5.jpg'; 
+
 export  const testimonials = [
     {
       id: '1',
       name : 'Emma Thompson',
       comment: 'Beautiful with staying power. the only reson I give it 4 stars is the price, but the quality justifies it',
       city:'Benin City',
-      image: null,
+      image: femaleProfile1,
       rateCount: 4.2,
 
     },
@@ -64,7 +72,7 @@ export  const testimonials = [
       name : 'Emma Thompson',
       comment: 'Beautiful with staying power. the only reson I give it 4 stars is the price, but the quality justifies it',
       city:'Benin City',
-      image: null,
+      image: femaleProfile2,
       rateCount: 4,
     },
     {
@@ -73,7 +81,7 @@ export  const testimonials = [
   comment:
     'My order arrived earlier than expected, and the packaging alone made me feel like royalty. The handbag screams luxury — solid, elegant, and classy.',
   city: 'Lagos',
-  image: null,
+  image: femaleProfile3,
   rateCount: 5,
 },
 {
@@ -82,7 +90,7 @@ export  const testimonials = [
   comment:
     'I’ve shopped from other stores, but Gluxury’s speed and attention to detail are unmatched. You can tell they truly care about women and their experience.',
   city: 'Abuja',
-  image: null,
+  image: femaleProfile4,
   rateCount: 5,
 },
 {
@@ -91,7 +99,7 @@ export  const testimonials = [
   comment:
     'The quality blew my mind. I carried my Gluxury purse to an event, and everyone kept asking where I got it. Definitely worth every naira!',
   city: 'Enugu',
-  image: null,
+  image: femaleProfile5,
   rateCount: 5,
 }
   ]
