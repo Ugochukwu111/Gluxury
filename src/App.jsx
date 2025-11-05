@@ -78,7 +78,7 @@ function App() {
     name: "Iris Luxe Tote",
     category: "Bags",
     price: 145,
-    rating: 4.7,
+    rating: 4,
     description: "Spacious tote bag crafted from vegan leather with gold-trimmed handles.",
     image: shoe2,
   },

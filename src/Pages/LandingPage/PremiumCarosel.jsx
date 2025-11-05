@@ -1,15 +1,40 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ProductCard } from "../Product/ProductCard.jsx";
 import "./PremiumCarosel.css";
 
+
+const getItemsPerView = () => {
+ if (window.innerWidth >= 768) {
+    return 2;
+  } else {
+    return 1;
+  }
+};
+
 export function PremiumCarousel({ products }) {
   const [index, setIndex] = useState(0);
-  const itemsPerView = 3;
+  const [itemsPerView, setItemsPerView] = useState(getItemsPerView() );
+
+  useEffect(() => {
+    const handleResize = () => {
+      // Update the state when the window size changes
+      setItemsPerView(getItemsPerView());
+    };
+
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+
+    // Clean up the event listener when the component unmounts
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   const next = () => {
     setIndex((prev) => (prev + itemsPerView) % products.length);
   };
+
 
   const prev = () => {
     setIndex((prev) =>

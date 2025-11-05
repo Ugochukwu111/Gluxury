@@ -23,7 +23,7 @@
 
 .product-card .product-name{
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .product-card .product-short-description{
@@ -52,12 +52,16 @@
 
 .product-card .product-cart-btn{
   padding: 0;
-  width: 45px;
+  width: 40px;
   aspect-ratio: 1;
   border-radius: 50% ;
   background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
   color: var(--text-link);
   border: 2px solid var(--text-link);
+}
+
+.product-card .product-stars{
+  text-align: end;
 }
 
 .product-card .product-cart-btn:active{
@@ -70,7 +74,7 @@
   top: .5em;
   background-color: var(--white);
     padding: 0;
-  width: 45px;
+  width: 40px;
   aspect-ratio: 1;
   border-radius: 50% ;
   z-index: 10;
@@ -85,4 +89,17 @@
   font-weight: 400;
   font-size: .9rem;
    margin-left: .25em;
+}
+
+.product-card-bage{
+  position: absolute;
+  background: linear-gradient(135deg, #f78bda, #b58cff, #f0c66e);
+  color: var(--white);
+  font-weight: 700;
+  width: 150px;
+  text-align: center;
+  transform: rotate(-30deg);
+  z-index: 10;
+  left: -2em;
+  top: .6em;
 }

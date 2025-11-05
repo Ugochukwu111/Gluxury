@@ -5,6 +5,7 @@ import { ProductCard } from "../Product/ProductCard.jsx";
 import { Faqs } from "./Faqs.jsx";
 import { PremiumCarousel } from "./PremiumCarosel.jsx";
 
+
 import {
   Star,
   StarHalf,
@@ -15,6 +16,10 @@ import {
   Timer,
   UserPen,
   Store,
+  Box,
+  Award,
+  Heart,
+  BadgeCheck,
 } from "lucide-react";
 
 import { faqs, testimonials } from "../../utils/contentData.js";
@@ -25,6 +30,7 @@ import shoe from "../../assets/images/shoe.jpg";
 import shoe2 from "../../assets/images/shoe2.jpg";
 import shippingImage from "../../assets/images/shipping.png";
 import reFundImage from "../../assets/images/refund-illustration.png";
+
 import contactUsIllustration from "../../assets/images/gluxury-contact-us.png";
 
 import "./LandingPage.css";
@@ -69,16 +75,19 @@ export function LandingPage({ products }) {
         <section className="hero-section ">
           <div className="container hero-section-content-container">
             <div className="text-content-container">
-              <h1>Gluxury, Designed for the Woman Who Walks in Confidence.</h1>
+              <h1>
+               The Confidence She Wears.
+              </h1>
+              <br />
               <p>
                 Gluxury is where trust meets beauty. Designed for women who
                 value quality and love speed, we deliver a shopping experience
                 that feels elegant, reliable, and made just for you.
               </p>
               <div className="hero-btn-container">
-                <Link className="bg-heading" to="/">
+                <Link className="bg-heading text-white" to="/">
                 Shop Now!
-                <Store />
+                <Store className="text-white shake-icon" />
                 </Link>
                 <Link className="bg-accent-pink" to="/sign-up">
                 Sign up
@@ -100,12 +109,61 @@ export function LandingPage({ products }) {
               </div>
               <div>
                 <img
-                  src={images[2]}
+                  src={images[1]}
                   alt=""
                   className="hero-pic last-hero-img"
                 />
               </div>
             </figure>
+          </div>
+        </section>
+
+        <section className="section about-us-section">
+          <h2 className="text-center">About Gluxury</h2>
+          <p></p>
+          <br/><br/>
+          <div className="container about-us-container">
+
+             <div className="content">
+              <div>
+                <p className="FWB">
+                  Where Beauty Meets 
+                  <span className="d-block text-link">
+                    Trust & Excellence
+                    </span>
+                </p>
+                 <br/>
+                <p>
+                  At Gluxry, we believe that evcery woman deserves more than just products, she deserves an experience. An experience that's personal, luxurious, and crafted with care
+                </p>
+                <br/>
+                <p>
+                  Born from a passion for beauty and a commitment to quality, Gluxury has besome a trusted companion for women who refuse to comprimise .FRom the moment you discover us to the joy of unboxing, every touch point is designed to make you feel valued, beautiful, and confident.
+                </p>
+
+              </div>
+
+              <br/><br/>
+               <div className="proirity-container">
+                <div>
+                  <Heart className="text-red" />
+                  <p className="FWB">Quality First</p>
+                   <p>
+                    Products that exceed expectations
+                   </p>
+                </div>
+                <div>
+                  <Box  className="text-heading"/>
+                  <p className="FWB">Fast Delivery</p>
+                  <p>beauty needs, delivered swiftly.</p>
+                </div>
+                <div>
+                    <Award className="text-green" />
+                  <p className="FWB">Trusted Care</p>
+                  <p>A relationship built on trust</p>
+                </div>
+               </div>
+             </div>
           </div>
         </section>
 
@@ -146,10 +204,12 @@ export function LandingPage({ products }) {
               {testimonials.map((testimonial) => {
                 return (
                   <div key={testimonial.id} className="testimonial-card">
+                    <div className="d-flex align-center justify-s-between w100">
                     <figure>
                       <img src={testimonial.image} alt={testimonial.name} />
                     </figure>
-
+                       {testimonial.verified ? <BadgeCheck className="text-green" />:''}
+                       </div>
                     <div>
                       <p className="FWB clients-name">
                         <span>{testimonial.name}</span>

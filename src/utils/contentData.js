@@ -51,6 +51,7 @@ export const faqs = [
 
 
 
+import { Verified } from 'lucide-react';
 import femaleProfile1 from '../assets/images/testimonialProfile/female1.webp';
 import femaleProfile2 from '../assets/images/testimonialProfile/female2.jpg';
 import femaleProfile3 from '../assets/images/testimonialProfile/female3.jpg';
@@ -65,7 +66,7 @@ export  const testimonials = [
       city:'Benin City',
       image: femaleProfile1,
       rateCount: 4.2,
-
+      verified: true,
     },
        {
       id: '2',
@@ -74,6 +75,7 @@ export  const testimonials = [
       city:'Benin City',
       image: femaleProfile2,
       rateCount: 4,
+      verified: true,
     },
     {
   id: '3',
@@ -83,6 +85,7 @@ export  const testimonials = [
   city: 'Lagos',
   image: femaleProfile3,
   rateCount: 5,
+  verified: true,
 },
 {
   id: '4',
@@ -92,6 +95,7 @@ export  const testimonials = [
   city: 'Abuja',
   image: femaleProfile4,
   rateCount: 5,
+  verified: false,
 },
 {
   id: '5',
@@ -101,5 +105,6 @@ export  const testimonials = [
   city: 'Enugu',
   image: femaleProfile5,
   rateCount: 5,
+  verified: true,
 }
   ]
