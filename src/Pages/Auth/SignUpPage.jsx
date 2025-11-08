@@ -1,16 +1,67 @@
-import { NavLink } from "react-router-dom";
-import './Auth.css'
-import GoogleIcon from '/images/google.png'
+import { useState, useEffect } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { SendHorizontal, UserRound, Mail, KeyRound } from "lucide-react";
+import "./Auth.css";
+import GoogleIcon from "/images/google.png";
 
 export function SignUpPage() {
+  const intialValues = { fullName: "", email: "", password: "" };
+
+  const [formValues, setFormValues] = useState(intialValues);
+    const [formErrors, setFormErrors] = useState({});
+    const [ isSubmit, setIsSubmit ] = useState(false);
+
+  const handleChange = (e)=>{
+    const {name, value} = e.target;
+    setFormValues({...formValues, [name]: value});
+  }
+
+  const handleSubmit = (e)=>{
+     e.preventDefault();
+     setFormErrors(validate(formValues));
+     setIsSubmit(true);
+  }
+
+  useEffect(()=>{
+    if (Object.keys(formErrors).length === 0 && isSubmit){
+      console.log('sign in successful')
+    }
+  },[formErrors])
+
+  const validate = (values) =>{
+    const errors = {};
+    const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+    if(!values.fullName){
+      errors.username = "fullName is required!";
+    }else if(values.fullName.length < 8){
+      errors.username = "fullName cannot me lesser than 8!";
+    }
+
+    if(!values.email){
+      errors.email = 'Email is required!';
+    }else if (!regex.test(values.email)){
+       errors.email = 'Not a valid email format!';
+    }
+
+    if (!values.password){
+      errors.password = 'Password is required!';
+    }else if (values.password.length < 8){
+       errors.password = 'Password must not be less than 8!';
+    }
+
+    return errors;
+  }
+
   return (
     <main className="grid-center sign-in-up-container">
-
-        <h1 className="logo">
-          Gluxury | Sign Up
-        </h1>
       
-      <form>
+      <div className="background-container">
+
+      </div>
+
+      <form onSubmit={handleSubmit}>
+        <h1 className="logo">Gluxury | Sign Up</h1>
         <p className="FWB text-heading text-center">
           <strong>
             Made for women who value care, quality, and confidence.
@@ -18,22 +69,52 @@ export function SignUpPage() {
         </p>
         <br />
         <div className="input-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-user-round-icon lucide-user-round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 0 0-16 0"/></svg>
-          <input type="text" placeholder="Full name:" id="name" name="name" autoComplete="fullname" />
+          <UserRound size={18} className={formValues.fullName?'filled-input': ''} />
+         
+          <input
+            type="text"
+            placeholder="Full name:"
+            id="name"
+            name="fullName"
+            value={formValues.fullName}
+            autoComplete="fullname"
+            onChange={handleChange}
+          />
         </div>
+         <span className={`error ${formErrors.username? 'show' : ''}`}>{formErrors.username}</span>
 
         <div className="input-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail-icon lucide-mail"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"/><rect x="2" y="4" width="20" height="16" rx="2"/></svg>
-          <input type="text" placeholder="Email:" id="email" name="email" autoComplete="email" />
+          <Mail size={18} className={formValues.email?'filled-input': ''} />
+          
+          <input
+            type="text"
+            placeholder="Email:"
+            id="email"
+            name="email"
+            value={formValues.email}
+            autoComplete="email"
+            onChange={handleChange}
+          />
         </div>
+        <span className={`error ${formErrors.email? 'show' : ''}`}>{formErrors.email}</span>
         <div className="input-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-key-round-icon lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
-          <input type="password" placeholder="Password" id="password" name="password" autoComplete="new-password" />
+          <KeyRound size={18} className={formValues.password?'filled-input': ''} />
+          
+          <input
+            type="password"
+            placeholder="Password"
+            id="password"
+            name="password"
+            autoComplete="new-password"
+            value={formValues.password}
+            onChange={handleChange}
+          />
         </div>
-      
-        <button type="button" id="submit-form-btn" className="flex-center">
+        <span className={`error ${formErrors.password?'show': ''}`}>{formErrors.password}</span>
+
+        <button type="submit" id="submit-form-btn" className="flex-center">
           Sign Up for Free
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-send-horizontal-icon lucide-send-horizontal"><path d="M3.714 3.048a.498.498 0 0 0-.683.627l2.843 7.627a2 2 0 0 1 0 1.396l-2.842 7.627a.498.498 0 0 0 .682.627l18-8.5a.5.5 0 0 0 0-.904z"/><path d="M6 12h16"/></svg>
+          <SendHorizontal />
         </button>
         <div className="flex-center">
           <button className="external-auth-btn" id="google-sign-up-btn">
@@ -41,18 +122,14 @@ export function SignUpPage() {
           </button>
         </div>
         <p className="text-center FWB text-heading">
-          Have an account ?  
-          <NavLink to = "/sign-in" >Sign in</NavLink>
+         Already Have an account ?<NavLink to="/sign-in">Sign in</NavLink>
         </p>
 
-        <div className="bottom-left-container "></div>
-        <div className="fast-delivery-container">
-          <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-truck-electric-icon lucide-truck-electric"><path d="M14 19V7a2 2 0 0 0-2-2H9"/><path d="M15 19H9"/><path d="M19 19h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62L18.3 9.38a1 1 0 0 0-.78-.38H14"/><path d="M2 13v5a1 1 0 0 0 1 1h2"/><path d="M4 3 2.15 5.15a.495.495 0 0 0 .35.86h2.15a.47.47 0 0 1 .35.86L3 9.02"/><circle cx="17" cy="19" r="2"/><circle cx="7" cy="19" r="2"/></svg>
-          <span className="FWB text-white">
-            Fast  delivery!
-          </span>
-        </div>
-        </form>
+        <p className="signup-legal-text">
+          By creating an account, you accept Gluxury's <Link to="/terms">Terms of Service</Link> and acknowledge the <Link to="/privacy">Privacy Policy</Link> regarding data use, and you agree to receive essential service updates.
+        </p>
+      </form>
+
     </main>
   );
 }

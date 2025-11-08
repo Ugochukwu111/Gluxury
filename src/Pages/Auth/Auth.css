@@ -1,17 +1,29 @@
 /* this file is used for css of sign up and sign in pages  */
+.sign-in-up-container{
+  padding: 0;
+  height: 100svh;
+  display: flex;
+  align-items: stretch;
+  background-color: var(--white);
+}
 
+.sign-in-up-container .background-container{
+  flex: 1;
+  height: 100%;
+   background-image: url('../../assets/images/auth-page-bg.png');
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+}
 
 .sign-in-up-container form{
-  width: 100%;
-  max-width: 450px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid var(--text-link);
   padding: 1.5em 1em;
-  border-radius: 1rem;
   position: relative;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .sign-in-up-container form input{
@@ -27,26 +39,45 @@
   bottom: -5em;
   left: -5em;
 }
-@media(max-width: 350px){
-  .bottom-left-container{
-  width: 210px;
-  height: 210px;
+@media (max-width: 767px){
+  .sign-in-up-container{
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 1em;
+    overflow: auto;
   }
+  .sign-in-up-container .background-container{
+  flex: auto;
+  width: 100%;
+  min-height: 200px;
+   background-image: url('../../assets/images/auth-page-bg.png');
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
 }
-
-.fast-delivery-container{
-  position: static;
-  z-index: 1;
-  color: var(--white);
+.sign-in-up-container form{
+  width: 100%;
+  max-width: 450px;
   display: flex;
   flex-direction: column;
-  width: fit-content;
-  align-self: flex-start;
+  align-items: center;
+  padding: 1.5em 1em;
+  position: relative;
+  overflow: hidden;
+  min-height: 550px;
+  background-color: var(--white);
+  border-radius: .5rem;
+  z-index: 100;
+  margin-top: -5em;
+  box-shadow: 3px 3px 10px var(--text-muted);
 }
+}
+
+
 
 form div {
   width: 100%;
-  margin: .25em 0;
+  margin: .15em 0;
   max-width: 400px;
 }
 
@@ -80,9 +111,7 @@ form div {
   left: 1em;
   color: var(--text-light-grey);
 }
-.input-container:focus-within svg{
-  color: var(--text-heading)
-}
+
 
 .external-auth-btn{
   height: 40px;
@@ -96,4 +125,37 @@ form div {
 #google-sign-up-btn{
   border: 2px solid var(--text-heading);
   background-image: url('/images/google.png');
+}
+
+.signup-legal-text{
+  font-size: .9rem;
+  line-height: 1;
+  color: var(--text-muted);
+  text-align: start;
+  margin-top: 1em;
+}
+.signup-legal-text a{
+  display: inline-block;
+  padding: .25em;
+  text-decoration: underline;
+}
+
+.error{
+  width: 100%;
+  padding-right: 2em;
+  font-size: .7rem;
+  font-weight: 700;
+  color: var(--red);
+  text-align: end;
+  transition: all 300ms ease;
+  visibility:hidden; 
+  height: 0px;
+}
+.error.show{
+ height: 15px;
+ visibility: visible;
+}
+
+.input-container svg.filled-input {
+  color: var(--text-heading);
 }

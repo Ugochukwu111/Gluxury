@@ -7,6 +7,7 @@ import { SignInPage } from "./Pages/Auth/SignInPage"
 import { ConfirmOtpPage } from "./Pages/Auth/ConfirmOtpPage"
 import { LandingPage } from './Pages/LandingPage/LandingPage'
 import { OrderPage } from './Pages/OrderPage'
+import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage"
 
 import './App.css'
 
@@ -116,6 +117,7 @@ function App() {
       <Routes>
         <Route path="/" element = {<ProductPage products = {products}/>} />
         <Route path="/cart" element = {<CartPage/>}/>
+        <Route path="/product/:id" element = {<ProductDetailsPage/>}/>
         <Route path="/sign-up" element = {<SignUpPage/>}/>
         <Route path = "/sign-in" element = { <SignInPage /> } />
         <Route path="/confirm-otp" element = {<ConfirmOtpPage/>} />

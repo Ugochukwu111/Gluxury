@@ -1,9 +1,16 @@
 import { renderStars } from '../../utils/utilsFunctions.jsx'
+import { useNavigate } from "react-router-dom";
 import "./ProductCard.css"
 
 export function ProductCard({product}){
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate(`/product/${product.id}`);
+  };
+
   return(
-     <div  className="product-card">
+     <div  className="product-card" onClick={handleClick}>
         <figure>
           <span className="product-card-bage">
             new
