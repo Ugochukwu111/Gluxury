@@ -5,6 +5,7 @@
   display: flex;
   align-items: stretch;
   background-color: var(--white);
+  margin: 0;
 }
 
 .sign-in-up-container .background-container{
@@ -17,13 +18,18 @@
 }
 
 .sign-in-up-container form{
+  width: 100%;
   max-width: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1.5em 1em;
+  justify-content: space-between;
+  padding: 1em;
   position: relative;
   overflow: auto;
+  height: 100%;
+  max-height: 900px;
+  background-color: var(--white);
 }
 
 .sign-in-up-container form input{
@@ -56,16 +62,10 @@
    background-size: cover;
 }
 .sign-in-up-container form{
-  width: 100%;
-  max-width: 450px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1.5em 1em;
-  position: relative;
+  max-width: 500px;
   overflow: hidden;
-  min-height: 550px;
-  background-color: var(--white);
+  position: relative;
+  min-height: 580px;
   border-radius: .5rem;
   z-index: 100;
   margin-top: -5em;
@@ -74,11 +74,12 @@
 }
 
 
-
-form div {
+form >div {
   width: 100%;
   margin: .15em 0;
   max-width: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
 #submit-form-btn{
@@ -102,6 +103,7 @@ form div {
   position: relative;
   display: flex;
   align-items: center;
+  margin: .2em 0;
 }
 .input-container input{
   padding-left: 3em;
@@ -132,7 +134,6 @@ form div {
   line-height: 1;
   color: var(--text-muted);
   text-align: start;
-  margin-top: 1em;
 }
 .signup-legal-text a{
   display: inline-block;
