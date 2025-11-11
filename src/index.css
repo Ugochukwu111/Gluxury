@@ -337,6 +337,41 @@ img{
   padding: .25em;
   color: var(--accent-gold);
 }
+.background-cover{
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow: auto;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+   display: grid;
+   place-items: center;
+   transition: all 0.3s ease;
+}
+.background-cover.show{
+   opacity: 1;
+  visibility: visible;
+   z-index: 1000;
+}
+.background-cover.hide{
+  opacity: 0;
+  visibility: hidden;
+  z-index: -100;
+}
+
+.spin {
+  animation: spin .38s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
 
 .FWB{font-weight: 700;}
 .text-center{text-align: center;}

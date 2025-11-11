@@ -6,6 +6,11 @@
   align-items: stretch;
   background-color: var(--white);
   margin: 0;
+  scrollbar-width: none;
+}
+
+.email-input{
+  text-transform: lowercase;
 }
 
 .sign-in-up-container .background-container{
@@ -159,4 +164,21 @@ form >div {
 
 .input-container svg.filled-input {
   color: var(--text-heading);
+}
+
+.sign-up-btn svg.sending {
+  display: inline-block;
+  animation: sending-x .8s linear infinite;
+}
+
+@keyframes sending-x {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(20px); /* adjust distance as you like */
+  }
+  100% {
+    transform: translateX(0);
+  }
 }

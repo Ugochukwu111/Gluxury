@@ -2,13 +2,25 @@
 import { NavLink, Link } from "react-router-dom";
 import { Mail, KeyRound, SendHorizontal } from "lucide-react";
 import { containerStagger, itemFadeUp } from "../../utils/Animations.jsx";
+import  { BackgroundCover } from "../../utils/utilsFunctions.jsx"
 import './Auth.css'
 import GoogleIcon from '/images/google.png'
 import { motion } from "framer-motion";
 
 export function  SignInPage(){
+    // const [loading, setLoading] = useState(false);
+
+
    return(
       <main className="grid-center sign-in-up-container">
+                  {/* <BackgroundCover 
+                  className={`${loading? "show" : "hide"}`}>
+                <LoaderCircle 
+                  size={52} 
+                  strokeWidth={2.75}
+                  className="spin text-white"
+                   />
+                </BackgroundCover> */}
       <div className="background-container">
       </div>
 

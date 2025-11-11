@@ -1,3 +1,4 @@
+
 import { Star, StarHalf, StarOff } from "lucide-react";
 
 
@@ -20,4 +21,12 @@ export function renderStars(count) {
     }
 
     return stars;
+  }
+
+  export function BackgroundCover({children, className}){
+    return (
+      <div className={`background-cover ${className || ''}`}>
+        {children}
+      </div>
+    )
   }
