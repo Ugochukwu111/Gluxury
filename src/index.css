@@ -363,6 +363,18 @@ img{
   visibility: hidden;
   z-index: -100;
 }
+.dropdown-notification-popup{
+  background-color: var(--white);
+  box-shadow: 3px 3px 6px var(--text-muted);
+  position: fixed;
+  margin: .25em;
+  min-width: 250px;
+  max-width: 320px;
+  padding: .7em 1em;
+  border-radius: .5em;
+  text-align: center;
+  font-weight: bold;
+}
 
 .spin {
   animation: spin .38s linear infinite;

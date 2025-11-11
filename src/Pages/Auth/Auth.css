@@ -6,7 +6,11 @@
   align-items: stretch;
   background-color: var(--white);
   margin: 0;
-  scrollbar-width: none;
+  scrollbar-width:none;
+}
+
+form{
+scrollbar-width:none;
 }
 
 .email-input{

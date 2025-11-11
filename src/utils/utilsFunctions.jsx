@@ -30,3 +30,11 @@ export function renderStars(count) {
       </div>
     )
   }
+
+  export function DropDownPopUpNotification ({children, className}){
+    return(
+      <div className={`dropdown-notification-popup ${className}`}>
+        {children}
+      </div>
+    )
+  }

@@ -69,7 +69,7 @@ export function SignUpPage() {
          
         } catch (err) {
           setIsSending(false);
-           console.log(err)
+           console.error(err)
           if (err?.response.data.message == "Email already registered") {
             setEmailError(err.response.data.message);
           }
@@ -149,6 +149,7 @@ export function SignUpPage() {
               value={formValues.fullName}
               autoComplete="fullname"
               onChange={handleChange}
+              autoFocus
             />
           </motion.div>
           <span className={`error ${formErrors.username ? "show" : ""}`}>
