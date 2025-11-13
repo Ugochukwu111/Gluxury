@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { saveToLocalStorage } from './storage';
 
 
 export const sendOtp = async (email,type)=>{
@@ -32,6 +33,7 @@ export const verifyOtp = async (email, otp, type)=>{
       console.error('verify otp error'); 
       return 'verify otp server error';
     }else{
+      saveToLocalStorage('user', res.data);
        return res.data.message;
     }
   }catch(err){

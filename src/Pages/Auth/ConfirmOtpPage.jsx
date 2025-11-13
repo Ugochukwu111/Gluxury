@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { containerStagger, itemFadeUp } from "../../utils/Animations.jsx";
+import { saveToLocalStorage } from "../../utils/storage.js";
 import { verifyOtp , sendOtp } from "../../utils/sendOtp.js";
 import  { BackgroundCover } from "../../utils/utilsFunctions.jsx"
 import './ConfirmOtpPage.css'
@@ -18,13 +19,15 @@ export function ConfirmOtpPage(){
   const { email, type  } = location.state || {} ;
   const navigate = useNavigate();
 
+  console.log(type)
+
     const handleSendRefreshOtp = async () =>{
     setLoading(true);
     try{
       const message = await sendOtp(email, type);
-      console.log(message);
+       return message;
     }catch (err) {
-    alert("Failed to send OTP: " + err.message);
+     console.error("Failed to send OTP: " + err.message);
   }finally{
     setLoading(false);
   }
@@ -77,12 +80,14 @@ export function ConfirmOtpPage(){
     setLoading(true)
     try{
      const message = await verifyOtp(email, otp.join(""), type);
-      if (message === 'OTP verified successfully'){
+      if (message === 'OTP verified successfully' && type === 'Confirm Email'){
         setTimeout(()=>{
           navigate('/')
         }, 1500);
-      }else{
-        setError(true);
+      }else if(message === 'OTP verified successfully' && type === 'Forgot Password'){
+          setTimeout(()=>{
+          navigate('/reset-password');
+        }, 1500);
       }
     }catch(err){
       console.error(err);

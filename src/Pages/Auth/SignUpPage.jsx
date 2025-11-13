@@ -220,7 +220,7 @@ export function SignUpPage() {
             variants={itemFadeUp}
             className="text-center FWB text-heading"
           >
-            Already Have an account ?<NavLink to="/sign-in">Sign in</NavLink>
+            Already Have an account ?<NavLink to="/login">Sign in</NavLink>
           </motion.p>
         </div>
 

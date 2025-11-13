@@ -5,9 +5,13 @@ import { CartPage } from "./Pages/CartPage"
 import { SignUpPage } from "./Pages/Auth/SignUpPage"
 import { SignInPage } from "./Pages/Auth/SignInPage"
 import { ConfirmOtpPage } from "./Pages/Auth/ConfirmOtpPage"
+import { ForgotPasswordPage } from "./Pages/Auth/ForgotPasswordPage"
+import { ResetPasswordPage } from "./Pages/Auth/ResetPasswordPage"
 import { LandingPage } from './Pages/LandingPage/LandingPage'
 import { OrderPage } from './Pages/OrderPage'
 import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage"
+
+
 
 import './App.css'
 
@@ -119,8 +123,10 @@ function App() {
         <Route path="/cart" element = {<CartPage/>}/>
         <Route path="/product/:id" element = {<ProductDetailsPage/>}/>
         <Route path="/sign-up" element = {<SignUpPage/>}/>
-        <Route path = "/sign-in" element = { <SignInPage /> } />
+        <Route path = "/login" element = { <SignInPage /> } />
         <Route path="/confirm-otp" element = {<ConfirmOtpPage/>} />
+        <Route path = "/forgot-password" element = {<ForgotPasswordPage/>} />
+        <Route path = "/reset-password" element = {<ResetPasswordPage/>} />
         <Route path="/home" element = {<LandingPage products={products}/>}/>
         <Route path="/order" element = {<OrderPage/>}/>
       </Routes>

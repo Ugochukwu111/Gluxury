@@ -23,6 +23,7 @@ export function SignInPage() {
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(null);
   const navigate = useNavigate();
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -197,7 +198,7 @@ export function SignInPage() {
         <div>
           <motion.p className=" text-center" variants={itemFadeUp}>
             Forgot your password?
-            <Link to="/reset-password">
+            <Link to="/forgot-password">
               <u>Reset it here. </u>
             </Link>
           </motion.p>
