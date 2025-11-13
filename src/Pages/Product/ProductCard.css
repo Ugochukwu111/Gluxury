@@ -8,6 +8,8 @@
   overflow: hidden;
   border: 1px solid var(--accent-pink);
   height: 370px;
+  background-color: var(--white);
+  box-shadow: 2px 2px 2px var(--text-muted);
 }
 
 .product-card:hover img, .product-short-description,.product-name{
@@ -38,8 +40,20 @@
 .product-card .stock-price{
   position: absolute;
   color: var(--white);
-  bottom: 0;
-  left: .5em;
+  bottom: .2em;
+  left: .8em;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+    background: radial-gradient(
+    circle,
+    rgba(73, 220, 73, 1) 0%,     /* bright green center */
+    rgba(73, 220, 73, 0.6) 40%,  /* soft mid glow */
+    rgba(73, 220, 73, 0.1) 80%,  /* almost transparent edge */
+    transparent 100%              /* fades out completely */
+  );
 }
 
 .product-card .product-info {

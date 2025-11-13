@@ -20,7 +20,7 @@ export function ProductCard({product}){
           </button>
           <img src={product.image} alt= {product.name} />
           <figcaption className='stock-price'>
-            Stock:100
+            -12%
           </figcaption>
         </figure>
         <div className='product-info'>
@@ -36,9 +36,10 @@ export function ProductCard({product}){
    
           <div className='d-flex justify-s-between align-center product-price-container'>
             <p className="product-discount-price">
-              $189
+               ${product.price}
               <span className='product-price'>
-                ${product.price}
+                <del>
+                  ${product.price}</del> 
               </span>
             </p>
 

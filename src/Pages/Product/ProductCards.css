@@ -1,5 +1,6 @@
 main{
   padding: 4em 1em;
+  padding-top: 1em;
 }
 
 .products-container{
@@ -12,3 +13,19 @@ main{
 
 
 
+@media(max-width:420px){
+.products-container{
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); 
+  gap: .35em;
+}
+main{
+  padding: 3em .25em;
+}
+}
+
+@media(max-width: 379px){
+.products-container{
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+}
+
+}

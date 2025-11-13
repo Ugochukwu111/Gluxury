@@ -1,0 +1,26 @@
+.filter-container{
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  margin-top: 1em;
+}
+
+
+
+.filter-container button{
+  display: flex;
+  flex-direction: column;
+  width: clamp(70px, 20vw, 90px);
+  margin-inline: .25em;
+}
+
+
+.filter-container .active button {
+  background: var(--text-heading);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+.filter-container .active button svg{
+  color: var(--white);
+}
+
