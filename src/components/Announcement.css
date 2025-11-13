@@ -1,13 +1,55 @@
+.announcement-wrapper{
+  background-image: url('../assets/images/announcement-bkg.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 300px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+header{
+  box-shadow: none;
+}
+
 .announcement-container{
   background-color: var(--text-heading);
+  background: linear-gradient(
+ 135deg, 
+    #5D00A5 0%, 
+    #A00073 25%, /* Adjusted color stops for a smoother, longer transition */
+    #7F00FF 50%, /* Introducing a third, slightly brighter color for movement */
+    #5D00A5 75%,
+    #A00073 100%
+  );
+
+  background-size: 400% 400%; 
+  
+  animation: gradientShift 10s ease infinite;
   display: flex;
   justify-content: space-around;
   margin: 1em auto;
   border-radius: 1rem;
-  box-shadow: 2px 2px 18px var(--text-heading);
+  box-shadow: 2px 2px 8px var(--text-heading);
+  width: 100%;
   max-width: 1200px;
   align-items: center;
   padding: .5em;
+  
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%; /* Start position */
+  }
+  50% {
+    background-position: 100% 50%; /* Mid position (moves the gradient across) */
+  }
+  100% {
+    background-position: 0% 50%; /* Returns to start position */
+  }
 }
 
 .announcement-container figure{
@@ -16,13 +58,39 @@
 
 .details-container h2{
  margin: 0;
+ color: var(--white);
+ text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+
+.scrolling-text {
+    animation: scrollText 40s linear infinite; 
+    white-space: nowrap; 
+    font-size: 1.8rem; 
+    font-weight: 800; 
+    text-transform: uppercase;
+    color: var(--white);
+    filter: blur(1px); 
+    position: absolute;
+    bottom: 0;
+}
+
+
+@keyframes scrollText {
+    0% {
+        transform: translateX(100%); 
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 @media(max-width: 600px){
   .announcement-container{
     justify-content: space-between;
+    padding: .5em 1em;
   }
   .details-container{
-    max-width: 250px;
+    max-width: 230px;
   }
 }

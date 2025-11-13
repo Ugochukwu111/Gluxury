@@ -9,7 +9,7 @@ export function Header({onToggleSideBar}){
       <NavLink to= "/home">
         <h1 className='logo'>G Luxury</h1>
       </NavLink>
-      <div className='d-flex justify-s-between align-center lower-container f-wrap'>
+      <div className='d-flex justify-s-between align-center lower-container f-wrap container'>
         <div className='d-flex align-center flex-1'>
           <button
            onClick={onToggleSideBar}
@@ -25,13 +25,6 @@ export function Header({onToggleSideBar}){
         </div>
         <nav>
           <ul className='d-flex align-center f-wrap nav-container'>
-            <li>
-              <NavLink to="/order" aria-label="My Orders">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="Order-icon text-white"><path d="M16 14v2.2l1.6 1"/><path d="M16 4h2a2 2 0 0 1 2 2v.832"/><path d="M8 4H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h2"/><circle cx="16" cy="16" r="6"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
-                <span>Orders</span>
-                <span className='storage-number text-accent-purple'>0</span>
-              </NavLink>
-            </li>
             <li>
               <NavLink to="/cart" aria-label="My Cart">
                 <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="cart-icon text-white"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>

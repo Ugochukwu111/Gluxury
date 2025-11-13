@@ -5,7 +5,7 @@ box-shadow: 4px 4px 10px var(--text-muted);
 
 header .lower-container{
   padding: .6em 1.2em;
-  border: 1px solid var(--text-link);
+  border-top: 1px solid var(--white);
 }
 
 header ul{
@@ -23,6 +23,7 @@ header ul li a{
   border-radius: inherit;
   transition: all 250ms ease;
   position: relative;
+  border: 2px solid transparent;
 }
 header ul li a:hover{
   background-color: var(--text-light-grey);
@@ -35,7 +36,7 @@ header ul li a svg{
 }
 
 header ul li a.active{
-  background-color: var(--text-light-grey);
+  border: 2px solid var(--white);
 }
 header ul li a.active svg{
   transform: scale(.9);
@@ -91,7 +92,6 @@ header ul li a.active svg{
 @media (max-width: 700px) {
   header .lower-container{
   padding: .3em .25em;
-  border: 1px solid var(--text-link);
 }
   .nav-container a span  {
     display: none;

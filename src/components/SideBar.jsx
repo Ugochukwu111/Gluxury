@@ -60,7 +60,7 @@ export function SideBar({onToggleSideBar, ref}) {
             </a>
           </li>
           <li>
-            <a href="">
+            <a href="/order">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 width="24"

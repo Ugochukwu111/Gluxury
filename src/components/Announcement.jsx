@@ -5,14 +5,14 @@ import CartIcon from '../assets/images/gluxury-shoper.png'
 export function Announcement() {
   const annoucements = [{
     id: '1',
-    name: "shop with good price",
-    details: "shop with good price with little you have",
+    name: "The Secret to Luxury, Exposed",
+    details: "Quality this undeniable should cost more. We simply decided it shouldn't.",
     date: "25th January 2025",
     image: "./assets/images/gluxury-shoper.png",
   }];
 
   return (
-    <div>
+    <div className='announcement-wrapper'>
       {annoucements.map((announcement) => (
         <div key= {announcement.id} className='announcement-container'>
           <div className='details-container'>
@@ -24,8 +24,14 @@ export function Announcement() {
           <figure className="text-white">
             <img src={CartIcon} alt="anouncement illustration" />
           </figure>
+  
         </div>
+
       ))}
+
+              <p class="scrolling-text">
+        GLUXURY • QUALITY • EXPENSIVE • WOW • GLUXURY • QUALITY • EXPENSIVE • WOW • 
+    </p>
     </div>
   );
 }
