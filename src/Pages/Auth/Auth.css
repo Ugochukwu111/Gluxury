@@ -83,7 +83,7 @@ scrollbar-width:none;
 }
 
 
-form >div {
+.sign-in-up-container form >div {
   width: 100%;
   margin: .15em 0;
   max-width: 400px;

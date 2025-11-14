@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  scrollbar-width: none;
 }
 
 
@@ -376,11 +377,29 @@ img{
   font-weight: bold;
 }
 
+
+/* my reuseable animations  */
 .spin {
   animation: spin .38s linear infinite;
 }
 @keyframes spin {
   to { transform: rotate(360deg); }
+}
+
+@keyframes slide-infinite {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-100%); }
+}
+
+
+.scrolling-element { 
+    animation: 20s linear infinite alternate slide-infinite; 
+}
+
+
+.scrolling-element:hover,
+.scrolling-element:focus {
+    animation-play-state: paused;
 }
 
 

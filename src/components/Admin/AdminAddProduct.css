@@ -1,0 +1,88 @@
+.add-products-section{
+  padding: 2em 0em;
+}
+
+.add-products-section .text-content{
+  max-width: 500px;
+}
+
+
+
+#image-input{
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  border: none;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  background: #f6e8ff;  /* your color */
+  color: #333;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: none;
+}
+
+.image-input-container{
+  width:  100%;
+  max-width: 800px;
+  margin: 0 auto;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+}
+#image-input{
+  flex: 1;
+  padding: 0;
+  border: 5px dotted var(--text-link);
+  border-radius: 0;
+  display: grid;
+  place-items: center;
+  max-width: 800px;
+}
+
+.add-products-section input{
+  max-width: 400px;
+}
+.add-products-section  label{
+  display: block;
+}
+
+.image-upload-text-content{
+   display: flex;
+   flex-direction: column;
+   justify-content: center;
+   align-items: center;
+   position: absolute;
+    top: 50%; 
+   bottom: 50%;
+   display: grid;
+   place-self: center;
+   text-align: center;
+   z-index: -1;
+}
+
+.product-name-details-container >div{
+    max-width: 400px;
+}
+
+.off-price-btn-container{
+  overflow: auto;
+}
+
+.category-container select{
+  padding: 1em .5em;
+}
+
+.add-products-section .add-product-button{
+  margin: 0 auto;
+  width: 100%;
+  max-width: 600px;
+ 
+}

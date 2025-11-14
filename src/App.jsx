@@ -15,6 +15,8 @@ import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage"
 
 // below are imported admin pages
 import { AdminHomePage } from "./Pages/Admin/HomePage"
+import { AdminProductPage } from "./Pages/Admin/AdminProductPage"
+
 
 
 
@@ -137,6 +139,7 @@ function App() {
         <Route path = "/shoes" element = {< ShoesPage products={products}/>} />
         <Route path = "/bags" element = {< BagsPage products={products}/>} />
         <Route path = "/admin/dashboard" element = {< AdminHomePage />} />
+        <Route path = "/admin/products" element = {< AdminProductPage />} />
 
       </Routes>
     </>

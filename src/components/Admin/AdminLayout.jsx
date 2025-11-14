@@ -10,7 +10,7 @@ import {
 
 import "./AdminLayout.css";
 
-export function AdminLayout() {
+export function AdminLayout({children}) {
   return (
     <div className="admin-layout-container">
       <div className="admin-sidebar">
@@ -108,7 +108,9 @@ export function AdminLayout() {
           </button>
         </header>
 
-        <main></main>
+        <main className="admin-layout-container-main">
+          {children}
+        </main>
       </div>
     </div>
   );

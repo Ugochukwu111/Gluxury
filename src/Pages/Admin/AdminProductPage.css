@@ -1,0 +1,16 @@
+.product-metrics-continer{
+  display: flex;
+  padding: 1em 0;
+  overflow: auto;
+  scrollbar-width: none;
+}
+
+.product-metrics-continer .product-metrics-card{
+  margin: .5em;
+ box-shadow: 2px 2px 4px var(--text-muted);
+  width: 100%;
+  max-width: 250px;
+  flex-shrink: 0;
+  padding: .5em 1em;
+  border-radius: .5rem;
+}

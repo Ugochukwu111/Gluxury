@@ -60,13 +60,16 @@ svg{
  }
 
 
+
 .admin-layout-container .admin-header-main-container{
   height: 100svh;
   flex: 1;
   padding: 0 ;
   display: flex;
   flex-direction: column;
+  overflow: auto;
 }
+
 
 .admin-layout-container .admin-header-main-container header{
   padding: .25em  1em;
@@ -118,6 +121,7 @@ svg{
   border-radius: 50%;
   margin-right: .5em;
 }
+
 
 
 @media(max-width:800px){
@@ -193,3 +197,4 @@ svg{
   }
 
 }
+
