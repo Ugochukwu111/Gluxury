@@ -13,6 +13,9 @@ import { LandingPage } from './Pages/LandingPage/LandingPage'
 import { OrderPage } from './Pages/OrderPage'
 import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage"
 
+// below are imported admin pages
+import { AdminHomePage } from "./Pages/Admin/HomePage"
+
 
 
 import './App.css'
@@ -133,6 +136,8 @@ function App() {
         <Route path="/order" element = {<OrderPage/>}/>
         <Route path = "/shoes" element = {< ShoesPage products={products}/>} />
         <Route path = "/bags" element = {< BagsPage products={products}/>} />
+        <Route path = "/admin/dashboard" element = {< AdminHomePage />} />
+
       </Routes>
     </>
   )
