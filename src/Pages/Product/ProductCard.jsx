@@ -10,7 +10,7 @@ export function ProductCard({product}){
   };
 
   return(
-     <div  className="product-card" onClick={handleClick}>
+     <div  className="product-card" >
         <figure>
           <span className="product-card-bage">
             new
@@ -23,7 +23,8 @@ export function ProductCard({product}){
             -12%
           </figcaption>
         </figure>
-        <div className='product-info'>
+        <div className='product-info' >
+          <div onClick={handleClick} tabIndex={0}> 
           <p className="product-name">
             {product.name}
           </p>
@@ -33,6 +34,7 @@ export function ProductCard({product}){
           <p className="product-short-description">
            {product.description}
           </p>
+          </div>
    
           <div className='d-flex justify-s-between align-center product-price-container'>
             <p className="product-discount-price">

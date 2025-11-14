@@ -5,7 +5,7 @@ import { ProductCardsGrid } from './ProductCardsGrid';
 import { FilterProducts } from '../../components/FilterProducts'
 import { SideBarHeader } from '../../components/SideBarHeader';
 
-export function ProductPage({products}){
+export function BagsPage({products}){
   return(
      <div className="d-flex flex-column">
        <SideBarHeader />

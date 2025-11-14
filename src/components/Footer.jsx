@@ -11,12 +11,12 @@ export function Footer(){
             <p className='details'>
               Redefining luxury beauty with cutting-edge slegance. Experience the future of sophistication.
             </p>
-            <ul className='d-flex justify-center'>
+            {/* <ul className='d-flex justify-center'>
               <li><a href="">ig</a></li>
               <li><a href="">FB</a></li>
               <li><a href="">X</a></li>
               <li><a href="">YT</a></li>
-            </ul>
+            </ul> */}
           </div>
 
           <div>
@@ -38,27 +38,18 @@ export function Footer(){
               <li>
                 <span></span>
                 <span>
-                  Email
-                  <span>
+                  Email: &nbsp;
+                  <a href='mailto:hello@gluxury.com' target='_blank'>
                     hello@gluxury.com
-                  </span>
+                  </a>
                 </span>
               </li>
               <li>
                 <span></span>
                 <span>
-                  Phone
+                  Phone: &nbsp;
                   <span>
                     +234 704 6253 045
-                  </span>
-                </span>
-              </li>
-              <li>
-                <span></span>
-                <span>
-                  location
-                  <span>
-                    Benin City, Nigeria
                   </span>
                 </span>
               </li>
@@ -74,12 +65,16 @@ export function Footer(){
           <form>
             <h5>Join Our Exclusive Club</h5>
             <br />
-            <p>
+            <p className='FWB'>
               Suscribe for early access, exclusive offers, and luxury updates
             </p>
             <br />
             <div className='d-flex f-wrap M-auto'>
-              <input type="text" />
+              <input 
+                type="mail" 
+                placeholder='Enter email' 
+                className='M-auto' 
+                />
               <button className='btn-accent'>
                 SUSCRIBE
               </button>

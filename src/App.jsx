@@ -1,6 +1,8 @@
 
 import { Routes , Route } from "react-router-dom"
 import { ProductPage } from "./Pages/Product/Product"
+import {  ShoesPage } from "./Pages/Product/ShoesPage"
+import { BagsPage } from "./Pages/Product/BagsPage"
 import { CartPage } from "./Pages/CartPage"
 import { SignUpPage } from "./Pages/Auth/SignUpPage"
 import { SignInPage } from "./Pages/Auth/SignInPage"
@@ -129,6 +131,8 @@ function App() {
         <Route path = "/reset-password" element = {<ResetPasswordPage/>} />
         <Route path="/home" element = {<LandingPage products={products}/>}/>
         <Route path="/order" element = {<OrderPage/>}/>
+        <Route path = "/shoes" element = {< ShoesPage products={products}/>} />
+        <Route path = "/bags" element = {< BagsPage products={products}/>} />
       </Routes>
     </>
   )

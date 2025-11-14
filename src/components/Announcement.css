@@ -8,7 +8,9 @@
   align-items: center;
   overflow: hidden;
   position: relative;
+  padding: 0 .25em;
 }
+
 
 header{
   box-shadow: none;

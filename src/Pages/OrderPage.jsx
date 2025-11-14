@@ -8,7 +8,7 @@ export function OrderPage() {
     <div className="layout-container">
       <SideBarHeader />
       <main>
-        <div className="order-container ">
+        <div className="order-container bg-white ">
           <div className="upper-container">
             <div className="d-flex order-total-content-container"> 
               <p>

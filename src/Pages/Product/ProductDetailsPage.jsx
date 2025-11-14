@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useParams,useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { SideBarHeader } from "../../components/SideBarHeader";
 import { Footer } from "../../components/Footer";
@@ -9,6 +9,7 @@ import {
   MessageCircle,
   SquareArrowOutUpRight,
   MapPinCheckInside,
+  ArrowLeft
 } from "lucide-react";
 
 import "./ProductDetailsPage.css";
@@ -16,6 +17,7 @@ import "./ProductDetailsPage.css";
 export function ProductDetailsPage() {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get("").then((res) => {
@@ -30,6 +32,14 @@ export function ProductDetailsPage() {
           <div className="product-details-card">
             <figure>
               <img src="" alt="" />
+              <button 
+              className="previous-btn"
+              onClick={()=>{
+                navigate(-1)
+              }}
+              >
+                <ArrowLeft />
+              </button>
             </figure>
 
             <div className="text-container">
