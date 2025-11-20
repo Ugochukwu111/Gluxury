@@ -6,6 +6,19 @@
   max-width: 500px;
 }
 
+.add-products-section input{
+  box-shadow: 1px 1px 2px var(--text-muted);
+}
+
+#product-rate-count{
+  width: 100px;
+  margin: 0 .5em;
+  border-radius: .5rem;
+}
+
+#product-name{
+  text-transform: capitalize;
+}
 
 
 #image-input{
@@ -85,4 +98,21 @@ input[type="file"]::-webkit-file-upload-button {
   width: 100%;
   max-width: 600px;
  
+}
+#product-size{
+  margin: 0 auto;
+  border: 1px solid ;
+  padding: 1em 1.5em;
+}
+
+.closed-form{
+  height: 0;
+  overflow: hidden;
+}
+
+
+
+.form-active{
+    height: auto;
+  overflow: auto;
 }

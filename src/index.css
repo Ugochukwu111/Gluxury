@@ -305,6 +305,7 @@ img{
 .d-grid{display: grid;}
 .d-block{display: block;}
 .d-inline-b{display: inline-block;}
+.d-none{display: none;}
 
 /* FLEX DIRECTION */
 .flex-column{flex-direction: column;}

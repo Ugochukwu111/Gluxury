@@ -1,0 +1,9 @@
+ .searchProduct-container{
+  max-width: 600px;
+   margin-inline: .5em;
+   position: relative;
+}
+.searchProduct-container:focus-within .lucide-search-icon{
+  color: var(--text-link);
+  left: 1.5em;
+}

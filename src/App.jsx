@@ -139,7 +139,7 @@ function App() {
         <Route path = "/shoes" element = {< ShoesPage products={products}/>} />
         <Route path = "/bags" element = {< BagsPage products={products}/>} />
         <Route path = "/admin/dashboard" element = {< AdminHomePage />} />
-        <Route path = "/admin/products" element = {< AdminProductPage />} />
+        <Route path = "/admin/products" element = {< AdminProductPage products={products} />} />
 
       </Routes>
     </>

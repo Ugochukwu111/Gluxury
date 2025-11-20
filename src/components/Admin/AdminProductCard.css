@@ -1,0 +1,15 @@
+.edith-delete-container{
+  position: absolute;
+  bottom:0;
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.edith-delete-container button{
+  padding: .5em;
+}
+
+.edith-delete-container > :first-child{
+  padding: 0 1.5rem;
+}

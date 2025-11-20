@@ -11,7 +11,7 @@ import { AdminAddProduct } from "../../components/Admin/AdminAddProduct"
 
 import "./AdminProductPage.css";
 
-export function AdminProductPage() {
+export function AdminProductPage({products}) {
   const productMetrics = [
     {
       id:'1',
@@ -49,7 +49,6 @@ export function AdminProductPage() {
       backgroundColor: "bg-green",
     },
   ];
-
   return (
     <AdminLayout>
       <div className="product-metrics-continer ">
@@ -67,7 +66,7 @@ export function AdminProductPage() {
         })}
         </div>
       </div>
-      <AdminAddProduct/>
+      <AdminAddProduct products = {products}/>
     </AdminLayout>
   );
 }
