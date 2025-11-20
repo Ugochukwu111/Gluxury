@@ -403,6 +403,60 @@ img{
     animation-play-state: paused;
 }
 
+.gluxury-notification-card{
+  min-width: 200px;
+  max-width: 320px;
+  padding: .5em 1em;
+  display: flex;
+  border-radius: .5rem;
+  position: fixed;
+  background-color: var(--white);
+  z-index: 100;
+   top: .5em;
+  display: flex;
+  justify-self: center;
+  box-shadow: 2px 2px 4px var(--text-muted);
+  font-weight: 700;
+  transform: translateY(-50px);
+  opacity: 0;
+  pointer-events: none;
+  text-align: center;
+  justify-content: center;
+}
+.gluxury-notification-card svg{
+  margin-right:.5em ;
+}
+
+.gluxury-notification-card.success{
+  background-color: var(--green);
+  color: var(--white);
+  animation: card 2s linear;
+}
+.gluxury-notification-card.fail{
+  background-color: var(--red);
+  color: var(--white);
+  animation: card 2s linear;
+}
+
+@keyframes card {
+  0% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  20% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+}
+
 
 
 .FWB{font-weight: 700;}

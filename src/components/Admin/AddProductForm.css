@@ -103,6 +103,8 @@ input[type="file"]::-webkit-file-upload-button {
   margin: 0 auto;
   border: 1px solid ;
   padding: 1em 1.5em;
+  width: 200px;
+  display: block;
 }
 
 .closed-form{

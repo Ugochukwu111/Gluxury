@@ -1,12 +1,15 @@
-import { Upload, Plus,LoaderCircle  } from "lucide-react";
+import { Upload, Plus, LoaderCircle } from "lucide-react";
 import { useState } from "react";
 import axios from "axios";
 import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
-import { BackgroundCover } from "../../utils/utilsFunctions";
+import { BackgroundCover,GluxNotification  } from "../../utils/utilsFunctions";
+
 
 export function AddProductForm() {
   const [isFormActive, setIsFormActive] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
+  const [notifKey, setNotifKey] = useState(0);
 
   const [formValues, setFormValues] = useState({
     image: null,
@@ -45,40 +48,51 @@ export function AddProductForm() {
 
     try {
       const formData = new FormData();
-      
 
       if (formValues.image) {
-        formData.append("image", formValues.image); 
+        formData.append("image", formValues.image);
       }
 
- 
       Object.keys(formValues).forEach((key) => {
         if (key !== "image") formData.append(key, formValues[key]);
       });
 
-      console.log(formValues)
+      console.log(formValues);
 
-     const res = await axios.post( "http://localhost:5000/api/products/upload", formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "http://localhost:5000/api/products/upload",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
       console.log(res.data);
+
+      setNotifKey(prev => prev + 1);
+       setIsSuccessful(true);
     } catch (error) {
       console.error(error);
+      setNotifKey(prev => prev + 1);
+      setIsSuccessful(false);
     } finally {
       setLoading(false);
+      console.log('removeloading')
     }
   };
 
   return (
     <section className="add-products-section">
-            <BackgroundCover 
-                              className={`${loading? "show" : "hide"}`}>
-                            <LoaderCircle 
-                              size={52} 
-                              strokeWidth={2.75}
-                              className="spin text-white"
-                               />
-                            </BackgroundCover>
+      <BackgroundCover className={`${loading ? "show" : "hide"}`}>
+        <LoaderCircle
+          size={52}
+          strokeWidth={2.75}
+          className={`spin text-white `}
+        />
+      </BackgroundCover>
+
+      <GluxNotification key={notifKey} className={`${isSuccessful?'success':'fail'}`}>
+        {isSuccessful? 'Success' : 'Upload failed'}
+      </GluxNotification>
       <div>
         <div className="d-flex justify-s-between align-start">
           <div className="text-content">
@@ -251,11 +265,11 @@ export function AddProductForm() {
           <br />
 
           {formValues.category === "shoe" && (
-            <div className="flex-column">
+            <div className="">
               <label className="text-center">Size</label>
               <select
                 id="product-size"
-                className=""
+                className=" "
                 value={formValues.size}
                 onChange={(e) => updateField("size", e.target.value)}
               >
@@ -299,7 +313,7 @@ export function AddProductForm() {
             className="add-product-button bg-green text-white"
             disabled={loading}
           >
-            "Add Product"
+            Add Product
             <Plus />
           </button>
         </form>

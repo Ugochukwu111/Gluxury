@@ -1,5 +1,5 @@
 
-import { Star, StarHalf, StarOff } from "lucide-react";
+import { Star, StarHalf, StarOff, Activity } from "lucide-react";
 
 
 export function renderStars(count) {
@@ -35,6 +35,17 @@ export function renderStars(count) {
     return(
       <div className={`dropdown-notification-popup ${className}`}>
         {children}
+      </div>
+    )
+  }
+
+  export function GluxNotification({children, className}){
+    return(
+      <div className={`gluxury-notification-card ${className}`}>
+        <Activity />
+        <span>
+          {children}
+        </span>
       </div>
     )
   }
