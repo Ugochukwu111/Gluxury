@@ -107,14 +107,24 @@ input[type="file"]::-webkit-file-upload-button {
   display: block;
 }
 
-.closed-form{
-  height: 0;
-  overflow: hidden;
+.add-products-section form{
+  background-color: var(--white);
+  padding: 1.5em .8em;
+  box-shadow: 2px 2px 4px var(--text-muted);
+  border-radius: .5rem;
+  transition: all 250ms ease-in-out;
+  opacity: 0;
 }
 
+.add-products-section form.closed-form{
+  height: 0;
+  overflow: hidden;
+  padding:0em;
+  opacity: 0;
+}
 
-
-.form-active{
+.add-products-section form.form-active{
     height: auto;
   overflow: auto;
+  opacity: 1;
 }

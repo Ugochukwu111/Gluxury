@@ -3,8 +3,7 @@ import { useState } from "react";
 import axios from "axios";
 import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
-import { BackgroundCover,GluxNotification  } from "../../utils/utilsFunctions";
-
+import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 
 export function AddProductForm() {
   const [isFormActive, setIsFormActive] = useState(false);
@@ -57,8 +56,6 @@ export function AddProductForm() {
         if (key !== "image") formData.append(key, formValues[key]);
       });
 
-      console.log(formValues);
-
       const res = await axios.post(
         "http://localhost:5000/api/products/upload",
         formData,
@@ -66,17 +63,14 @@ export function AddProductForm() {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      console.log(res.data);
-
-      setNotifKey(prev => prev + 1);
-       setIsSuccessful(true);
+      setNotifKey((prev) => prev + 1);
+      setIsSuccessful(true);
     } catch (error) {
       console.error(error);
-      setNotifKey(prev => prev + 1);
+      setNotifKey((prev) => prev + 1);
       setIsSuccessful(false);
     } finally {
       setLoading(false);
-      console.log('removeloading')
     }
   };
 
@@ -90,9 +84,14 @@ export function AddProductForm() {
         />
       </BackgroundCover>
 
-      <GluxNotification key={notifKey} className={`${isSuccessful?'success':'fail'}`}>
-        {isSuccessful? 'Success' : 'Upload failed'}
-      </GluxNotification>
+      {notifKey > 0 && (
+        <GluxNotification
+          key={notifKey}
+          className={isSuccessful ? "success" : "fail"}
+        >
+          {isSuccessful ? "Product Added to Inventory" : "Upload Failed. Please try again"}
+        </GluxNotification>
+      )}
       <div>
         <div className="d-flex justify-s-between align-start">
           <div className="text-content">
