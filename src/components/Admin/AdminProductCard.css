@@ -13,3 +13,9 @@
 .edith-delete-container > :first-child{
   padding: 0 1.5rem;
 }
+
+.relative-time{
+  font-size: .8rem;
+  font-weight: 600;
+  color: var(--text-subtle);
+}

@@ -12,7 +12,7 @@ import { AdminAddProduct } from "../../components/Admin/AdminAddProduct"
 
 import "./AdminProductPage.css";
 
-export function AdminProductPage({products}) {
+export function AdminProductPage({allProducts, refreshProducts}) {
   const productMetrics = [
     {
       id:'1',
@@ -67,7 +67,7 @@ export function AdminProductPage({products}) {
         })}
         </div>
       </div>
-      <AdminAddProduct products = {products}/>
+      <AdminAddProduct allProducts = {allProducts} refreshProducts = {refreshProducts}/>
     </AdminLayout>
   );
 }

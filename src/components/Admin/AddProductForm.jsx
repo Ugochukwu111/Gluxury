@@ -5,7 +5,7 @@ import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 
-export function AddProductForm() {
+export function AddProductForm({refreshProducts}) {
   const [isFormActive, setIsFormActive] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
@@ -63,6 +63,7 @@ export function AddProductForm() {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
+      await refreshProducts()
       setNotifKey((prev) => prev + 1);
       setIsSuccessful(true);
     } catch (error) {

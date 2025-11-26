@@ -1,5 +1,6 @@
 
 import { Routes , Route } from "react-router-dom"
+import { useState, useEffect } from "react"
 import { ProductPage } from "./Pages/Product/Product"
 import {  ShoesPage } from "./Pages/Product/ShoesPage"
 import { BagsPage } from "./Pages/Product/BagsPage"
@@ -26,8 +27,25 @@ import bag1 from'./assets/images/bag.jpg';
 import bag2 from'./assets/images/bag2.jpg';
 import shoe from'./assets/images/shoe.jpg';
 import shoe2 from'./assets/images/shoe2.jpg';
+import axios from "axios"
 
 function App() {
+  const [allProducts, setAllProducts] = useState([])
+
+           let getAllProductData = async ()=>{
+          try{
+            console.log('ran')
+            const res = await axios.get('http://localhost:5000/api/products')
+            setAllProducts(res.data.products)
+            console.log(res.data.products)
+          }catch(err){
+            console.log(err || 'nextwork try again later')
+          }
+        }
+
+    useEffect(()=>{
+        getAllProductData();
+    },[])
 
 
   const products = [
@@ -139,7 +157,7 @@ function App() {
         <Route path = "/shoes" element = {< ShoesPage products={products}/>} />
         <Route path = "/bags" element = {< BagsPage products={products}/>} />
         <Route path = "/admin/dashboard" element = {< AdminHomePage />} />
-        <Route path = "/admin/products" element = {< AdminProductPage products={products} />} />
+        <Route path = "/admin/products" element = {< AdminProductPage allProducts={allProducts} refreshProducts={getAllProductData} />} />
 
       </Routes>
     </>
