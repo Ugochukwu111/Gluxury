@@ -2,6 +2,7 @@ import { SquarePen, Trash2 } from "lucide-react";
 import { renderStars } from "../../utils/utilsFunctions";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
+import axios from "axios";
 
 import "../../Pages/Product/ProductCard";
 import "./AdminProductCard.css";
@@ -13,7 +14,11 @@ export function AdminProductCard({
   setOpenEdithProduct,
   setEdithProduct,
 }) {
-  const handleEdithProductApi = () => {};
+  
+  const fetchProduct = async (id) => {
+  const res = await axios.get(`/api/products/${id}`);
+  setEdithProduct(product);
+};
 
   return (
     <div className="product-card">
@@ -28,6 +33,7 @@ export function AdminProductCard({
           <button
             onClick={() => {
               setOpenEdithProduct(false);
+              fetchProduct(product._id);
             }}
             className="bg-gradient text-white"
           >

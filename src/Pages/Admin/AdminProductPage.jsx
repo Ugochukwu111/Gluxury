@@ -10,6 +10,7 @@ import { AdminLayout } from "../../components/Admin/AdminLayout";
 import { AdminAddProduct } from "../../components/Admin/AdminAddProduct"
 
 
+
 import "./AdminProductPage.css";
 
 export function AdminProductPage({allProducts, refreshProducts}) {
@@ -67,7 +68,10 @@ export function AdminProductPage({allProducts, refreshProducts}) {
         })}
         </div>
       </div>
-      <AdminAddProduct allProducts = {allProducts} refreshProducts = {refreshProducts}/>
+      <AdminAddProduct 
+        allProducts = {allProducts} 
+        refreshProducts = {refreshProducts}
+        />
     </AdminLayout>
   );
 }

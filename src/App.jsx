@@ -34,10 +34,8 @@ function App() {
 
            let getAllProductData = async ()=>{
           try{
-            console.log('ran')
             const res = await axios.get('http://localhost:5000/api/products')
             setAllProducts(res.data.products)
-            console.log(res.data.products)
           }catch(err){
             console.log(err || 'nextwork try again later')
           }
