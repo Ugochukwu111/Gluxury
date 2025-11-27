@@ -17,6 +17,7 @@ export function AddProductForm({refreshProducts}) {
     description: "",
     price: "",
     offPrice: "",
+    offPercent : 0,
     discount: 0,
     stockquantity: "",
     category: "bag",
@@ -36,7 +37,8 @@ export function AddProductForm({refreshProducts}) {
   const handleDiscountClick = (percent) => {
     setActivePercent(percent);
     updateField("discount", percent);
-
+     formValues.offPercent = percent;
+     console.log(formValues.offPercent)
     const off = Number(formValues.price) + Number(formValues.price * percent);
     updateField("offPrice", off.toFixed(2));
   };

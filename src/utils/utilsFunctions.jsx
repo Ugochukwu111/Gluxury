@@ -23,9 +23,9 @@ export function renderStars(count) {
     return stars;
   }
 
-  export function BackgroundCover({children, className}){
+  export function BackgroundCover({children, className, onClick}){
     return (
-      <div className={`background-cover ${className || ''}`}>
+      <div onClick={onClick} className={`background-cover ${className || ''}`}>
         {children}
       </div>
     )

@@ -30,7 +30,8 @@ import shoe2 from'./assets/images/shoe2.jpg';
 import axios from "axios"
 
 function App() {
-  const [allProducts, setAllProducts] = useState([])
+  const [allProducts, setAllProducts] = useState([]);
+   console.log(allProducts)
 
            let getAllProductData = async ()=>{
           try{

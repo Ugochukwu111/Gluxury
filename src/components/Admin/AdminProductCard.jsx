@@ -32,7 +32,7 @@ export function AdminProductCard({
         <div className="edith-delete-container">
           <button
             onClick={() => {
-              setOpenEdithProduct(false);
+              setOpenEdithProduct(true);
               fetchProduct(product._id);
             }}
             className="bg-gradient text-white"
