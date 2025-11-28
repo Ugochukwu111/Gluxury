@@ -7,8 +7,38 @@ main{
    display: grid;
   grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); 
   place-items: center;
-  gap: .5em;
+  gap: .5em;;
+  min-height: 50vh;
+}
 
+.empty-cart-container{
+  display: grid;
+  place-items: center;
+}
+
+.products-container .empty-cart-container svg{
+  color: var(--text-muted);
+  animation: changeColor 2s infinite ;
+}
+
+@keyframes changeColor {
+  0%{
+    color: var(--text-muted);
+    transform: scale(1);
+  }
+  25%{
+    color: var(--accent-purple);
+    transform: scale(1.4)
+  }50%{
+    color: var(--text-link);
+    transform: scale(1.2)
+  }75%{
+    color: var(--red);
+    transform: scale(1.6)
+  }100%{
+    color: var(--text-heading);
+    transform: scale(1)
+  }
 }
 
 
