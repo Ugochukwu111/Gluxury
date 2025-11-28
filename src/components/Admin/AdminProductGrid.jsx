@@ -3,7 +3,7 @@ import { AdminProductCard } from "./AdminProductCard"
 
 import '../../Pages/Product/ProductCardsGrid'
 
-export function AdminProductGrid({allProducts, setOpenEdithProduct, setEdithProduct}){
+export function AdminProductGrid({allProducts, setOpenEdithProduct, setEdithProduct, handleOpenEdit}){
   return(
     
     <div className='container  products-container'>
@@ -11,6 +11,7 @@ export function AdminProductGrid({allProducts, setOpenEdithProduct, setEdithProd
       allProducts.map((product)=>{
        return( 
        <AdminProductCard 
+         handleOpenEdit = {handleOpenEdit}
          setOpenEdithProduct ={setOpenEdithProduct} 
          key={product.id} 
          product={product}

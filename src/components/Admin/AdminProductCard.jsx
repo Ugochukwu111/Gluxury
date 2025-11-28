@@ -13,12 +13,9 @@ export function AdminProductCard({
   product,
   setOpenEdithProduct,
   setEdithProduct,
+  handleOpenEdit,
 }) {
   
-  const fetchProduct = async (id) => {
-  const res = await axios.get(`/api/products/${id}`);
-  setEdithProduct(product);
-};
 
   return (
     <div className="product-card">
@@ -32,8 +29,8 @@ export function AdminProductCard({
         <div className="edith-delete-container">
           <button
             onClick={() => {
-              setOpenEdithProduct(true);
-              fetchProduct(product._id);
+               setEdithProduct(product);
+               handleOpenEdit(product)
             }}
             className="bg-gradient text-white"
           >

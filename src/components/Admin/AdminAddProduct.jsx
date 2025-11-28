@@ -7,9 +7,8 @@ import { BackgroundCover } from "../../utils/utilsFunctions";
 import { X, Save, ArrowLeft, LoaderCircle } from "lucide-react";
 import "./AdminAddProduct.css";
 import { useState, useRef, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-
-
 
 export function AdminAddProduct({ allProducts, refreshProducts }) {
   const [openEdithProduct, setOpenEdithProduct] = useState(false);
@@ -18,8 +17,11 @@ export function AdminAddProduct({ allProducts, refreshProducts }) {
   const [notifKey, setNotifKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const popupRef = useRef(null);
-const previouslyFocusedElementRef = useRef(null);
+  const previouslyFocusedElementRef = useRef(null);
 
   const handleImageChange = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -46,6 +48,7 @@ const previouslyFocusedElementRef = useRef(null);
     if (edithProduct.newImageFile)
       formData.append("image", edithProduct.newImageFile);
     setIsLoading(true);
+    console.log("save hit");
     try {
       let res = await axios.put(
         `http://localhost:5000/api/products/${edithProduct._id}`,
@@ -62,8 +65,8 @@ const previouslyFocusedElementRef = useRef(null);
       setNotifKey((prev) => prev + 1);
     } finally {
       refreshProducts();
-      setOpenEdithProduct(false);
       setIsLoading(false);
+      handleCloseEdit();
     }
   };
 
@@ -75,6 +78,32 @@ const previouslyFocusedElementRef = useRef(null);
       previouslyFocusedElementRef.current?.focus?.();
     }
   }, [openEdithProduct]);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const productId = params.get("edit");
+
+    if (productId) {
+      const product = allProducts.find((p) => p._id === productId);
+      if (product) setEdithProduct(product);
+      setOpenEdithProduct(!!product);
+    } else {
+      setOpenEdithProduct(false);
+      setEdithProduct({});
+    }
+  }, [location.search, allProducts]);
+
+  const handleOpenEdit = (product) => {
+    setEdithProduct(product);
+    setOpenEdithProduct(true);
+    navigate(`?edit=${product._id}`, { replace: false });
+  };
+
+  const handleCloseEdit = () => {
+    setOpenEdithProduct(false);
+    setEdithProduct({});
+    navigate("", { replace: false });
+  };
 
   return (
     <>
@@ -97,6 +126,7 @@ const previouslyFocusedElementRef = useRef(null);
           <SearchBar />
           <FilterProducts />
           <AdminProductGrid
+            handleOpenEdit={handleOpenEdit}
             allProducts={allProducts}
             setOpenEdithProduct={setOpenEdithProduct}
             setEdithProduct={setEdithProduct}
@@ -104,218 +134,223 @@ const previouslyFocusedElementRef = useRef(null);
 
           {openEdithProduct && (
             <BackgroundCover
-            onClick={(e) => {
-              setOpenEdithProduct(false);
-            }}
-            className={`${openEdithProduct ? "show" : "hide"}`}
-          >
-            <form
-             
-              ref={popupRef}
-              id="edith-product-dialog"
-              role="dialog"
-              aria-modal="true"
-              aria-labelledby="edith-product-title"
-              aria-describedby="edith-product-desc"
-              className={`edith-form ${openEdithProduct ? "show" : "hide"} `}
+              onClick={(e) => {
+                if (e.target === e.currentTarget) handleCloseEdit();
+              }}
+              className={`${openEdithProduct ? "show" : "hide"}`}
             >
-              <div className="d-flex align-center justify-s-between">
-                <h4 id="edith-product-title">Edith product</h4>
-                <button
-                  type="button"
-                  aria-label="close edith product form button"
-                  onClick={() => {
-                    setOpenEdithProduct(false);
-                  }}
-                >
-                  <X />
-                </button>
-              </div>
-              <p id="edith-product-desc">Update your luxury product details</p>
-              <div className="edith-form-input-container">
-                <div className="edith-product-image-container">
-                  <label htmlFor="edith-product-image">Product Image</label>
-                  <input
-                    type="file"
-                    className="d-none"
-                    id="edith-product-image"
-                    onChange={handleImageChange}
-                  />
-                  <figure>
-                    <img src={edithProduct.image} alt={edithProduct.name} />
-                    <button
-                      onClick={() =>
-                        document.getElementById("edith-product-image").click()
-                      }
-                      type="button"
-                      className="edith-product-photo-btn bg-text-muted"
-                      disabled={true}
-                    >
-                      edith photo
-                    </button>
-                  </figure>
+              <form
+                ref={popupRef}
+                id="edith-product-dialog"
+                role="dialog"
+                aria-modal="true"
+                aria-labelledby="edith-product-title"
+                aria-describedby="edith-product-desc"
+                className={`edith-form ${openEdithProduct ? "show" : "hide"} `}
+              >
+                <div className="d-flex align-center justify-s-between">
+                  <h4 id="edith-product-title">Edith product</h4>
+                  <button
+                    type="button"
+                    aria-label="close edith product form button"
+                    onClick={() => {
+                      setOpenEdithProduct(false);
+                      handleCloseEdit();
+                    }}
+                  >
+                    <X />
+                  </button>
                 </div>
-                <br />
-                <div>
-                  <label htmlFor="edith-product-name">Name</label>
-                  <input
-                    type="text"
-                    id="edith-product-name"
-                    value={edithProduct.name || ""}
-                    onChange={(e) =>
-                      setEdithProduct({ ...edithProduct, name: e.target.value })
-                    }
-                  />
-                </div>
-
-                <div className="grid-input-container">
+                <p id="edith-product-desc">
+                  Update your luxury product details
+                </p>
+                <div className="edith-form-input-container">
+                  <div className="edith-product-image-container">
+                    <label htmlFor="edith-product-image">Product Image</label>
+                    <input
+                      type="file"
+                      className="d-none"
+                      id="edith-product-image"
+                      onChange={handleImageChange}
+                    />
+                    <figure>
+                      <img src={edithProduct.image} alt={edithProduct.name} />
+                      <button
+                        onClick={() =>
+                          document.getElementById("edith-product-image").click()
+                        }
+                        type="button"
+                        className="edith-product-photo-btn bg-text-muted"
+                        disabled={true}
+                      >
+                        edith photo
+                      </button>
+                    </figure>
+                  </div>
+                  <br />
                   <div>
-                    <label htmlFor="edith-price">Price</label>
+                    <label htmlFor="edith-product-name">Name</label>
                     <input
-                      type="number"
-                      id="edith-price"
-                      value={edithProduct?.price || ""}
-                      onChange={(e) => {
-                        const price = Number(e.target.value);
-
-                        setEdithProduct((prev) => {
-                          const offPercent = prev.offPercent;
-                          const offPrice = price + price * offPercent;
-
-                          return {
-                            ...prev,
-                            price,
-                            offPrice,
-                          };
-                        });
-                      }}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="edith-stock-quantity">Stock:</label>
-                    <input
-                      type="number"
-                      id="edith-stock-quantity"
-                      value={edithProduct?.stockquantity || 0}
+                      type="text"
+                      id="edith-product-name"
+                      value={edithProduct.name || ""}
                       onChange={(e) =>
                         setEdithProduct({
                           ...edithProduct,
-                          stockquantity: e.target.value,
+                          name: e.target.value,
                         })
                       }
                     />
                   </div>
-                  <div className="d-flex  flex-column ">
-                    <label htmlFor="edith-category" className="">
-                      Category:
-                    </label>
-                    <select
-                      id="edith-category"
-                      className="w100 flex-1"
-                      value={edithProduct?.category || ""}
-                      onChange={(e) =>
-                        setEdithProduct({
-                          ...edithProduct,
-                          category: e.target.value,
-                        })
-                      }
+
+                  <div className="grid-input-container">
+                    <div>
+                      <label htmlFor="edith-price">Price</label>
+                      <input
+                        type="number"
+                        id="edith-price"
+                        value={edithProduct?.price || ""}
+                        onChange={(e) => {
+                          const price = Number(e.target.value);
+
+                          setEdithProduct((prev) => {
+                            const offPercent = prev.offPercent;
+                            const offPrice = price + price * offPercent;
+
+                            return {
+                              ...prev,
+                              price,
+                              offPrice,
+                            };
+                          });
+                        }}
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="edith-stock-quantity">Stock:</label>
+                      <input
+                        type="number"
+                        id="edith-stock-quantity"
+                        value={edithProduct?.stockquantity || 0}
+                        onChange={(e) =>
+                          setEdithProduct({
+                            ...edithProduct,
+                            stockquantity: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div className="d-flex  flex-column ">
+                      <label htmlFor="edith-category" className="">
+                        Category:
+                      </label>
+                      <select
+                        id="edith-category"
+                        className="w100 flex-1"
+                        value={edithProduct?.category || ""}
+                        onChange={(e) =>
+                          setEdithProduct({
+                            ...edithProduct,
+                            category: e.target.value,
+                          })
+                        }
+                      >
+                        <option value="bag">bag</option>
+                        <option value="shoe">shoe</option>
+                      </select>
+                    </div>
+
+                    <div
+                      className={`${
+                        edithProduct.category == "shoe" ? "d-none" : ""
+                      }`}
                     >
-                      <option value="bag">bag</option>
-                      <option value="shoe">shoe</option>
-                    </select>
-                  </div>
-
-                  <div
-                    className={`${
-                      edithProduct.category == "shoe" ? "d-none" : ""
-                    }`}
-                  >
-                    <label htmlFor="edith-product-width">Width:</label>
-                    <input
-                      type="number"
-                      id="edith-product-width"
-                      value={edithProduct?.width || 0}
-                      onChange={(e) =>
-                        setEdithProduct({
-                          ...edithProduct,
-                          width: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-                  <div
-                    className={`${
-                      edithProduct.category == "shoe" ? "d-none" : ""
-                    }`}
-                  >
-                    <label htmlFor="edith-product-width">Height:</label>
-                    <input
-                      type="number"
-                      id="edith-product-height"
-                      value={edithProduct?.height || 0}
-                      onChange={(e) =>
-                        setEdithProduct({
-                          ...edithProduct,
-                          height: e.target.value,
-                        })
-                      }
-                    />
-                  </div>
-
-                  <div
-                    className={`${
-                      edithProduct.category == "shoe" ? "" : "d-none"
-                    }`}
-                  >
-                    <label className="text-center">Size</label>
-                    <select
-                      id="product-size"
-                      className=" "
-                      value={edithProduct?.size || 0}
-                      onChange={(e) =>
-                        setEdithProduct({
-                          ...edithProduct,
-                          size: e.target.value,
-                        })
-                      }
+                      <label htmlFor="edith-product-width">Width:</label>
+                      <input
+                        type="number"
+                        id="edith-product-width"
+                        value={edithProduct?.width || 0}
+                        onChange={(e) =>
+                          setEdithProduct({
+                            ...edithProduct,
+                            width: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+                    <div
+                      className={`${
+                        edithProduct.category == "shoe" ? "d-none" : ""
+                      }`}
                     >
-                      {[35, 36, 37, 38, 39, 40].map((s) => (
-                        <option key={s} value={s}>
-                          {s}
-                        </option>
-                      ))}
-                    </select>
+                      <label htmlFor="edith-product-width">Height:</label>
+                      <input
+                        type="number"
+                        id="edith-product-height"
+                        value={edithProduct?.height || 0}
+                        onChange={(e) =>
+                          setEdithProduct({
+                            ...edithProduct,
+                            height: e.target.value,
+                          })
+                        }
+                      />
+                    </div>
+
+                    <div
+                      className={`${
+                        edithProduct.category == "shoe" ? "" : "d-none"
+                      }`}
+                    >
+                      <label className="text-center">Size</label>
+                      <select
+                        id="product-size"
+                        className=" "
+                        value={edithProduct?.size || 0}
+                        onChange={(e) =>
+                          setEdithProduct({
+                            ...edithProduct,
+                            size: e.target.value,
+                          })
+                        }
+                      >
+                        {[35, 36, 37, 38, 39, 40].map((s) => (
+                          <option key={s} value={s}>
+                            {s}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <div className="d-flex justify-s-between align-center f-wrap">
-                <button
-                  className="bg-red text-white"
-                  type="button"
-                  onClick={() => {
-                    setOpenEdithProduct(false);
-                  }}
-                >
-                  <ArrowLeft />
-                  Cancel
-                </button>
-                <button
-                  className="bg-green text-white"
-                  onClick={handleSave}
-                  type="button"
-                  disabled={isLoading}
-                >
-                  {isLoading ? (
-                    <LoaderCircle className={`spin text-white `} />
-                  ) : (
-                    <Save />
-                  )}
-                  Save Changes
-                </button>
-              </div>
-            </form>
-          </BackgroundCover>
+                <div className="d-flex justify-s-between align-center f-wrap">
+                  <button
+                    className="bg-red text-white"
+                    type="button"
+                    onClick={() => {
+                      handleCloseEdit();
+                    }}
+                  >
+                    <ArrowLeft />
+                    Cancel
+                  </button>
+                  <button
+                    className="bg-green text-white"
+                    onClick={handleSave}
+                    type="button"
+                    disabled={isLoading}
+                  >
+                    {isLoading ? (
+                      <LoaderCircle className={`spin text-white `} />
+                    ) : (
+                      <Save />
+                    )}
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </BackgroundCover>
           )}
         </div>
       </div>
