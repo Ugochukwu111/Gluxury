@@ -4,7 +4,7 @@ import { AdminProductCard } from "./AdminProductCard"
 import '../../Pages/Product/ProductCardsGrid'
 
 
-export function AdminProductGrid({allProducts, setOpenEdithProduct, setEdithProduct, handleOpenEdit}){
+export function AdminProductGrid({allProducts, setOpenEdithProduct,  handleOpenEdit, setIsDelPopUp,handleOpenDelete}){
   return(
     
     <div className='container  products-container'>
@@ -21,12 +21,13 @@ export function AdminProductGrid({allProducts, setOpenEdithProduct, setEdithProd
     {
       allProducts.map((product)=>{
        return( 
-       <AdminProductCard 
+       <AdminProductCard
+         setIsDelPopUp = {setIsDelPopUp} 
          handleOpenEdit = {handleOpenEdit}
          setOpenEdithProduct ={setOpenEdithProduct} 
          key={product.id} 
          product={product}
-         setEdithProduct = {setEdithProduct}
+          handleOpenDelete = {handleOpenDelete}
           />
       )
       })

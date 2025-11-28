@@ -2,7 +2,6 @@ import { SquarePen, Trash2 } from "lucide-react";
 import { renderStars } from "../../utils/utilsFunctions";
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
-import axios from "axios";
 
 import "../../Pages/Product/ProductCard";
 import "./AdminProductCard.css";
@@ -11,9 +10,8 @@ dayjs.extend(relativeTime);
 
 export function AdminProductCard({
   product,
-  setOpenEdithProduct,
-  setEdithProduct,
   handleOpenEdit,
+  handleOpenDelete
 }) {
   
 
@@ -29,14 +27,17 @@ export function AdminProductCard({
         <div className="edith-delete-container">
           <button
             onClick={() => {
-               setEdithProduct(product);
                handleOpenEdit(product)
             }}
             className="bg-gradient text-white"
           >
             <SquarePen size={20} /> edith
           </button>
-          <button className="text-white bg-red">
+          <button 
+            onClick={()=>{ 
+              handleOpenDelete(product)
+            }}
+            className="text-white bg-red">
             <Trash2 size={20} />
           </button>
         </div>
