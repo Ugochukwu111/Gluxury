@@ -15,6 +15,7 @@ export function AdminProductCard({
 }) {
   
 
+
   return (
     <div className="product-card">
       <figure>

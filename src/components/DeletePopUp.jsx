@@ -1,8 +1,28 @@
-import { X, TriangleAlert } from "lucide-react";
+import axios from "axios";
+import { useState } from "react";
+import { X, TriangleAlert,LoaderCircle } from "lucide-react";
 import { BackgroundCover } from "../utils/utilsFunctions";
 import "./DeletePopUp.css";
 
-export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct }) {
+export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refreshProducts}) {
+
+  const [deleteLoading, setDeleteLoading] = useState(false);
+
+  const deleteProductApi = async (id) => {
+    setDeleteLoading(true);
+    try {
+      const res = await axios.delete(`http://localhost:5000/api/products/delete/${id}`);
+      console.log(res.data.message);
+       refreshProducts();
+    } catch (err) {
+      console.log(err);
+    }finally{
+      setDeleteLoading(false);
+      handleCloseDelete();
+     
+    }
+  };
+
   return (
     <BackgroundCover className={`${isDelPopUp ? "show" : "hide"}`}>
       <div className="delete-card">
@@ -42,7 +62,13 @@ export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct }) {
             <button onClick={handleCloseDelete} className="bg-text-muted ">
               Cancel
             </button>
-            <button className="bg-red text-white">Confirm Delete</button>
+            <button 
+              disabled={deleteLoading}
+              onClick={()=>{deleteProductApi(deleteProduct._id)}}
+              className="bg-red text-white">
+                {deleteLoading? (<LoaderCircle className={`spin text-white `} /> ) :''}
+                Confirm
+            </button>
           </div>
         </div>
       </div>

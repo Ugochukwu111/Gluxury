@@ -101,6 +101,7 @@ export function AdminProductPage({ allProducts, refreshProducts }) {
         isDelPopUp={isDelPopUp}
         deleteProduct={deleteProduct}
         handleCloseDelete = {handleCloseDelete}
+        refreshProducts = {refreshProducts}
       />
       <div className="product-metrics-continer ">
         <div className="scrolling-element d-flex">
