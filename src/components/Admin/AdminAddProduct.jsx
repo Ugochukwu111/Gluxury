@@ -9,7 +9,7 @@ import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelete}) {
+export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelete, adminAnalytics}) {
   const [openEdithProduct, setOpenEdithProduct] = useState(false);
   const [edithProduct, setEdithProduct] = useState({});
   const [isSuccessful, setIsSuccessful] = useState(false);

@@ -31,7 +31,6 @@ import axios from "axios"
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
-   console.log(allProducts)
 
            let getAllProductData = async ()=>{
           try{
