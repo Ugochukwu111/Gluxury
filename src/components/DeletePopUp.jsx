@@ -1,12 +1,14 @@
 import axios from "axios";
 import { useState } from "react";
 import { X, TriangleAlert,LoaderCircle } from "lucide-react";
-import { BackgroundCover } from "../utils/utilsFunctions";
+import { BackgroundCover, GluxNotification } from "../utils/utilsFunctions";
 import "./DeletePopUp.css";
 
 export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refreshProducts}) {
 
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [isSuccessful, setIsSuccessful] = useState(false);
+    const [notifKey, setNotifKey] = useState(0);
 
   const deleteProductApi = async (id) => {
     setDeleteLoading(true);
@@ -14,8 +16,12 @@ export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refr
       const res = await axios.delete(`http://localhost:5000/api/products/delete/${id}`);
       console.log(res.data.message);
        refreshProducts();
+       setIsSuccessful(true);
+       setNotifKey((prev) => prev + 1);
     } catch (err) {
       console.log(err);
+      setNotifKey((prev) => prev + 1);
+      setIsSuccessful(false);
     }finally{
       setDeleteLoading(false);
       handleCloseDelete();
@@ -24,6 +30,17 @@ export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refr
   };
 
   return (
+    <>
+          {notifKey > 0 && (
+        <GluxNotification
+          key={notifKey}
+          className={isSuccessful ? "success" : "fail"}
+        >
+          {isSuccessful
+            ? "deleted Successfully"
+            : "delete failed"}
+        </GluxNotification>
+      )}
     <BackgroundCover className={`${isDelPopUp ? "show" : "hide"}`}>
       <div className="delete-card">
         <div className="red-line"></div>
@@ -73,5 +90,6 @@ export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refr
         </div>
       </div>
     </BackgroundCover>
+     </>
   );
 }

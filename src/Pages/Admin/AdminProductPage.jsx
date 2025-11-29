@@ -11,7 +11,6 @@ import {
 import { AdminLayout } from "../../components/Admin/AdminLayout";
 import { AdminAddProduct } from "../../components/Admin/AdminAddProduct";
 import { DeletePopUp } from "../../components/DeletePopUp";
-
 import "./AdminProductPage.css";
 
 export function AdminProductPage({ allProducts, refreshProducts }) {
@@ -62,7 +61,6 @@ export function AdminProductPage({ allProducts, refreshProducts }) {
   const handleOpenDelete = (product) => {
      setDeletProduct(product);
      setIsDelPopUp(true);
-
      navigate(`?delete=${product._id}`, {replace: false});
   }
 
