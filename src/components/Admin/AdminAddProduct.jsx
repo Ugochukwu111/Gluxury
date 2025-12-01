@@ -15,6 +15,10 @@ export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelet
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+const [adminResults, setAdminResults] = useState([]);
+  const [query, setQuery] = useState("");
+
+console.log('adminResults', adminResults);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -104,6 +108,37 @@ export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelet
     navigate("", { replace: false });
   };
 
+
+
+  // Initialize query from URL
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchQuery = params.get("search") || "";
+    setQuery(searchQuery);
+
+    if (searchQuery) {
+      // Optional: fetch results immediately
+      axios
+        .get(`http://localhost:5000/api/products/search?query=${searchQuery}`)
+        .then(res => setAdminResults(res.data))
+        .catch(() => setAdminResults([]));
+    } else {
+      setAdminResults([]);
+    }
+  }, [location.search]);
+
+  // Update URL whenever query changes
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (query) {
+      params.set("search", query);
+    } else {
+      params.delete("search");
+    }
+    navigate(`?${params.toString()}`, { replace: true });
+  }, [query, navigate]);
+
+
   return (
     <>
       {notifKey > 0 && (
@@ -121,12 +156,17 @@ export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelet
       <div>
         <h3 className="text-center">Product Collections:</h3>
         <br />
-        <div>
-          <SearchBar />
+        <div className="admin-product-section">
+          <SearchBar
+            placeholder="Search in admin..."
+            onResults={setAdminResults}
+            query={query}
+            setQuery={setQuery}
+           />
           <FilterProducts />
           <AdminProductGrid
             handleOpenEdit={handleOpenEdit}
-            allProducts={allProducts}
+            allProducts={adminResults.length > 0 ? adminResults : allProducts}
             setOpenEdithProduct={setOpenEdithProduct}
             setEdithProduct={setEdithProduct}
             handleOpenDelete = { handleOpenDelete }

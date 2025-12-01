@@ -96,14 +96,15 @@
 }
 
 .product-card .product-discount-price{
-  font-weight: 700;
-  font-size: 1.2rem;
-  margin-left: .5em;
+  font-weight: 500;
+  font-size: .7rem;
+  margin-left: .2em;
+  color: var(--text-muted);
 }
 .product-card .product-price{
-  font-weight: 400;
+  font-weight: 700;
   font-size: .9rem;
-   margin-left: .25em;
+  color: var(--green);
 }
 
 .product-card-bage{

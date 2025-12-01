@@ -3,6 +3,12 @@
    margin-inline: .5em;
    position: relative;
 }
+
+ .searchProduct-container input{
+  padding-left: 3em;
+  box-shadow: 2px 2px 4px var(--text-muted);
+ }
+
 .searchProduct-container:focus-within .lucide-search-icon{
   color: var(--text-link);
   left: 1.5em;

@@ -1,5 +1,6 @@
 import { SquarePen, Trash2 } from "lucide-react";
 import { renderStars } from "../../utils/utilsFunctions";
+import { formatMoney } from '../../utils/money'
 import relativeTime from "dayjs/plugin/relativeTime";
 import dayjs from "dayjs";
 
@@ -54,12 +55,12 @@ export function AdminProductCard({
         </span>
         <div className="d-flex justify-s-between">
           <p className="d-flex flex-column">
-            <span className="product-price">Price</span>
-            <span className="text-green FWB">
-              ${product.price}
-              <span className="text-muted">
+            <span className="">Price</span>
+            <span className="text-green FWB product-price f-wrap">
+              {formatMoney(product.price)}
+              <span className="text-muted product-discount-price">
                 &nbsp;
-                <del>${product.offPrice}</del>
+                <del>{formatMoney(product.offPrice)}</del>
               </span>
             </span>
           </p>

@@ -1,5 +1,5 @@
 import { Upload, Plus, LoaderCircle } from "lucide-react";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import axios from "axios";
 import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
@@ -9,6 +9,7 @@ export function AddProductForm({refreshProducts}) {
   const [isFormActive, setIsFormActive] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
+  const formRef = useRef(null)
 
   const [formValues, setFormValues] = useState({
     image: null,
@@ -33,6 +34,28 @@ export function AddProductForm({refreshProducts}) {
   const updateField = (field, value) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
   };
+
+  const resetForm = () => {
+  formRef.current.reset();
+
+  setFormValues({
+    image: null,
+    rating: 3,
+    name: "",
+    description: "",
+    price: "",
+    offPrice: "",
+    offPercent: 0,
+    discount: 0,
+    stockquantity: "",
+    category: "bag",
+    width: "",
+    height: "",
+    size: "",
+  });
+
+  setActivePercent(null);
+};
 
   const handleDiscountClick = (percent) => {
     setActivePercent(percent);
@@ -68,6 +91,7 @@ export function AddProductForm({refreshProducts}) {
       await refreshProducts()
       setNotifKey((prev) => prev + 1);
       setIsSuccessful(true);
+      resetForm();
     } catch (error) {
       console.error(error);
       setNotifKey((prev) => prev + 1);
@@ -113,6 +137,7 @@ export function AddProductForm({refreshProducts}) {
         <br />
 
         <form
+          ref={formRef}
           onSubmit={handleSubmit}
           onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           className={`${isFormActive ? "form-active" : "closed-form"}`}
