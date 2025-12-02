@@ -1,5 +1,4 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
+ import { Charts } from "../../components/Admin/Charts/Charts";
 import { AdminLayout } from "../../components/Admin/AdminLayout";
 import { Announcement } from "../../components/Announcement";
 
@@ -47,6 +46,8 @@ export function AdminHomePage(){
   return (
     <AdminLayout>
      <Announcement/>
+     <br />
+     <Charts/>
     </AdminLayout>
   );
 }

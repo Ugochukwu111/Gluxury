@@ -11,8 +11,6 @@ svg{
  .admin-sidebar{
   position: static;
   height: 100%;
-  width: 20%;
-  max-width: 250px;
   border-right: 1px solid rgb(0, 0, 0);
   overflow: auto;
   display: flex;
@@ -20,13 +18,49 @@ svg{
   justify-content: space-between;
   padding-bottom: 1em;
   overflow: hidden;
-  transition: all 1000ms ease;
+  transition: all 300ms ease;
+
+  width: 58px;
 }
 
+  .admin-sidebar h1 span{
+   opacity: 0.05;
+}
+
+.admin-side-bar-adminstrator-container{
+  display: none;
+  justify-content: start;
+  padding: 1em .5em;
+  background-color: var(--text-light-grey);
+}
+
+.admin-side-bar-adminstrator-container figure{
+  width: 50px;
+  height: 50px;
+  border: 1px solid var(--text-muted);
+  border-radius: 50%;
+  margin-right: .5em;
+}
+
+ .admin-sidebar:hover{
+    width: 20%;
+    max-width: 180px;
+ }
+
+  .admin-sidebar:hover .admin-side-bar-adminstrator-container{
+    display: flex;
+  }
+
+    .admin-sidebar:hover   h1 span{
+        opacity: 1;
+    }
+
  .admin-sidebar ul{
-  padding-left: 1em;
+  padding-left: .4em;
   padding-top: 2em;
  }
+
+
 
  .admin-sidebar ul li{
   margin: .2em auto;
@@ -107,20 +141,7 @@ svg{
   text-shadow: 2px 2px 2px var(--text-muted);
 }
 
-.admin-side-bar-adminstrator-container{
-  display: flex;
-  justify-content: start;
-  padding: 1em .5em;
-  background-color: var(--text-light-grey);
-}
 
-.admin-side-bar-adminstrator-container figure{
-  width: 50px;
-  height: 50px;
-  border: 1px solid var(--text-muted);
-  border-radius: 50%;
-  margin-right: .5em;
-}
 
 
 
@@ -135,10 +156,7 @@ svg{
  .admin-sidebar ul svg{
   margin-right: 1em;
  }
- .admin-sidebar h1 span{
-  visibility: hidden;
-  position: absolute;
-}
+
 .admin-side-bar-adminstrator-container{
   display: none;
 }

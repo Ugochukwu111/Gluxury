@@ -8,6 +8,8 @@ import {
   ChevronDown
  } from "lucide-react"
 
+ import adminProfilePic from '../../assets/images/Admin/admin-profile-photo.png'
+
 import "./AdminLayout.css";
 
 export function AdminLayout({children}) {
@@ -67,7 +69,7 @@ export function AdminLayout({children}) {
 
         <div className="admin-side-bar-adminstrator-container">
           <figure>
-
+            <img src={adminProfilePic} alt="admin profile pic"/>
           </figure>
           <p>
             <span className="FWB">
@@ -94,7 +96,7 @@ export function AdminLayout({children}) {
 
           <button>
             <figure>
-
+                <img src={adminProfilePic} alt="admin profile pic"/>
             </figure>
             <p>
               <span>
