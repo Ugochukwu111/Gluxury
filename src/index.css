@@ -178,6 +178,7 @@ ul{
 .bg-red{background-color: var(--red);}
 .bg-light-red{background-color: var(--light-red);}
 .bg-heading{background-color: var(--text-heading);}
+.bg-light-grey{background-color: var(--text-light-grey);}
 
 
 

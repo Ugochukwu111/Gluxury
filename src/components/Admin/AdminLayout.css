@@ -43,8 +43,7 @@ svg{
 }
 
  .admin-sidebar:hover{
-    width: 20%;
-    max-width: 180px;
+    width: 200px;
  }
 
   .admin-sidebar:hover .admin-side-bar-adminstrator-container{
@@ -147,9 +146,13 @@ svg{
 
 @media(max-width:800px){
 .admin-sidebar{
-  height: 100%;
+  width: 58px;
+
+}
+.admin-sidebar:hover{
   width: 58px;
 }
+
  .admin-sidebar ul{
   padding-left: .2em;
  }
@@ -157,7 +160,7 @@ svg{
   margin-right: 1em;
  }
 
-.admin-side-bar-adminstrator-container{
+.admin-sidebar:hover .admin-side-bar-adminstrator-container{
   display: none;
 }
 }
@@ -182,8 +185,14 @@ svg{
   overflow: auto;
   transition: all 1000ms ease;
   padding: 0;
-
 }
+ .admin-sidebar:hover{
+  width: 100%;
+ }
+
+ .admin-sidebar:hover .admin-side-bar-adminstrator-container{
+  display: none;
+ }
 .admin-sidebar h1{
   display: none;
 }

@@ -7,6 +7,11 @@ import {
   Crown,
   ChevronDown
  } from "lucide-react"
+ import dayjs from "dayjs";
+ import { GetGreeting } from "../../utils/utilsFunctions";
+
+ const todaysDate = dayjs().format('MMMM D, YYYY');
+ const greeting = GetGreeting();
 
  import adminProfilePic from '../../assets/images/Admin/admin-profile-photo.png'
 
@@ -87,10 +92,10 @@ export function AdminLayout({children}) {
         <header className="f-wrap">
           <p>
             <span className="text-muted">
-            Friday, November 2025
+              {todaysDate}
             </span>
             <span className="d-block FWB">
-              Good morning Boss.😎
+              {greeting} Boss.😎
             </span>
           </p>
 
