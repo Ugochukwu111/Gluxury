@@ -21,6 +21,7 @@ export const sendOtp = async (email,type)=>{
 }
 
 export const verifyOtp = async (email, otp, type)=>{
+  console.log('hit')
   try{
     let res = await axios.post('http://localhost:5000/api/otp/verify',
       {
@@ -29,15 +30,18 @@ export const verifyOtp = async (email, otp, type)=>{
         type
       }
     )
+    console.log(res);
     if(!res?.data){
       console.error('verify otp error'); 
       return 'verify otp server error';
     }else{
       saveToLocalStorage('user', res.data);
+       console.log(res.data);
        return res.data.message;
     }
   }catch(err){
     const serverMessage = err.response?.data?.message || err.response?.data || err.message;
+    console.error("Error verifying OTP:", serverMessage);
     return `verify otp error: ${serverMessage}`;
   }
 }

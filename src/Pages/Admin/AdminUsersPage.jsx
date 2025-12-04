@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { MailCheck, UserCog, LoaderCircle } from "lucide-react"
 import { UserRow } from "./UserRow"
-import { DeletePopUp , } from "../../components/DeletePopUp";
+import { SearchBar } from "../../components/SearchBar"
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 
 import { AdminLayout } from "../../components/Admin/AdminLayout"
@@ -113,9 +113,15 @@ export function AdminUsersPage(){
       <h2>User Management</h2>
       <p className="text-muted">Monitor customer activity and manage user accounts.</p>
 
+      
+
+
+{/* for future  */}
       <div className=" container user-analytics-card-container">
 
       </div>
+
+  
 
       <div className="container users-table-container ">
          
