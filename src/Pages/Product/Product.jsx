@@ -1,52 +1,61 @@
 import axios from "axios";
 import { useState } from "react";
 import { Announcement } from "../../components/Announcement";
-import { Footer } from '../../components/Footer';
-import { ProductCardsGrid } from './ProductCardsGrid';
-import { FilterProducts } from '../../components/FilterProducts'
-import { SideBarHeader } from '../../components/SideBarHeader';
+import { Footer } from "../../components/Footer";
+import { ProductCardsGrid } from "./ProductCardsGrid";
+import { FilterProducts } from "../../components/FilterProducts";
+import { SideBarHeader } from "../../components/SideBarHeader";
+import {
+  GluxNotification,
+  AddToCartAPI,
+} from "../../utils/utilsFunctions";
 
-import { GluxNotification } from "../../utils/utilsFunctions";
-import {  IsLoggedIn  } from "../../utils/Auth";
 
-IsLoggedIn();
 
-export function ProductPage({products, allProducts}){
+
+export function ProductPage({ allProducts }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const [isAddedToCartMsg, setIsAddedToCartMsg] = useState("");
+  const [AddedToCartMsg, setIsAddedToCartMsg] = useState("");
+  const [productId, setProductId] = useState(null);
+    const [notifKey, setNotifKey] = useState(null);
 
-  // a function that handles adding productv to cart 
-  // by calling and api and giving it the product id
-  const handleAddToCart =  async (id) =>{
-       try{
-          let res = await axios.post(`http://localhost:5000/api/cart/:${id}`);
-          setIsAddedToCart(true);
-          setIsAddedToCartMsg(res.data.message || "Added");
+
+      const handleAddToCart = async () => {
+       try {
+        const res = await AddToCartAPI(productId);
+        setIsAddedToCart(true);
+        setIsAddedToCartMsg(res);
+        console.log('Add to cart response:', res);
        }catch(err){
-          console.log(err);
-          setIsAddedToCart(false);
-          setIsAddedToCartMsg(err.message || "Failed to add to cart");
+        console.log(err);
+        setIsAddedToCart(false);
+        setIsAddedToCartMsg( 'Error adding to cart');
+        setIsAddedToCartMsg(err|| 'Error adding to cart');
        }finally{
-          // maybe show a notification that product has been added to cart
+        setNotifKey((prev) => prev + 1);
        }
-  }
+      }
 
-
-
-
-  return(
-     <div className="d-flex flex-column">
-      {isAddedToCartMsg && (
+  return (
+    <div className="d-flex flex-column">
+      {/* {notifKey && (
         <GluxNotification
-          type={isAddedToCart ? "success" : "error"}
-          message={isAddedToCartMsg}
-        />
-      )}
-       <SideBarHeader />
-       <Announcement />
-       <FilterProducts/>
-       <ProductCardsGrid products={products} allProducts={allProducts}/>
-       <Footer />
-     </div>
+          key={notifKey}
+          className={isAddedToCart ? "success" : "error"}
+          
+        >
+          {isAddedToCart ? AddedToCartMsg : `Failed to add to cart`}
+        </GluxNotification>
+      )} */}
+      <SideBarHeader />
+      <Announcement />
+      <FilterProducts />
+      <ProductCardsGrid 
+        setProductId={setProductId}
+        allProducts={allProducts}
+        handleAddToCart={handleAddToCart}
+         />
+      <Footer />
+    </div>
   );
 }

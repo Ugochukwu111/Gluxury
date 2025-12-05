@@ -36,7 +36,10 @@ export const verifyOtp = async (email, otp, type)=>{
       return 'verify otp server error';
     }else{
       saveToLocalStorage('user', res.data);
-       console.log(res.data);
+            let data = res.data;
+          saveToLocalStorage("user", data.user);
+          saveToLocalStorage('token', data.accessToken);
+       console.log(data.accessToken);
        return res.data.message;
     }
   }catch(err){

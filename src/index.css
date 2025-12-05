@@ -378,6 +378,7 @@ img{
   border-radius: .5em;
   text-align: center;
   font-weight: bold;
+
 }
 
 
@@ -417,7 +418,7 @@ img{
    top: .5em;
   display: flex;
   justify-self: center;
-  box-shadow: 2px 2px 4px var(--text-muted);
+  box-shadow: 2px 2px 3px var(--text-muted);
   font-weight: 700;
   transform: translateY(-50px);
   opacity: 0;

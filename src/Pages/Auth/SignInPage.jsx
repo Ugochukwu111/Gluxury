@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -61,10 +61,13 @@ export function SignInPage() {
             "http://localhost:5000/api/user/login",
             formValues
           );
-          let userData = res.data;
-          saveToLocalStorage("user", userData);
+          let data = res.data;
+          saveToLocalStorage("user", data.user);
+          saveToLocalStorage('token', data.accessToken);
+          console.log(data.accessToken)
           setIsSuccess(true);
           setLoading(false);
+    
           setTimeout(() => navigate("/"), 1500);
         } catch (err) {
           setLoading(false);

@@ -7,14 +7,13 @@ import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
 
-export function ProductCard({ product }) {
+export function ProductCard({ product, setProductId,handleAddToCart }) {
   const navigate = useNavigate();
 
   const handleClick = () => {
     navigate(`/product/${product.id}`);
   };
-
-
+  
   const daysAgo = dayjs().diff(dayjs(product.createdAt), "day");
   const isNew = daysAgo <= 14;
   return (
@@ -59,6 +58,11 @@ export function ProductCard({ product }) {
           </p>
 
           <button
+            onClick={()=>{
+              setProductId(product._id);
+              console.log('add to cart clickd,', product._id);
+              handleAddToCart();
+            }}
             className="product-icon product-cart-btn"
             type="button"
             arial-label="add to cart button"

@@ -10,7 +10,6 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { useLocation } from "react-router-dom";
 import { containerStagger, itemFadeUp } from "../../utils/Animations.jsx";
-import { saveToLocalStorage } from "../../utils/storage.js";
 import { verifyOtp, sendOtp } from "../../utils/sendOtp.js";
 import { BackgroundCover } from "../../utils/utilsFunctions.jsx";
 import "./ConfirmOtpPage.css";
