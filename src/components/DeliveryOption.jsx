@@ -7,6 +7,7 @@ export function DeliveryOption({
   optionIndex,
   handleDeliveryChange,
   cartItem,
+  // setDeliveryDate,
 }) {
   return (
     <div>
@@ -17,6 +18,8 @@ export function DeliveryOption({
         checked={cartItem.selectedDeliveryOption === optionIndex}
         onChange={() => {
           handleDeliveryChange(cartItemId, optionIndex);
+
+
         }}
       />
       <p className="FWB">

@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import dayjs from "dayjs";
 
 import { formatMoney } from "../utils/money.js";
 import { AddToCartAPI } from "../utils/utilsFunctions.jsx";
@@ -8,6 +9,7 @@ import { DeliveryOption } from "./DeliveryOption.jsx";
 
 export function CCard({ cartItem, setRefreshCart }) {
   const [quantity, setQuantity] = useState(1);
+  const [ deliveryDate, setDeliveryDate ] = useState('');
 
   const handleQuantityChange = (e) => {
     setQuantity(Number(e.target.value));
@@ -55,9 +57,13 @@ export function CCard({ cartItem, setRefreshCart }) {
     }
   };
 
+  let selectedDeliveryDate = cartItem.deliveryOptions[cartItem.selectedDeliveryOption].date 
+  
   return (
     <div className="cart-details-card">
-      <h2>Deliverydate: Tuesday, October 21</h2>
+      <h2>
+        Delivery date: {dayjs(selectedDeliveryDate).format("dddd MMMM D") }
+        </h2>
       <div className="d-flex f-wrap cart-details-wrapper justify-s-between">
         <div className="d-flex">
           <figure>
@@ -136,6 +142,7 @@ export function CCard({ cartItem, setRefreshCart }) {
                   cartItemId={cartItem._id}
                   option={option}
                   handleDeliveryChange={handleDeliveryChange}
+                  setDeliveryDate = {setDeliveryDate}
                 />
               );
             })}
