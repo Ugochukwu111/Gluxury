@@ -7,9 +7,8 @@ import { formatMoney } from "../utils/money.js";
 import { AddToCartAPI } from "../utils/utilsFunctions.jsx";
 import { DeliveryOption } from "./DeliveryOption.jsx";
 
-export function CCard({ cartItem, setRefreshCart }) {
+export function CCard({ cartItem, setRefreshCart , fetchSummary}) {
   const [quantity, setQuantity] = useState(1);
-  const [ deliveryDate, setDeliveryDate ] = useState('');
 
   const handleQuantityChange = (e) => {
     setQuantity(Number(e.target.value));
@@ -23,11 +22,11 @@ export function CCard({ cartItem, setRefreshCart }) {
   const handelAddToCartAPI = async (productId, quantity) => {
     try {
       const res = await AddToCartAPI(productId, quantity);
-      console.log("Add to cart response:", res);
       if (!res) {
         console.error("No response from AddToCartAPI");
         return;
       }
+      fetchSummary()
     } catch (err) {
       console.error("Error adding to cart:", err);
     } finally {
@@ -52,6 +51,7 @@ export function CCard({ cartItem, setRefreshCart }) {
       );
       console.log(res);
       setRefreshCart((prev) => !prev); // refresh cart after update
+      fetchSummary()
     } catch (err) {
       console.error("Error updating delivery option", err);
     }
@@ -142,7 +142,6 @@ export function CCard({ cartItem, setRefreshCart }) {
                   cartItemId={cartItem._id}
                   option={option}
                   handleDeliveryChange={handleDeliveryChange}
-                  setDeliveryDate = {setDeliveryDate}
                 />
               );
             })}

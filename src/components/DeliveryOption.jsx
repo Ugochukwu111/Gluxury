@@ -7,7 +7,6 @@ export function DeliveryOption({
   optionIndex,
   handleDeliveryChange,
   cartItem,
-  // setDeliveryDate,
 }) {
   return (
     <div>

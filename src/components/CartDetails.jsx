@@ -1,39 +1,58 @@
-import "./CartDetails.css";
-import dayjs from "dayjs";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { CartCard } from "./CartCard"
+import "./CartDetails.css";
+import { formatMoney } from "../utils/money";
 
-export function CartDetails(cartItem) {
-  const today = dayjs();
 
-  const deliveryOptions = [
-    { day: today.add(7, "day"), price: "Free" },
-    { day: today.add(3, "day"), price: 1200 },
-    { day: today.add(1, "day"), price: 2000 },
-  ];
+export function CartDetails() {
+const [summary, setSummary] = useState({});
+
+  const fetchSummary = async () =>{
+    const token = localStorage.getItem("token");
+    try{
+      const res = await axios.get('http://localhost:5000/api/cart/summary', 
+        {
+          headers:{Authorization: `Bearer ${token}`},
+          withCredentials: true,
+        },
+        
+      );
+       if(!res){ console.error('response error'); return}
+       setSummary(res.data);
+       console.log(res.data);
+    }catch(err){
+      console.error(err);
+    }
+  }
+
+useEffect(()=>{
+  fetchSummary();
+},[]);
 
 
   return (
     <main>
       <div className="container cart-payment-container">
         <div className="cart-details-card-container">
-           <CartCard/>
+           <CartCard fetchSummary={fetchSummary}/>
         </div>
 
         <div className="payment-summary-container">
           <h3>Payment Summary</h3>
             <p>
-            <span>items(3)</span>
-            <span>$45.99</span>
+            <span>items({summary?.cartLength || 0})</span>
+            <span>{formatMoney(summary.itemsTotal) || 0}</span>
            </p>
           <p>
             <span>Shipping</span>
-            <span>$4.99</span>
+            <span>{formatMoney(summary?.deliveryTotal) || 0}</span>
           </p>
           <hr />
           <br />
           <p className="text-green FWB">
             <span>Order total:</span>
-            <span>$52.51</span>
+            <span>{formatMoney(summary?.grandTotal) || 0}</span>
           </p>
 
           <button className="bg-green text-white ">
