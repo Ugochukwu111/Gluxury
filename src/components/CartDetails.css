@@ -33,6 +33,21 @@ h3 {
   flex-wrap: wrap;
   padding: .8em;
   margin: .25em;
+  padding-top: 3em;
+  position: relative;
+}
+
+.cart-details-card .del-btn{
+  width: fit-content;
+  padding: .5em 1em;
+  color: var(--white);
+  background-color: var(--light-red);
+  position: absolute;
+  top: .15em;
+  right: .5em;
+}
+.cart-details-card .del-btn:hover{
+  color: var(--red);
 }
 
 .cart-details-card figure{

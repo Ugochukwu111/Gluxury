@@ -53,7 +53,6 @@ export function GetGreeting() {
 
 export const AddToCartAPI = async (productId, quantity = 1) => {
   const accessToken = localStorage.getItem("token");
-    console.log("Access Token:", accessToken);
   if (!accessToken) {
     console.error("user not loggen in");
     return;

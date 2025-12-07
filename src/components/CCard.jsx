@@ -1,23 +1,21 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { Link,} from "react-router-dom";
+import { useState,} from "react";
 import axios from "axios";
 import dayjs from "dayjs";
+import { Trash } from "lucide-react";
 
 import { formatMoney } from "../utils/money.js";
 import { AddToCartAPI } from "../utils/utilsFunctions.jsx";
 import { DeliveryOption } from "./DeliveryOption.jsx";
 
-export function CCard({ cartItem, setRefreshCart , fetchSummary}) {
+export function CCard({ cartItem, setRefreshCart }) {
   const [quantity, setQuantity] = useState(1);
 
   const handleQuantityChange = (e) => {
     setQuantity(Number(e.target.value));
   };
 
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate(`/product/${cartItem.productId._id}`);
-  };
+console.log(cartItem.productId._id)
 
   const handelAddToCartAPI = async (productId, quantity) => {
     try {
@@ -26,7 +24,6 @@ export function CCard({ cartItem, setRefreshCart , fetchSummary}) {
         console.error("No response from AddToCartAPI");
         return;
       }
-      fetchSummary()
     } catch (err) {
       console.error("Error adding to cart:", err);
     } finally {
@@ -51,16 +48,38 @@ export function CCard({ cartItem, setRefreshCart , fetchSummary}) {
       );
       console.log(res);
       setRefreshCart((prev) => !prev); // refresh cart after update
-      fetchSummary()
     } catch (err) {
       console.error("Error updating delivery option", err);
     }
   };
 
+  const handleDeleteCartItem = async (cartItemId) =>{
+    const token = localStorage.getItem('token');
+    console.log(cartItemId)
+    try{
+      const res = await axios.delete('http://localhost:5000/api/cart/delete',{
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true,
+         data: { cartItemId }, 
+      }
+    );
+      if(!res){console.error('delete cart item error'); return;}
+      setRefreshCart((prev) => !prev);
+    }catch(err){
+    console.log(err);
+  }
+  }
+
   let selectedDeliveryDate = cartItem.deliveryOptions[cartItem.selectedDeliveryOption].date 
   
   return (
     <div className="cart-details-card">
+      <button
+       aria-label="delete cart item button"
+       onClick={()=>{handleDeleteCartItem(cartItem._id)}} 
+       className="del-btn">
+        <Trash />
+      </button>
       <h2>
         Delivery date: {dayjs(selectedDeliveryDate).format("dddd MMMM D") }
         </h2>
@@ -94,8 +113,8 @@ export function CCard({ cartItem, setRefreshCart , fetchSummary}) {
               className="d-flex 
                     flex-column buy-product-btn-container"
             >
-              <Link onClick={handleClick}>
-                <u>See more details about product</u>
+              <Link to= {`/product/${cartItem.productId._id}`}>
+                <u>See product details</u>
               </Link>
 
               <div className="d-flex align-center">
