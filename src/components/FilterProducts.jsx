@@ -1,37 +1,21 @@
-import { Handbag, Gem , Footprints} from 'lucide-react';
+import { Handbag, Gem , Footprints,ListFilterPlus} from 'lucide-react';
 import { NavLink } from 'react-router';
 import './FilterProducts.css'
 
 export function FilterProducts(){
   return (
-    <div className='filter-container f-wrap'>
-      <NavLink to= "/">
-      <button>
-         <Gem />
-         <span>all</span>
-      </button>
-      </NavLink>
-
-      <NavLink to = '/shoes'
-       end
-        className={({ isActive }) => (isActive ? "active" : "")}
-        >
-      <button>
-         <Footprints />
-         <span>shoes</span>
-      </button>
-      </NavLink>
-      
-      <NavLink
-      to="/bags"
-        className={({ isActive }) => (isActive ? "active" : "")} 
-      >
-      <button>
-         <Handbag />
-         <span>bags</span>
-      </button>
-      </NavLink>
-
+    <div className='filter-container flex-column f-wrap'>
+       <button className='bg-heading text-white FWB filter-btn'>
+        Filter 
+        <ListFilterPlus />
+       </button>
+       <div className='d-flex justify-center align-center'>
+         <button>Type</button>
+         <button>Price</button>
+       </div>
+       <div>
+        
+       </div>
     </div>
   );
 }

@@ -7,7 +7,7 @@ import {
   MessageCircle,
   MapPinCheckInside,
   ArrowLeft,
-  LoaderCircle
+  LoaderCircle,
 } from "lucide-react";
 import { formatMoney } from "../../utils/money";
 import { renderStars } from "../../utils/utilsFunctions";
@@ -22,9 +22,9 @@ export function ProductDetailsPage() {
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [addToCartMsg, setAddToCartMsg] = useState('')
-    const [notifKey, setNotifKey] = useState(0);
-    const [addedToCart, setAddedToCart] = useState(false);
+  const [addToCartMsg, setAddToCartMsg] = useState("");
+  const [notifKey, setNotifKey] = useState(0);
+  const [addedToCart, setAddedToCart] = useState(false);
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
@@ -41,34 +41,31 @@ export function ProductDetailsPage() {
     try {
       const res = await AddToCartAPI(productId, quantity);
       if (!res) {
-        setAddedToCart(false)
+        setAddedToCart(false);
         console.error("No response from AddToCartAPI");
         return;
       }
-      setAddedToCart(true)
+      setAddedToCart(true);
       setAddToCartMsg(`${quantity}, Added`);
     } catch (err) {
-      setAddedToCart(false)
+      setAddedToCart(false);
       console.error("Error adding to cart:", err);
-      setAddToCartMsg(`Error adding to cart`)
+      setAddToCartMsg(`Error adding to cart`);
     } finally {
       setIsAddingToCart(false);
       setNotifKey((prev) => prev + 1);
     }
   };
   return (
-
     <div>
-          {notifKey > 0 && (
-              <GluxNotification
-                key={notifKey}
-                className={addedToCart ? "success" : "fail"}
-              >
-                {isAddingToCart
-                  ? addToCartMsg
-                  : addToCartMsg}
-              </GluxNotification>
-            )}
+      {notifKey > 0 && (
+        <GluxNotification
+          key={notifKey}
+          className={addedToCart ? "success" : "fail"}
+        >
+          {isAddingToCart ? addToCartMsg : addToCartMsg}
+        </GluxNotification>
+      )}
 
       <main className="product-details-page-main">
         <div className="container product-details-container">
@@ -122,12 +119,12 @@ export function ProductDetailsPage() {
                   onClick={() => {
                     handelAddToCartAPI(product?._id, quantity);
                   }}
-                  className='bg-heading text-white'
+                  className="bg-heading text-white"
                 >
                   {isAddingToCart ? (
                     <>
-                    <LoaderCircle size={20} className={`spin text-white `} />
-                    adding
+                      <LoaderCircle size={20} className={`spin text-white `} />
+                      adding
                     </>
                   ) : (
                     <>

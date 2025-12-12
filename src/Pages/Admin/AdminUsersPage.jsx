@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 import { MailCheck, UserCog, LoaderCircle } from "lucide-react"
 import { UserRow } from "./UserRow"
-import { SearchBar } from "../../components/SearchBar"
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 
 import { AdminLayout } from "../../components/Admin/AdminLayout"
@@ -62,6 +61,7 @@ export function AdminUsersPage(){
 
   return(
     <AdminLayout>
+
       {notifKey > 0 && (
         <GluxNotification
           key={notifKey}

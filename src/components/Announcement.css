@@ -66,15 +66,17 @@ header{
 
 
 .scrolling-text {
-    animation: scrollText 40s linear infinite; 
+    animation: scrollText 50s linear infinite; 
     white-space: nowrap; 
-    font-size: 1.8rem; 
+    font-size: 1.5rem; 
     font-weight: 800; 
-    text-transform: uppercase;
-    color: var(--white);
-    filter: blur(1px); 
+    color: var(--text-heading);
+    border-radius: .5rem; 
     position: absolute;
-    bottom: 0;
+    bottom: .5em;
+    background-color: yellow;
+    padding: 0 1em;
+    box-shadow: 2px 2px 4px rgb(76, 76, 3);
 }
 
 

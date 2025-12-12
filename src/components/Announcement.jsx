@@ -1,3 +1,4 @@
+import { ScrollingInfo } from './ScrollingInfo';
 import './Announcement.css'
 import CartIcon from '../assets/images/gluxury-shoper.png'
 
@@ -29,9 +30,7 @@ export function Announcement() {
 
       ))}
 
-              <p class="scrolling-text">
-        GLUXURY • QUALITY • EXPENSIVE • WOW • GLUXURY • QUALITY • EXPENSIVE • WOW • 
-    </p>
+    <ScrollingInfo/>
     </div>
   );
 }
