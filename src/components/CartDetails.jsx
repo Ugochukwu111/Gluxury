@@ -9,6 +9,25 @@ export function CartDetails() {
 
   const [cartItems, setCartItems] = useState([]);
   const [refreshCart, setRefreshCart] = useState(false);
+
+  const placeOrder = async ()=>{
+    const token = localStorage.getItem('token');
+    try{
+     const res = await axios.post(`http://localhost:5000/api/cart/place-order`,
+      {},
+      {
+        headers:{Authorization:`Bearer ${token}`,},
+        withCredentials:true,
+      }
+     )
+     if(!res){console.error('error placing orders'); return};
+     console.log(res);
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+
   const handelGetCartAPI = async () => {
     const token = localStorage.getItem("token");
     try {
@@ -77,7 +96,9 @@ export function CartDetails() {
             <span>{formatMoney(summary?.grandTotal) || 0}</span>
           </p>
 
-          <button className="bg-green text-white ">
+          <button 
+            onClick={()=>{placeOrder()}}
+            className="bg-green text-white ">
             Place your order
             <svg
               xmlns="http://www.w3.org/2000/svg"

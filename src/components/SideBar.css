@@ -75,3 +75,8 @@ aside .user-details-container figure{
 [aria-label="side bar closed"] {
   transform: translateX(-100%);
 }
+
+.sider{
+  border: 2px solid green;
+  width: 1250px;
+}

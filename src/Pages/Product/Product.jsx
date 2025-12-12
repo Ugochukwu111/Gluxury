@@ -38,15 +38,6 @@ export function ProductPage({ allProducts }) {
 
   return (
     <div className="d-flex flex-column">
-      {/* {notifKey && (
-        <GluxNotification
-          key={notifKey}
-          className={isAddedToCart ? "success" : "error"}
-          
-        >
-          {isAddedToCart ? AddedToCartMsg : `Failed to add to cart`}
-        </GluxNotification>
-      )} */}
       <SideBarHeader />
       <Announcement />
       <FilterProducts />

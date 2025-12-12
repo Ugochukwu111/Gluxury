@@ -415,7 +415,7 @@ img{
   position: fixed;
   background-color: var(--white);
   z-index: 100;
-   top: .5em;
+  top: .5em;
   display: flex;
   justify-self: center;
   box-shadow: 2px 2px 3px var(--text-muted);
