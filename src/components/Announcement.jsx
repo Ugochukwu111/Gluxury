@@ -1,4 +1,4 @@
-import { ScrollingInfo } from './ScrollingInfo';
+
 import './Announcement.css'
 import CartIcon from '../assets/images/gluxury-shoper.png'
 
@@ -29,8 +29,6 @@ export function Announcement() {
         </div>
 
       ))}
-
-    <ScrollingInfo/>
     </div>
   );
 }

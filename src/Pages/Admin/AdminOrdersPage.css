@@ -23,6 +23,10 @@
     box-shadow: 2px 2px 3px var(--text-link);
 }
 
+.order-card.delivered{
+ opacity: .7;
+}
+
 .order-user-info{
   max-width: 900px;
   box-shadow: inset 2px 2px 2px var(--text-muted);

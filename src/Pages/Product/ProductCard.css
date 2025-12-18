@@ -73,6 +73,47 @@
   background: linear-gradient(180deg, var(--bg-gradient-start), var(--bg-gradient-end));
   color: var(--text-link);
   border: 2px solid var(--text-link);
+  z-index: 1;
+}
+
+.p-relative{
+  position: relative;
+}
+
+.product-card .added-icon{
+ color: var(--white);
+ fill: var(--green);
+ position: absolute;
+ z-index: 0;
+ transform: translateY(-20px);
+  transform: translateY(10px);
+    opacity: .1;
+}
+
+.product-card.added .added-icon{
+animation: addedToCart 1s linear;
+}
+
+@keyframes addedToCart {
+  0%{
+     transform: translateY(10px);
+    opacity: 1;
+  }25%{
+      transform: translateY(-40px);
+      opacity: 1;
+  }50%{
+     transform: translateY(-40px);
+     transform: scale(1.5);
+     z-index: 2;
+     opacity: 1;
+     
+  }75%{
+    transform: translateY(0px);
+    opacity: .6;
+  }100%{
+     transform: translateY(10px);
+     opacity: .1;
+  }
 }
 
 .product-card .product-stars{
@@ -88,7 +129,7 @@
   right: .5em;
   top: .5em;
   background-color: var(--white);
-    padding: 0;
+  padding: 0;
   width: 40px;
   aspect-ratio: 1;
   border-radius: 50% ;

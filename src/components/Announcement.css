@@ -72,11 +72,11 @@ header{
     font-weight: 800; 
     color: var(--text-heading);
     border-radius: .5rem; 
-    position: absolute;
-    bottom: .5em;
     background-color: yellow;
     padding: 0 1em;
     box-shadow: 2px 2px 4px rgb(76, 76, 3);
+    width: fit-content;
+
 }
 
 

@@ -288,6 +288,10 @@ img{
   max-width: 1400px;
   margin: 0 auto;
 }
+.hidden{
+  overflow: hidden;
+  position: relative;
+}
 /*
  this contains lets the main content of the page strech
  thereby keeping the footer always at the top and the footer always at the bottom

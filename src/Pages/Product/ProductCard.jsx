@@ -1,23 +1,37 @@
 import dayjs from "dayjs";
+import { useState } from "react";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { renderStars } from "../../utils/utilsFunctions.jsx";
 import { useNavigate } from "react-router-dom";
+import { AddToCartAPI } from "../../utils/utilsFunctions.jsx";
 import { formatMoney } from "../../utils/money.js";
+import { BadgeCheck } from "lucide-react";
 import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
 
-export function ProductCard({ product, setProductId,handleAddToCart }) {
+export function ProductCard({ product }) {
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/product/${product.id}`);
+    navigate(`/product/${product._id}`);
   };
-  
+
+  const handleAddToCart = async (productId) => {
+    try {
+      const res = await AddToCartAPI(productId);
+      setIsAddedToCart(true);
+    } catch (err) {
+      console.log(err);
+      setIsAddedToCart(false);
+    }
+  };
+
   const daysAgo = dayjs().diff(dayjs(product.createdAt), "day");
   const isNew = daysAgo <= 14;
   return (
-    <div className="product-card">
+    <div className={`product-card ${isAddedToCart ? "added" : ""}`}>
       <figure>
         {isNew && <span className="product-card-bage">new</span>}
         <button className="product-like-btn">
@@ -57,33 +71,37 @@ export function ProductCard({ product, setProductId,handleAddToCart }) {
             </span>
           </p>
 
-          <button
-            onClick={()=>{
-              setProductId(product._id);
-              console.log('add to cart clickd,', product._id);
-              handleAddToCart();
-            }}
-            className="product-icon product-cart-btn"
-            type="button"
-            arial-label="add to cart button"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.25"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-shopping-cart-icon lucide-shopping-cart"
+          <div className=" d-flex flex-column align-center p-relative">
+            <BadgeCheck
+              onAnimationEnd={() => setIsAddedToCart(false)}
+              className="added-icon "
+            />
+            <button
+              onClick={() => {
+                handleAddToCart(product._id);
+              }}
+              className="product-icon product-cart-btn"
+              type="button"
+              aria-label="add to cart button"
             >
-              <circle cx="8" cy="21" r="1" />
-              <circle cx="19" cy="21" r="1" />
-              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
-            </svg>
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.25"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-shopping-cart-icon lucide-shopping-cart"
+              >
+                <circle cx="8" cy="21" r="1" />
+                <circle cx="19" cy="21" r="1" />
+                <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </div>

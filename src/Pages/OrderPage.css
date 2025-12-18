@@ -5,7 +5,9 @@
   flex-direction: column;
   width: 100%;
   max-width: 1000px;
-  margin-inline: auto;
+  margin: 1em auto;
+  background-color: var(--white);
+  box-shadow: 2px 2px 4px var(--text-muted);
 }
 
 .order-container .upper-container{
@@ -50,6 +52,13 @@
   justify-content: space-between;
   flex: 1;
   flex-wrap: wrap;
+}
+
+.order-total-price{
+  font-size: clamp(1rem, 2.5vw + 0.6rem, 1.5rem);
+}
+.del-order-btn{
+  padding: .5em;
 }
 
 @media(max-width: 500px){
