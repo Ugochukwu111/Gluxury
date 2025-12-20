@@ -8,6 +8,7 @@ import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { GluxNotification, AddToCartAPI } from "../../utils/utilsFunctions";
 
 export function ProductPage({ allProducts }) {
+  console.log('coolike' , document.cookie);
   return (
     <div className="d-flex flex-column ">
       <SideBarHeader />

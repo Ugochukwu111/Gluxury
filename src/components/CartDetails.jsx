@@ -3,6 +3,7 @@ import axios from "axios";
 import { CartCard } from "./CartCard";
 import "./CartDetails.css";
 import { formatMoney } from "../utils/money";
+import api from "../utils/api";
 
 export function CartDetails() {
   const [summary, setSummary] = useState({});
@@ -29,18 +30,8 @@ export function CartDetails() {
 
 
   const handelGetCartAPI = async () => {
-    const token = localStorage.getItem("token");
     try {
-      const res = await axios.get("http://localhost:5000/api/cart", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-        withCredentials: true,
-      });
-      if (!res) {
-        console.error("No response from server");
-        return;
-      }
+      const res = await api.get("http://localhost:5000/api/cart", );
       setCartItems(res.data);
     } catch (err) {
       console.log(err);

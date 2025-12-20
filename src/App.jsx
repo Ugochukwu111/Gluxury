@@ -11,6 +11,7 @@ import { ForgotPasswordPage } from "./Pages/Auth/ForgotPasswordPage";
 import { ResetPasswordPage } from "./Pages/Auth/ResetPasswordPage";
 import { LandingPage } from "./Pages/LandingPage/LandingPage";
 import { OrderPage } from "./Pages/OrderPage";
+import {  ProfilePage } from './Pages/ProfilePage'
 import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage";
 
 // below are imported admin pages
@@ -29,6 +30,7 @@ import axios from "axios";
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
+  const [user, setUser] = useState([]);
 
   let getAllProductData = async () => {
     try {
@@ -38,6 +40,17 @@ function App() {
       console.log(err || "nextwork try again later");
     }
   };
+
+  const getUserDetails = async () =>{
+    try{
+      const res = await axios.get('http://localhost:5000/api/user');
+      setUser(res.data)
+    }catch(err){
+      console.log(err)
+    }
+  }
+
+  
 
   useEffect(() => {
     getAllProductData();
@@ -164,6 +177,7 @@ function App() {
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/home" element={<LandingPage products={products} />} />
         <Route path="/order" element={<OrderPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="/shoes" element={<ShoesPage products={products} />} />
         <Route path="/bags" element={<BagsPage products={products} />} />
         <Route path="/admin/dashboard" element={<AdminHomePage />} />

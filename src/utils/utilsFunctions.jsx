@@ -1,4 +1,5 @@
-import axios from "axios";
+
+import api from "./api";
 import { Star, StarHalf, StarOff, Activity } from "lucide-react";
 
 export function renderStars(count) {
@@ -58,8 +59,8 @@ export const AddToCartAPI = async (productId, quantity = 1) => {
     return;
   }
   try {
-    let res = await axios.post(
-      "http://localhost:5000/api/cart/add",
+    let res = await api.post(
+      "/api/cart/add",
       {
         productId,
         quantity,

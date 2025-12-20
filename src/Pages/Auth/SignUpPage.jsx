@@ -56,7 +56,8 @@ export function SignUpPage() {
         try {
           let res = await axios.post(
             "http://localhost:5000/api/user/signup",
-            formValues
+            formValues, 
+            { withCredentials: true }
           );
           let userData = res.data;
           saveToLocalStorage("user", userData);

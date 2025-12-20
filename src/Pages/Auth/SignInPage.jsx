@@ -1,4 +1,4 @@
-import { useState, useEffect, use } from "react";
+import { useState, useEffect,  } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -59,7 +59,8 @@ export function SignInPage() {
         try {
           let res = await axios.post(
             "http://localhost:5000/api/user/login",
-            formValues
+            formValues,
+             { withCredentials: true }
           );
           let data = res.data;
           saveToLocalStorage("user", data.user);

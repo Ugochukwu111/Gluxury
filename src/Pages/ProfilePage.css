@@ -1,0 +1,153 @@
+
+
+.profile-page-main{
+  border:  2px solid rgb(20, 15, 15);
+  height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: auto;
+}
+
+.profile-page-main .profile-container{
+  box-shadow: 2px 2px 4px var(--accent-purple);
+  border-radius: .5rem;
+  padding: 2em .5em;
+}
+
+.profile-container .profile-card{
+  display: flex;
+  justify-content: space-between;
+  padding: .25em;
+  border-radius: inherit;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+
+}
+
+.profile-container .profile-card figure{
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background-color: var(--accent-purple);
+}
+
+.profile-card .user-personal-details-container{
+ display: flex;
+ gap: 1em;
+ margin: 1em;
+ flex-wrap: wrap;
+}
+
+.profile-card .user-personal-details-container>*{
+  box-shadow: 2px 2px var(--text-muted);
+  border-radius: .5rem;
+  padding: .5em;
+    
+  border: 1px solid var(--text-muted);
+  flex: 1;
+  min-width: 300px;
+ flex-wrap: wrap;
+ transition: all 250ms ease;
+}
+
+.profile-card .user-personal-details-container>* svg{
+   background-color: var(--text-muted);
+   border-radius: 50%;
+   padding: .5em;
+   flex-shrink: 0;
+   box-sizing: content-box;
+   color: var(--white);
+}
+
+.profile-card .user-personal-details-container> *:hover{
+   box-shadow: 2px 2px 4px var(--accent-purple);
+     border: 1px solid var(--accent-purple);
+     transform: translateY(-10px);
+
+}
+
+.profile-card .user-personal-details-container> *:hover svg{
+  background-color: var(--accent-purple);
+}
+
+.profile-card .user-personal-details-container .title{
+  font-weight: 800;
+  color: var(--text-heading);
+  text-shadow: 1px 1px 1.5px var(--text-muted);
+  text-transform: capitalize;
+  display: block;
+}
+
+.profile-page-main .pf-cart-order-container{
+  padding: 1em 0;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  /* flex-wrap: wrap; */
+}
+
+.profile-page-main .pf-cart-order-container >*{
+  padding: 1em;
+  display: flex;
+  border: 2px solid var(--text-muted);
+  border-radius: .5rem;
+  width: 100%;
+  max-width: 250px;
+  min-width: 150px;
+  background-color: var(--accent-purple);
+  font-weight: 700;
+  color: var(--white);
+  overflow: hidden;
+  position: relative;
+  height: 90px;
+}
+
+.profile-page-main .circle{
+  position: absolute;
+  top: 0em;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background-color: var(--text-heading);
+  right: -2em;
+  box-shadow: 2px 2px 14px rgba(40, 3, 40, 0.559);
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.profile-page-main .circle span{
+  margin-right: 1em;
+}
+
+.cart-order-link-container a{
+  border:  3px solid var(--text-link);
+  border-radius: .5rem;
+  margin: .5em;
+  display: flex;
+  
+}
+
+.edith-pf-container{
+  background-color: var(--white);
+  padding: 2em 1em;
+  border-radius: .5rem;
+  position: relative;
+}
+
+.edith-pf-container label{
+  font-weight: 700;
+  color: var(--text-muted);
+  font-size: .8rem;
+  margin-left: .5em;
+}
+
+.close-edith-pf-btn{
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: .5em;
+  background-color: transparent;
+}

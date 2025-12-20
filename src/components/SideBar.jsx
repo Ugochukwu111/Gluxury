@@ -60,7 +60,7 @@ export function SideBar({onToggleSideBar, ref}) {
             </NavLink>
           </li>
           <li>
-            <NavLink href="">
+            <NavLink to="/profile">
               <UserRound />
               Profile
             </NavLink>
