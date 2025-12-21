@@ -2,8 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
 import api from "./utils/api";
 import { ProductPage } from "./Pages/Product/Product";
-import { ShoesPage } from "./Pages/Product/ShoesPage";
-import { BagsPage } from "./Pages/Product/BagsPage";
 import { CartPage } from "./Pages/CartPage";
 import { SignUpPage } from "./Pages/Auth/SignUpPage";
 import { SignInPage } from "./Pages/Auth/SignInPage";
@@ -14,6 +12,7 @@ import { LandingPage } from "./Pages/LandingPage/LandingPage";
 import { OrderPage } from "./Pages/OrderPage";
 import {  ProfilePage } from './Pages/ProfilePage'
 import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage";
+import { Header } from "./components/Header";
 
 // below are imported admin pages
 import { AdminHomePage } from "./Pages/Admin/HomePage";
@@ -44,7 +43,7 @@ function App() {
     }
   };
 
-    const handelGetCartAPI = async () => {
+    const handleGetCartAPI = async () => {
     try {
       const res = await api.get("http://localhost:5000/api/cart", );
       setCartItems(res.data.items);
@@ -57,8 +56,8 @@ function App() {
   
 
   useEffect(() => {
-  handelGetCartAPI()
-}, [cartLength]);
+  handleGetCartAPI()
+}, []);
 
   const getUserDetails = async () =>{
     try{
@@ -184,10 +183,10 @@ function App() {
         <Route
           path="/"
           element={
-            <ProductPage products={products} allProducts={allProducts} cartLength = {cartLength} />
+            <ProductPage products={products} allProducts={allProducts} cartLength = {cartLength} handleGetCartAPI={handleGetCartAPI} />
           }
         />
-        <Route path="/cart" element={<CartPage cartItems={cartItems} handelGetCartAPI={handelGetCartAPI} cartLength = {cartLength} />} />
+        <Route path="/cart" element={<CartPage cartItems={cartItems} handleGetCartAPI={handleGetCartAPI} cartLength = {cartLength} />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />

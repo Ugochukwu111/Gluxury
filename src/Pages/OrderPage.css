@@ -61,6 +61,14 @@
   padding: .5em;
 }
 
+.hr{
+  padding: 2em;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+
 @media(max-width: 500px){
   .order-total-content-container{
     flex-direction: column;

@@ -7,7 +7,7 @@ import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { GluxNotification, AddToCartAPI } from "../../utils/utilsFunctions";
 
-export function ProductPage({ allProducts ,cartLength}) {
+export function ProductPage({ allProducts ,cartLength , handleGetCartAPI}) {
   return (
     <div className="d-flex flex-column ">
       <SideBarHeader cartLength = {cartLength} />
@@ -19,7 +19,7 @@ export function ProductPage({ allProducts ,cartLength}) {
       <br />
       <br />
       <FilterProducts />
-      <ProductCardsGrid allProducts={allProducts} />
+      <ProductCardsGrid allProducts={allProducts} handleGetCartAPI={handleGetCartAPI} />
       <Footer />
     </div>
   );

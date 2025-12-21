@@ -2,7 +2,7 @@ import { ProductCard } from "./ProductCard";
 
 import "./ProductCards.css";
 
-export function ProductCardsGrid({ allProducts }) {
+export function ProductCardsGrid({ allProducts , handleGetCartAPI}) {
   return (
     
     <main>
@@ -11,6 +11,7 @@ export function ProductCardsGrid({ allProducts }) {
           <ProductCard
             key={product._id}
             product={product}
+            handleGetCartAPI = {handleGetCartAPI}
           />
         ))}
       </div>

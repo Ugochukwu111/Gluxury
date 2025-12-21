@@ -28,12 +28,15 @@ export function OrderPage({cartLength}) {
   }, []);
 
   return (
-    <div className="layout-container">
+    <div className="layout-container ">
       <SideBarHeader cartLength = {cartLength}/>
-         <div>
-           <ScrollingInfo/>
+
+         <div className=" hidden hr">
+           <ScrollingInfo className='hidden'/>
+           <br />
          </div>
-         <br /><br />
+   
+         <br />
       <main>
         {orders?.map((order) => {
           return (
@@ -46,7 +49,7 @@ export function OrderPage({cartLength}) {
                   </p>
                   <p>
                     <span className="FWB">Total: </span>
-                    <span>{formatMoney(order.total)}</span>
+                    <span className="FWB text-green">{formatMoney(order.total)}</span>
                   </p>
                 </div>
 

@@ -7,7 +7,7 @@ export function CartCard({cartItems,setRefreshCart}) {
 
   return (
     <div>
-      {cartItems.map((cartItem) => {
+      {cartItems?.map((cartItem) => {
         return (
           <CCard key={cartItem._id} cartItem={cartItem} setRefreshCart={setRefreshCart}
             />

@@ -1,19 +1,21 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import { useNavigate } from "react-router";
 import { CartCard } from "./CartCard";
 import "./CartDetails.css";
 import { formatMoney } from "../utils/money";
 import api from "../utils/api";
 
-export function CartDetails({cartItems, handelGetCartAPI}) {
+export function CartDetails({cartItems, handleGetCartAPI}) {
   const [summary, setSummary] = useState({});
-
   const [refreshCart, setRefreshCart] = useState(false);
+   console.log(handleGetCartAPI)
+  const navigate = useNavigate();
 
   const placeOrder = async ()=>{
     try{
      const res = await api.post(`http://localhost:5000/api/cart/place-order`,
      )
+     navigate('/order');
     }catch(err){
       console.log('error placing order', err)
     }
@@ -29,7 +31,7 @@ export function CartDetails({cartItems, handelGetCartAPI}) {
   };
 
   useEffect(() => {
-    handelGetCartAPI();
+    handleGetCartAPI()
      fetchSummary();
   }, [refreshCart]);
 
@@ -46,7 +48,7 @@ export function CartDetails({cartItems, handelGetCartAPI}) {
         <div className="payment-summary-container">
           <h3>Payment Summary</h3>
           <p>
-            <span>items({summary?.cartLength || 0})</span>
+            <span>items({summary?.totalQuantity || 0})</span>
             <span>{formatMoney(summary.itemsTotal) || 0}</span>
           </p>
           <p>

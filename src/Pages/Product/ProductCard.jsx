@@ -10,7 +10,7 @@ import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
 
-export function ProductCard({ product }) {
+export function ProductCard({ product, handleGetCartAPI }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const navigate = useNavigate();
 
@@ -21,6 +21,8 @@ export function ProductCard({ product }) {
   const handleAddToCart = async (productId) => {
     try {
       const res = await AddToCartAPI(productId);
+      // handleGetCartAPI() was define in app
+      handleGetCartAPI(); // this lets me update cartlength and diplay at the header  
       setIsAddedToCart(true);
     } catch (err) {
       console.log(err);
