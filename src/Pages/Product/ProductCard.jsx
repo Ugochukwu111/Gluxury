@@ -5,13 +5,13 @@ import { renderStars } from "../../utils/utilsFunctions.jsx";
 import { useNavigate } from "react-router-dom";
 import { AddToCartAPI } from "../../utils/utilsFunctions.jsx";
 import { formatMoney } from "../../utils/money.js";
-import { BadgeCheck } from "lucide-react";
+import { BadgeCheck, CircleX } from "lucide-react";
 import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
 
 export function ProductCard({ product, handleGetCartAPI }) {
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(null);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -22,18 +22,22 @@ export function ProductCard({ product, handleGetCartAPI }) {
     try {
       const res = await AddToCartAPI(productId);
       // handleGetCartAPI() was define in app
-      handleGetCartAPI(); // this lets me update cartlength and diplay at the header  
-      setIsAddedToCart(true);
+      handleGetCartAPI(); // this lets me update cartlength and diplay at the header
+      setIsAddedToCart("true");
     } catch (err) {
       console.log(err);
-      setIsAddedToCart(false);
+      setIsAddedToCart("false");
     }
   };
 
   const daysAgo = dayjs().diff(dayjs(product.createdAt), "day");
   const isNew = daysAgo <= 14;
   return (
-    <div className={`product-card ${isAddedToCart ? "added" : ""}`}>
+    <div
+      className={`product-card ${
+        isAddedToCart === "true" ? "added" : "failed"
+      }`}
+    >
       <figure>
         {isNew && <span className="product-card-bage">new</span>}
         <button className="product-like-btn">
@@ -74,10 +78,18 @@ export function ProductCard({ product, handleGetCartAPI }) {
           </p>
 
           <div className=" d-flex flex-column align-center p-relative">
-            <BadgeCheck
-              onAnimationEnd={() => setIsAddedToCart(false)}
-              className="added-icon "
-            />
+            {isAddedToCart === "true" && (
+              <BadgeCheck
+                className="added-icon"
+                onAnimationEnd={() => setIsAddedToCart(null)}
+              />
+            )}
+            {isAddedToCart === "false" && (
+              <CircleX
+                className="not-added-icon"
+                onAnimationEnd={() => setIsAddedToCart(null)}
+              />
+            )}
             <button
               onClick={() => {
                 handleAddToCart(product._id);

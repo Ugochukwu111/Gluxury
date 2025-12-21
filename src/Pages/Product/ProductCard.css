@@ -90,7 +90,21 @@
     opacity: .1;
 }
 
+.product-card .not-added-icon{
+ color: var(--white);
+ fill: var(--red);
+ position: absolute;
+ z-index: 0;
+ transform: translateY(-20px);
+  transform: translateY(10px);
+    opacity: .1;
+}
+
 .product-card.added .added-icon{
+animation: addedToCart 1s linear;
+}
+
+.product-card.failed .not-added-icon{
 animation: addedToCart 1s linear;
 }
 
