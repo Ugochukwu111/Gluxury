@@ -7,11 +7,10 @@ import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { GluxNotification, AddToCartAPI } from "../../utils/utilsFunctions";
 
-export function ProductPage({ allProducts }) {
-  console.log('coolike' , document.cookie);
+export function ProductPage({ allProducts ,cartLength}) {
   return (
     <div className="d-flex flex-column ">
-      <SideBarHeader />
+      <SideBarHeader cartLength = {cartLength} />
       <Announcement />
       <div className="hidden">
         <ScrollingInfo />

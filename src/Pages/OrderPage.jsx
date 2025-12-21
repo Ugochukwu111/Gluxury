@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../utils/api.js";
 import { SideBarHeader } from "../components/SideBarHeader";
 import { Footer } from "../components/Footer";
 import { formatMoney } from "../utils/money.js";
@@ -8,26 +9,15 @@ import dayjs from "dayjs";
 
 import "./OrderPage.css";
 
-export function OrderPage() {
+export function OrderPage({cartLength}) {
   const [orders, setOrders] = useState([]);
 
   useEffect(() => {
     const handleGetOrders = async () => {
-      const token = localStorage.getItem("token");
       try {
-        const res = await axios.get(
-          "http://localhost:5000/api/cart/my-orders",
-          {
-            headers: { Authorization: `Bearer ${token}` },
-            withCredentials: true,
-          }
+        const res = await api.get(
+          "/api/cart/my-orders"
         );
-
-        if (!res) {
-          console.error("get orders error");
-          return;
-        }
-        console.log(res);
         setOrders(res.data);
       } catch (err) {
         console.log(err);
@@ -37,10 +27,9 @@ export function OrderPage() {
     handleGetOrders();
   }, []);
 
-  console.log(orders);
   return (
     <div className="layout-container">
-      <SideBarHeader />
+      <SideBarHeader cartLength = {cartLength}/>
          <div>
            <ScrollingInfo/>
          </div>

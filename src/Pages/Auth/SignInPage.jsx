@@ -65,7 +65,6 @@ export function SignInPage() {
           let data = res.data;
           saveToLocalStorage("user", data.user);
           saveToLocalStorage('token', data.accessToken);
-          console.log(data.accessToken)
           setIsSuccess(true);
           setLoading(false);
     

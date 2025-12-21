@@ -28,7 +28,7 @@ export function ProductDetailsPage() {
 
   useEffect(() => {
     axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
-      setProduct(res.data);
+    setProduct(res.data);
     });
   }, [id]);
 

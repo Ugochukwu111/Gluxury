@@ -28,22 +28,19 @@ api.interceptors.response.use(
       originalRequest._retry = true;
       console.log(`access expired refreshing`)
       try {
-        console.log('hola')
          const res = await axios.post(
           "http://localhost:5000/api/otp/refresh",
           {},
           { withCredentials: true }
         );
-        console.log(res)
         const newAccessToken = res.data.accessToken;
-        console.log(`new accees token ${newAccessToken}`)
         localStorage.setItem("token", newAccessToken);
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (err) {
         console.log(err)
         localStorage.removeItem("token");
-        // window.location.href = "/login"; // fallback logout
+        window.location.href = "/login"; 
         return Promise.reject(err);
       }
     }

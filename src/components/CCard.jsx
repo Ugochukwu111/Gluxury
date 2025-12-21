@@ -1,8 +1,8 @@
-import { Link,} from "react-router-dom";
-import { useState,} from "react";
-import axios from "axios";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 import dayjs from "dayjs";
 import { Trash } from "lucide-react";
+import api from "../utils/api.js";
 
 import { formatMoney } from "../utils/money.js";
 import { AddToCartAPI } from "../utils/utilsFunctions.jsx";
@@ -15,15 +15,9 @@ export function CCard({ cartItem, setRefreshCart }) {
     setQuantity(Number(e.target.value));
   };
 
-console.log(cartItem.productId._id)
-
   const handelAddToCartAPI = async (productId, quantity) => {
     try {
       const res = await AddToCartAPI(productId, quantity);
-      if (!res) {
-        console.error("No response from AddToCartAPI");
-        return;
-      }
     } catch (err) {
       console.error("Error adding to cart:", err);
     } finally {
@@ -32,57 +26,45 @@ console.log(cartItem.productId._id)
   };
 
   const handleDeliveryChange = async (cartItemId, optionIndex) => {
-    const token = localStorage.getItem("token");
     try {
-      const res = await axios.put(
-        `http://localhost:5000/api/cart/delivery`,
-        {
-          cartItemId,
-          optionIndex,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(res);
+      const res = await api.put(`/api/cart/delivery`, {
+        cartItemId,
+        optionIndex,
+      });
       setRefreshCart((prev) => !prev); // refresh cart after update
     } catch (err) {
       console.error("Error updating delivery option", err);
     }
   };
 
-  const handleDeleteCartItem = async (cartItemId) =>{
-    const token = localStorage.getItem('token');
-    console.log(cartItemId)
-    try{
-      const res = await axios.delete('http://localhost:5000/api/cart/delete',{
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-         data: { cartItemId }, 
-      }
-    );
-      if(!res){console.error('delete cart item error'); return;}
+  const handleDeleteCartItem = async (cartItemId) => {
+    try {
+      const res = await api.delete("http://localhost:5000/api/cart/delete", {
+        data: { cartItemId },
+      });
       setRefreshCart((prev) => !prev);
-    }catch(err){
-    console.log(err);
-  }
-  }
+    } catch (err) {
+      console.log("delete cart error ", err);
+    }
+  };
 
-  let selectedDeliveryDate = cartItem.deliveryOptions[cartItem.selectedDeliveryOption].date 
-  
+  let selectedDeliveryDate =
+    cartItem.deliveryOptions[cartItem.selectedDeliveryOption].date;
+
   return (
     <div className="cart-details-card">
       <button
-       aria-label="delete cart item button"
-       onClick={()=>{handleDeleteCartItem(cartItem._id)}} 
-       className="del-btn">
+        aria-label="delete cart item button"
+        onClick={() => {
+          handleDeleteCartItem(cartItem._id);
+        }}
+        className="del-btn"
+      >
         <Trash />
       </button>
       <h2>
-        Delivery date: {dayjs(selectedDeliveryDate).format("dddd MMMM D") }
-        </h2>
+        Delivery date: {dayjs(selectedDeliveryDate).format("dddd MMMM D")}
+      </h2>
       <div className="d-flex f-wrap cart-details-wrapper justify-s-between">
         <div className="d-flex">
           <figure>
@@ -113,7 +95,7 @@ console.log(cartItem.productId._id)
               className="d-flex 
                     flex-column buy-product-btn-container"
             >
-              <Link to= {`/product/${cartItem.productId._id}`}>
+              <Link to={`/product/${cartItem.productId._id}`}>
                 <u>See product details</u>
               </Link>
 

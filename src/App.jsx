@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import api from "./utils/api";
 import { ProductPage } from "./Pages/Product/Product";
 import { ShoesPage } from "./Pages/Product/ShoesPage";
 import { BagsPage } from "./Pages/Product/BagsPage";
@@ -31,6 +32,8 @@ import axios from "axios";
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [user, setUser] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
+  const [ cartLength, setCartLength ] = useState(0);
 
   let getAllProductData = async () => {
     try {
@@ -40,6 +43,22 @@ function App() {
       console.log(err || "nextwork try again later");
     }
   };
+
+    const handelGetCartAPI = async () => {
+    try {
+      const res = await api.get("http://localhost:5000/api/cart", );
+      setCartItems(res.data.items);
+      setCartLength(res.data.totalQuantity);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  
+
+  useEffect(() => {
+  handelGetCartAPI()
+}, [cartLength]);
 
   const getUserDetails = async () =>{
     try{
@@ -165,10 +184,10 @@ function App() {
         <Route
           path="/"
           element={
-            <ProductPage products={products} allProducts={allProducts} />
+            <ProductPage products={products} allProducts={allProducts} cartLength = {cartLength} />
           }
         />
-        <Route path="/cart" element={<CartPage />} />
+        <Route path="/cart" element={<CartPage cartItems={cartItems} handelGetCartAPI={handelGetCartAPI} cartLength = {cartLength} />} />
         <Route path="/product/:id" element={<ProductDetailsPage />} />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />
@@ -176,10 +195,8 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/home" element={<LandingPage products={products} />} />
-        <Route path="/order" element={<OrderPage />} />
+        <Route path="/order" element={<OrderPage  cartLength = {cartLength}/>} />
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/shoes" element={<ShoesPage products={products} />} />
-        <Route path="/bags" element={<BagsPage products={products} />} />
         <Route path="/admin/dashboard" element={<AdminHomePage />} />
         <Route
           path="/admin/products"

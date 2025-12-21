@@ -5,54 +5,23 @@ import "./CartDetails.css";
 import { formatMoney } from "../utils/money";
 import api from "../utils/api";
 
-export function CartDetails() {
+export function CartDetails({cartItems, handelGetCartAPI}) {
   const [summary, setSummary] = useState({});
 
-  const [cartItems, setCartItems] = useState([]);
   const [refreshCart, setRefreshCart] = useState(false);
 
   const placeOrder = async ()=>{
-    const token = localStorage.getItem('token');
     try{
-     const res = await axios.post(`http://localhost:5000/api/cart/place-order`,
-      {},
-      {
-        headers:{Authorization:`Bearer ${token}`,},
-        withCredentials:true,
-      }
+     const res = await api.post(`http://localhost:5000/api/cart/place-order`,
      )
-     if(!res){console.error('error placing orders'); return};
-     console.log(res);
     }catch(err){
-      console.log(err)
+      console.log('error placing order', err)
     }
   }
 
-
-  const handelGetCartAPI = async () => {
+    const fetchSummary = async () => {
     try {
-      const res = await api.get("http://localhost:5000/api/cart", );
-      setCartItems(res.data);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    handelGetCartAPI();
-  }, [refreshCart]);
-
-  const fetchSummary = async () => {
-    const token = localStorage.getItem("token");
-    try {
-      const res = await axios.get("http://localhost:5000/api/cart/summary", {
-        headers: { Authorization: `Bearer ${token}` },
-        withCredentials: true,
-      });
-      if (!res) {
-        console.error("response error");
-        return;
-      }
+      const res = await api.get("http://localhost:5000/api/cart/summary")
       setSummary(res.data);
     } catch (err) {
       console.error(err);
@@ -60,8 +29,12 @@ export function CartDetails() {
   };
 
   useEffect(() => {
-    fetchSummary();
+    handelGetCartAPI();
+     fetchSummary();
   }, [refreshCart]);
+
+
+
 
   return (
     <main>
