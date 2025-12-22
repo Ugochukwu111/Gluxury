@@ -2,10 +2,10 @@
 import { Announcement } from "../../components/Announcement";
 import { Footer } from "../../components/Footer";
 import { ProductCardsGrid } from "./ProductCardsGrid";
-import { FilterProducts } from "../../components/FilterProducts";
 import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
-import { GluxNotification, AddToCartAPI } from "../../utils/utilsFunctions";
+import { ProductCardPrice } from "../../components/ProductCardPrice";
+
 
 export function ProductPage({ allProducts ,cartLength , handleGetCartAPI}) {
   return (
@@ -17,8 +17,7 @@ export function ProductPage({ allProducts ,cartLength , handleGetCartAPI}) {
       </div>
       <br />
       <br />
-      <br />
-      <FilterProducts />
+      <ProductCardPrice handleGetCartAPI = {handleGetCartAPI}/>
       <ProductCardsGrid allProducts={allProducts} handleGetCartAPI={handleGetCartAPI} />
       <Footer />
     </div>

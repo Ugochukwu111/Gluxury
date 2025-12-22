@@ -1,0 +1,28 @@
+.price-range-container select{
+  padding: .8em 1em;
+  border-radius: .5rem;
+  font-weight: 500;
+}
+
+.price-range-container select:focus{
+  outline: 2px solid var(--text-heading);
+}
+
+.price-range-container .price-range-product-container {
+  display: flex;
+  flex-wrap: nowrap;      /* no wrapping */
+  overflow-x: auto;       /* horizontal scroll */
+  gap: 1rem;              /* spacing */
+  padding-bottom: 1rem;   /* space for scrollbar */
+  background-color: var(--white);
+  padding: 1em .5em;
+  box-shadow: 2px 2px 4px var(--text-muted);
+  border-radius: .5rem;
+  scroll-snap-type: x mandatory;
+}
+
+.price-range-product-container > * {
+  flex: 0 0 auto;        /* prevent shrinking, keep original width */
+ width: clamp(12rem, 20vw, 20rem);
+   scroll-snap-align: start;
+}

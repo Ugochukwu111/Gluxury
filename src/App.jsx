@@ -45,11 +45,11 @@ function App() {
 
     const handleGetCartAPI = async () => {
     try {
-      const res = await api.get("http://localhost:5000/api/cart", );
+      const res = await api.get("/api/cart", );
       setCartItems(res.data.items);
       setCartLength(res.data.totalQuantity);
     } catch (err) {
-      console.log(err);
+      console.log('');
     }
   };
 

@@ -47,8 +47,7 @@ header ul li a.active svg{
   font-weight: 700;
   position: absolute;
   font-size: 1.1rem;
-  top: 0;
-  right: 0;
+  top: -.5em;
   padding: .2em .3em;
 }
 
