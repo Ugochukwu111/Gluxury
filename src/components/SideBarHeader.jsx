@@ -2,7 +2,7 @@ import { useState, useRef,  } from "react";
 import { Header } from "./Header";
 import { SideBar } from "./SideBar";
 
-export function SideBarHeader({cartLength}){
+export function SideBarHeader({cartLength, onResults}){
    const [isSideBarOpen, setIsSideBarOpen] = useState(false);
    const sideBarNotifier = useRef (null)
 
@@ -20,7 +20,9 @@ export function SideBarHeader({cartLength}){
   return(   
     <div 
      className="header-side-bar-container">
-      <Header onToggleSideBar = {toggleSideBar} cartLength = {cartLength} />
+      <Header onToggleSideBar = {toggleSideBar} 
+      cartLength = {cartLength} 
+       onResults = {onResults} />
       <SideBar   
       ref={sideBarNotifier}
       onToggleSideBar = {toggleSideBar} />

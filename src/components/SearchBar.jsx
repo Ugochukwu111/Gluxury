@@ -1,49 +1,90 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
+
 import "./SearchBar.css";
 
-export function SearchBar({
-  placeholder = "Search",
-  query,
-  setQuery,      // parent controls this
-  onResults,
-}) {
-  const [debouncedValue, setDebouncedValue] = useState(query || "");
+export function SearchBar({ placeholder = "Search", onResults }) {
+  const [searchParams] = useSearchParams();
+  const queryFromURL = searchParams.get("query") || "";
+
+  const [query, setQuery] = useState(queryFromURL);
   const [loading, setLoading] = useState(false);
 
-  // Debounce Effect (500ms)
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setDebouncedValue(query);
-    }, 500);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const inputRef = useRef(null);
 
-    return () => clearTimeout(timeout);
-  }, [query]);
+  // Get user role once
+  const userRole = localStorage.getItem("user");
 
-  // Search API call
+  /* ----------------------------------------------------
+     Sync input state from URL (fixes back / forward)
+  -----------------------------------------------------*/
   useEffect(() => {
-    if (debouncedValue.trim() === "") {
-      onResults([]); // reset search
-      return;
+    setQuery(queryFromURL);
+  }, [queryFromURL]);
+
+  /* ----------------------------------------------------
+     Focus input when on search page
+  -----------------------------------------------------*/
+  useEffect(() => {
+    if (location.pathname.startsWith("/search")) {
+      inputRef.current?.focus();
     }
+  }, [location.pathname]);
 
-    const searchProducts = async () => {
+  /* ----------------------------------------------------
+     Navigate to search page on focus (non-admin)
+  -----------------------------------------------------*/
+  const moveToSearchPage = () => {
+    if (userRole !== "admin" && !location.pathname.startsWith("/search")) {
+      navigate(`/search?query=${encodeURIComponent(query)}`);
+    }
+  };
+
+  /* ----------------------------------------------------
+     Input ONLY updates URL
+  -----------------------------------------------------*/
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+
+    const params = new URLSearchParams(location.search);
+    params.set("query", value);
+
+    navigate(
+      { pathname: "/search", search: params.toString() },
+      { replace: true }
+    );
+  };
+
+  /* ----------------------------------------------------
+     Debounced search driven by URL (single source of truth)
+  -----------------------------------------------------*/
+  useEffect(() => {
+    const timeout = setTimeout(async () => {
+      if (!queryFromURL.trim()) {
+        onResults([]);
+        return;
+      }
+
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:5000/api/products/search?query=${debouncedValue}`
-        ); 
+          `http://localhost:5000/api/products/search?query=${queryFromURL}`
+        );
         onResults(res.data);
-      } catch (error) {
-        console.error("Search failed:", error);
+      } catch (err) {
+        console.error("Search failed:", err);
         onResults([]);
       } finally {
         setLoading(false);
       }
-    };
+    }, 500);
 
-    searchProducts();
-  }, [debouncedValue, onResults]);
+    return () => clearTimeout(timeout);
+  }, [queryFromURL, onResults]);
 
   return (
     <div className="d-flex flex-1 justify-center">
@@ -65,10 +106,12 @@ export function SearchBar({
         </svg>
 
         <input
+          ref={inputRef}
           type="text"
           placeholder={placeholder}
           value={query}
-          onChange={(e) => setQuery(e.target.value)}
+          onFocus={moveToSearchPage}
+          onChange={handleChange}
         />
 
         {loading && <span className="search-loading-dot"></span>}

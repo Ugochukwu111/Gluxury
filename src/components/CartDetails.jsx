@@ -8,12 +8,11 @@ import api from "../utils/api";
 export function CartDetails({cartItems, handleGetCartAPI}) {
   const [summary, setSummary] = useState({});
   const [refreshCart, setRefreshCart] = useState(false);
-   console.log(handleGetCartAPI)
   const navigate = useNavigate();
 
   const placeOrder = async ()=>{
     try{
-     const res = await api.post(`http://localhost:5000/api/cart/place-order`,
+     const res = await api.post(`/api/cart/place-order`,
      )
      navigate('/order');
     }catch(err){
@@ -23,7 +22,7 @@ export function CartDetails({cartItems, handleGetCartAPI}) {
 
     const fetchSummary = async () => {
     try {
-      const res = await api.get("http://localhost:5000/api/cart/summary")
+      const res = await api.get("/api/cart/summary")
       setSummary(res.data);
     } catch (err) {
       console.error(err);

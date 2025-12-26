@@ -1,3 +1,21 @@
+.price-range-container{
+   background-color: var(--white);
+  padding: 1em .5em;
+  box-shadow: 2px 2px 4px var(--text-muted);
+    border-radius: .5rem;
+    min-height: 350px;
+}
+
+.product-search-page-container{
+  height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.search-result-container{
+  flex: 1;
+}
+
 .price-range-container select{
   padding: .8em 1em;
   border-radius: .5rem;
@@ -14,10 +32,8 @@
   overflow-x: auto;       /* horizontal scroll */
   gap: 1rem;              /* spacing */
   padding-bottom: 1rem;   /* space for scrollbar */
-  background-color: var(--white);
   padding: 1em .5em;
-  box-shadow: 2px 2px 4px var(--text-muted);
-  border-radius: .5rem;
+
   scroll-snap-type: x mandatory;
 }
 

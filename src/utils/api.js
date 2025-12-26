@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "http://localhost:5000", 
+  baseURL: import.meta.env.VITE_API_BASE_URL, 
   withCredentials: true, // sends refresh token cookie automatically
 });
 
@@ -9,7 +9,6 @@ const api = axios.create({
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
-    console.log(`axios api token ${token}`)
     if (token) config.headers["Authorization"] = `Bearer ${token}`;
     return config;
   },
@@ -26,7 +25,6 @@ api.interceptors.response.use(
 
     if (error.response?.status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
-      console.log(`access expired refreshing`)
       try {
          const res = await axios.post(
           "http://localhost:5000/api/otp/refresh",
@@ -34,7 +32,6 @@ api.interceptors.response.use(
           { withCredentials: true }
         );
         const newAccessToken = res.data.accessToken;
-        localStorage.setItem("token", newAccessToken);
         originalRequest.headers["Authorization"] = `Bearer ${newAccessToken}`;
         return api(originalRequest);
       } catch (err) {

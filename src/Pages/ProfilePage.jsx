@@ -10,15 +10,18 @@ import {
   ArrowLeft,
   X ,
 } from "lucide-react";
-
+import { useAuth } from "../context/useContext";
 import { ScrollingInfo } from "../components/ScrollingInfo";
 import { BackgroundCover } from "../utils/utilsFunctions";
 import UserIcon from "/images/user.png";
 import "./ProfilePage.css";
 import { useState } from "react";
 
+
 export function ProfilePage() {
   const [edithProfile, setEdithProfile] = useState(false);
+  
+  const { user, loading } = useAuth();
 
 
 
@@ -88,7 +91,7 @@ export function ProfilePage() {
             <div className="w100">
               <div className="d-flex align-center justify-s-between">
                 <figure>
-                  <img src={UserIcon} alt={"user"} />
+                  <img src={UserIcon} alt={user?.fullName || "user"} />
                 </figure>
                 <div>
                   <p className="text-heading FWB">Gluxury Acount</p>
@@ -107,7 +110,7 @@ export function ProfilePage() {
                   <User />
                   <p>
                     <span className="title">full name</span>
-                    <span className="title-value">Pascal joseph</span>
+                    <span className={`title-value ${loading ? "skeleton-text" : ""}`}>{user?.fullName || 'John Doe'}</span>
                   </p>
                 </div>
 
@@ -115,7 +118,9 @@ export function ProfilePage() {
                   <Mail />
                   <p>
                     <span className="title">Email address</span>
-                    <span className="title-value">pascaljoseph@gmail.com</span>
+                    <span className={`title-value ${loading ? "skeleton-text" : ""}`}>
+                      {user?.email || 'johndoe@gmail.com'}
+                    </span>
                   </p>
                 </div>
 
@@ -123,7 +128,9 @@ export function ProfilePage() {
                   <Phone />
                   <p>
                     <span className="title">Phone Number</span>
-                    <span className="title-value">07046253045</span>
+                    <span className={`title-value ${loading ? "skeleton-text" : ""}`}>
+                      {user?.phoneNumber || 'XXXXXXXXXXX'}
+                    </span>
                   </p>
                 </div>
 
@@ -131,7 +138,9 @@ export function ProfilePage() {
                   <User />
                   <p>
                     <span className="title">Role</span>
-                    <span className="title-value">User</span>
+                    <span className={`title-value ${loading ? "skeleton-text" : ""}`}>
+                      {user?.role || 'user'}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -139,7 +148,7 @@ export function ProfilePage() {
           </div>
 
           {/* pf stands for profile(you can see i use it in class naming) */}
-          <div className="pf-cart-order-container">
+          {/* <div className="pf-cart-order-container f-wrap">
             <div className="pf-items">
               <ShoppingBag />
               &nbsp;&nbsp;
@@ -161,9 +170,9 @@ export function ProfilePage() {
                 <span>4</span>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="d-flex justify-center cart-order-link-container">
+          <div className="cart-order-link-container">
             <Link to="/cart">
               View Cart &nbsp;
               <ArrowRight className="text-link" />
@@ -173,6 +182,7 @@ export function ProfilePage() {
               <ArrowRight className="text-link" />
             </Link>
           </div>
+          
         </div>
       </main>
     </>

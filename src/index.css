@@ -466,6 +466,51 @@ img{
 
 
 
+/* ===== Text Skeleton (Lightweight) ===== */
+.skeleton-text {
+  position: relative;
+  color: transparent !important;
+  background-color: #f6eff8; /* very light pink-lavender */
+  border-radius: 4px;
+  animation: pulse-bg 1.4s ease-in-out infinite;
+}
+
+/* shimmer sweep */
+.skeleton-text::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 178, 255, 0.35), /* softened accent-gold/purple */
+    transparent
+  );
+  transform: translateX(-100%);
+  animation: shimmer-move 1.6s infinite;
+}
+
+/* reveal transition */
+.skeleton-reveal {
+  transition: color 0.25s ease;
+}
+
+/* animations */
+@keyframes shimmer-move {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes pulse-bg {
+  0%   { background-color: #f6eff8; }
+  50%  { background-color: #f1e6f4; }
+  100% { background-color: #f6eff8; }
+}
+
+
+
+
 .FWB{font-weight: 700;}
 .text-center{text-align: center;}
 .text-start{text-align: start;}

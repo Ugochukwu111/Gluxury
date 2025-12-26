@@ -46,7 +46,7 @@
     
   border: 1px solid var(--text-muted);
   flex: 1;
-  min-width: 300px;
+  min-width: 230px;
  flex-wrap: wrap;
  transition: all 250ms ease;
 }
@@ -122,12 +122,26 @@
   margin-right: 1em;
 }
 
+.cart-order-link-container{
+
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+
 .cart-order-link-container a{
   border:  3px solid var(--text-link);
   border-radius: .5rem;
   margin: .5em;
-  display: flex;
-  
+  display: inline-flex;
+  max-width: 100%;
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+
 }
 
 .edith-pf-container{

@@ -1,10 +1,15 @@
 import { NavLink } from "react-router";
-import { MessageCircle,ClipboardClock,HeartPulse,UserRound, ArrowLeftRight } from "lucide-react";
+import { ShoppingCart,ClipboardClock,UserRound,} from "lucide-react";
+import { useAuth } from "../context/useContext";
 import "./SideBar.css";
 
-import ProfilePic from '../assets/images/Gluxury-anime-girl-profile.webp'
+
+import UserIcon from "/images/user.png";
 
 export function SideBar({onToggleSideBar, ref}) {
+
+    const { user ,loading, logOut}= useAuth();
+
   return (
     <aside ref = {ref} aria-label = "sidebar closed">
       <div>
@@ -28,23 +33,24 @@ export function SideBar({onToggleSideBar, ref}) {
 
         <div className="user-details-container">
           <figure>
-            <img src={ProfilePic} alt=" profile pic" />
+            <img src={UserIcon} alt={user?.fullName|| "profile"} />
           </figure>
-          <p className="user-name text-heading FWB">
-            Gift Ugo
+          <p className={`user-name text-heading FWB ${loading ? "skeleton-text" : ""}`}>
+            {user?.fullName || 'John Doe'}
             </p>
           <p className="user-state-country">
-            <span>Benin City,</span>
-            <span> Nigeria</span>
+            <span className={`${loading ? "skeleton-text" : ""}`}>
+              {user?.email || 'johndoe@gmail.com'}
+            </span>
           </p>
           <hr />
         </div>
         <br />
         <ul>
           <li>
-            <NavLink href="">
-              <MessageCircle />
-              Message
+            <NavLink to="/cart">
+            <ShoppingCart />
+              Cart
             </NavLink>
           </li>
           <li>
@@ -54,27 +60,18 @@ export function SideBar({onToggleSideBar, ref}) {
             </NavLink>
           </li>
           <li>
-            <NavLink href="">
-              <HeartPulse />
-              WishList
-            </NavLink>
-          </li>
-          <li>
             <NavLink to="/profile">
               <UserRound />
               Profile
             </NavLink>
           </li>
-          <li>
-            <NavLink href="">
-              <ArrowLeftRight />
-              Transaction History
-            </NavLink>
-          </li>
+
         </ul>
       </div>
 
-      <button className="bg-red FWB text-white">
+      <button 
+        onClick={logOut}
+        className="bg-red FWB text-white">
         Log Out
       </button>
     </aside>

@@ -1,7 +1,8 @@
-import { useState , useEffect} from "react";
+import { useState , useEffect, use} from "react";
 import { ProductCard } from "../Pages/Product/ProductCard";
 import axios from "axios";
 import { formatMoney } from "../utils/money";
+import { ProductCardSkeleton } from "./Skeleton";
 
 import './ProductCardPrice.css'
 
@@ -10,6 +11,7 @@ export function ProductCardPrice({handleGetCartAPI}) {
   const [priceRange, setPriceRange] = useState([]);
   const [priceRangeValue, setPriceRangeValue] = useState(10000);
   const [productPriceRange, setProductPriceRange] = useState([]);
+  const [ loading, setLoading ] = useState(false);
 
   const handleGetPriceRange = async () =>{
    try{
@@ -22,18 +24,19 @@ export function ProductCardPrice({handleGetCartAPI}) {
 
 
 const handleGetProductPriceRange = async(priceRangeValue = 10000) =>{
+  setLoading(true);
      try{
       const res = await axios.get(`http://localhost:5000/api/products?maxPrice=${priceRangeValue}`, );
       setProductPriceRange(res.data.products);
-      console.log(res.data.products)
    }catch(err){
     console.error(err);
+   }finally{
+    setLoading(false)
    }
 }
 
 //the useEffect is to show a filtered product base of 5000 price once page loads
 // this avoids the section beign empty on first load
-
 
 useEffect(()=>{
     // Fetch all price ranges for the dropdown
@@ -72,7 +75,13 @@ useEffect(()=>{
       </div>
       <br />
       <div className="d-flex price-range-product-container">
-        {productPriceRange?.map((product)=>{
+        {
+          loading
+          ?Array(10).fill(0).map((_, i) => <ProductCardSkeleton
+                     key={i}
+                     productLoading = {loading}
+                      />)
+          :productPriceRange?.map((product)=>{
           return(
              <ProductCard  
                product = {product}
@@ -80,8 +89,8 @@ useEffect(()=>{
                handleGetCartAPI = 
                {handleGetCartAPI}/>
           )
-        })}
-       
+        })
+        }
        </div>
        <br />
     </div>

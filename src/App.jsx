@@ -10,9 +10,10 @@ import { ForgotPasswordPage } from "./Pages/Auth/ForgotPasswordPage";
 import { ResetPasswordPage } from "./Pages/Auth/ResetPasswordPage";
 import { LandingPage } from "./Pages/LandingPage/LandingPage";
 import { OrderPage } from "./Pages/OrderPage";
-import {  ProfilePage } from './Pages/ProfilePage'
+import { ProfilePage } from "./Pages/ProfilePage";
 import { ProductDetailsPage } from "./Pages/Product/ProductDetailsPage";
-import { Header } from "./components/Header";
+import { ProductSearchPage } from "./Pages/Product/ProductSearchPage";
+import { ProtectedRoute, AdminRoute } from "./utils/Auth";
 
 // below are imported admin pages
 import { AdminHomePage } from "./Pages/Admin/HomePage";
@@ -30,49 +31,38 @@ import axios from "axios";
 
 function App() {
   const [allProducts, setAllProducts] = useState([]);
+  const [productLoading, setProductLoading] = useState(false);
   const [user, setUser] = useState([]);
   const [cartItems, setCartItems] = useState([]);
-  const [ cartLength, setCartLength ] = useState(0);
+  const [cartLength, setCartLength] = useState(0);
 
   let getAllProductData = async () => {
+    setProductLoading(true);
     try {
       const res = await axios.get("http://localhost:5000/api/products");
       setAllProducts(res.data.products);
     } catch (err) {
       console.log(err || "nextwork try again later");
+    }finally{
+      setProductLoading(false);
     }
   };
 
-    const handleGetCartAPI = async () => {
+  const handleGetCartAPI = async () => {
     try {
-      const res = await api.get("/api/cart", );
+      const res = await api.get("/api/cart");
       setCartItems(res.data.items);
       setCartLength(res.data.totalQuantity);
     } catch (err) {
-      console.log('');
+      console.log(err.response.data.message || "");
     }
   };
 
-  
-
   useEffect(() => {
-  handleGetCartAPI()
-}, []);
-
-  const getUserDetails = async () =>{
-    try{
-      const res = await axios.get('http://localhost:5000/api/user');
-      setUser(res.data)
-    }catch(err){
-      console.log(err)
-    }
-  }
-
-  
-
-  useEffect(() => {
+    handleGetCartAPI();
     getAllProductData();
   }, []);
+
 
   const products = [
     {
@@ -183,31 +173,65 @@ function App() {
         <Route
           path="/"
           element={
-            <ProductPage products={products} allProducts={allProducts} cartLength = {cartLength} handleGetCartAPI={handleGetCartAPI} />
+            <ProductPage
+              productLoading={productLoading}
+              products={products}
+              allProducts={allProducts}
+              cartLength={cartLength}
+              handleGetCartAPI={handleGetCartAPI}
+            />
           }
         />
-        <Route path="/cart" element={<CartPage cartItems={cartItems} handleGetCartAPI={handleGetCartAPI} cartLength = {cartLength} />} />
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/cart"
+            element={
+              <CartPage
+                cartItems={cartItems}
+                handleGetCartAPI={handleGetCartAPI}
+                cartLength={cartLength}
+              />
+            }
+          />
+          <Route
+            path="/order"
+            element={<OrderPage cartLength={cartLength} />}
+          />
+        </Route>
+
         <Route path="/product/:id" element={<ProductDetailsPage />} />
+        <Route
+          path="/search"
+          element={
+            <ProductSearchPage
+              handleGetCartAPI={handleGetCartAPI}
+              cartLength={cartLength}
+            />
+          }
+        />
         <Route path="/sign-up" element={<SignUpPage />} />
         <Route path="/login" element={<SignInPage />} />
         <Route path="/confirm-otp" element={<ConfirmOtpPage />} />
         <Route path="/forgot-password" element={<ForgotPasswordPage />} />
         <Route path="/reset-password" element={<ResetPasswordPage />} />
         <Route path="/home" element={<LandingPage products={products} />} />
-        <Route path="/order" element={<OrderPage  cartLength = {cartLength}/>} />
+
         <Route path="/profile" element={<ProfilePage />} />
-        <Route path="/admin/dashboard" element={<AdminHomePage />} />
-        <Route
-          path="/admin/products"
-          element={
-            <AdminProductPage
-              allProducts={allProducts}
-              refreshProducts={getAllProductData}
-            />
-          }
-        />
-        <Route path="/admin/users" element={<AdminUsersPage />} />
-        <Route path="/admin/orders" element={<AdminOrdersPage />} />
+
+        <Route element= {<AdminRoute/>}>
+          <Route path="/admin/dashboard" element={<AdminHomePage />} />
+          <Route
+            path="/admin/products"
+            element={
+              <AdminProductPage
+                allProducts={allProducts}
+                refreshProducts={getAllProductData}
+              />
+            }
+          />
+          <Route path="/admin/users" element={<AdminUsersPage />} />
+          <Route path="/admin/orders" element={<AdminOrdersPage />} />
+        </Route>
       </Routes>
     </>
   );
