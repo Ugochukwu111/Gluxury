@@ -32,9 +32,9 @@ import axios from "axios";
 function App() {
   const [allProducts, setAllProducts] = useState([]);
   const [productLoading, setProductLoading] = useState(false);
-  const [user, setUser] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [cartLength, setCartLength] = useState(0);
+  const [loadingCart, setLoadingCart] = useState(false)
 
   let getAllProductData = async () => {
     setProductLoading(true);
@@ -49,12 +49,15 @@ function App() {
   };
 
   const handleGetCartAPI = async () => {
+    setLoadingCart(true);
     try {
       const res = await api.get("/api/cart");
       setCartItems(res.data.items);
       setCartLength(res.data.totalQuantity);
     } catch (err) {
       console.log(err.response.data.message || "");
+    }finally{
+      setLoadingCart(false);
     }
   };
 
@@ -190,6 +193,7 @@ function App() {
                 cartItems={cartItems}
                 handleGetCartAPI={handleGetCartAPI}
                 cartLength={cartLength}
+                loadingCart = {loadingCart}
               />
             }
           />

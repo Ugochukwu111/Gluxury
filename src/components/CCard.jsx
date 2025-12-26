@@ -39,7 +39,7 @@ export function CCard({ cartItem, setRefreshCart }) {
 
   const handleDeleteCartItem = async (cartItemId) => {
     try {
-      const res = await api.delete("http://localhost:5000/api/cart/delete", {
+      const res = await api.delete("/api/cart/delete", {
         data: { cartItemId },
       });
       setRefreshCart((prev) => !prev);

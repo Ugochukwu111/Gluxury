@@ -5,7 +5,7 @@ import "./CartDetails.css";
 import { formatMoney } from "../utils/money";
 import api from "../utils/api";
 
-export function CartDetails({cartItems, handleGetCartAPI}) {
+export function CartDetails({cartItems, handleGetCartAPI,loadingCart}) {
   const [summary, setSummary] = useState({});
   const [refreshCart, setRefreshCart] = useState(false);
   const navigate = useNavigate();
@@ -30,9 +30,13 @@ export function CartDetails({cartItems, handleGetCartAPI}) {
   };
 
   useEffect(() => {
-    handleGetCartAPI()
-     fetchSummary();
+    handleGetCartAPI();
+    fetchSummary();
   }, [refreshCart]);
+
+  useEffect(()=>{
+    fetchSummary();
+  },[])
 
 
 
@@ -41,7 +45,11 @@ export function CartDetails({cartItems, handleGetCartAPI}) {
     <main>
       <div className="container cart-payment-container">
         <div className="cart-details-card-container">
-          <CartCard cartItems={cartItems} setRefreshCart={setRefreshCart} />
+          <CartCard 
+          cartItems={cartItems} 
+          setRefreshCart={setRefreshCart}
+          loadingCart ={loadingCart}
+           />
         </div>
 
         <div className="payment-summary-container">
