@@ -1,6 +1,7 @@
 import "../Pages/Product/ProductCard";
 import "./Skeleton.css";
-import "./CartDetails.css"; // your real cart styles
+import "./CartDetails.css"; 
+import "../Pages/OrderPage.css"; 
 
 export function ProductCardSkeleton({productLoading}) {
   return (
@@ -27,9 +28,6 @@ export function ProductCardSkeleton({productLoading}) {
     </div>
   );
 }
-
-
-
 
 export function CCardSkeleton() {
   return (
@@ -85,6 +83,53 @@ export function CCardSkeleton() {
             ))}
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
+
+
+
+
+export function OrderCardSkeleton() {
+  return (
+    <div className="order-container is-skeleton">
+      <div className="upper-container">
+        <div className="d-flex order-total-content-container">
+          <p>
+            <span className="FWB skeleton skeleton-text"></span>
+            <span className="skeleton skeleton-text"></span>
+          </p>
+          <p>
+            <span className="FWB skeleton skeleton-text"></span>
+            <span className="FWB text-green skeleton skeleton-text"></span>
+          </p>
+        </div>
+
+        <div>
+          <span className="FWB skeleton skeleton-text"></span>
+          <span className="skeleton skeleton-text"></span>
+        </div>
+      </div>
+
+      <div className="bottom-container">
+        {Array(2).fill(0).map((_, i) => (
+          <div key={i} className="order-product-card">
+            <figure>
+              <div className="skeleton skeleton-image"></div>
+            </figure>
+
+            <div className="order-product-card-info">
+              <div>
+                <p className="FWB skeleton skeleton-text"></p>
+                <p className="FWB skeleton skeleton-text"></p>
+                <p className="FWB skeleton skeleton-text"></p>
+                <p className="FWB skeleton skeleton-text"></p>
+              </div>
+              <button className="skeleton skeleton-btn"></button>
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );

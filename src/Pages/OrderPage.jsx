@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import api from "../utils/api.js";
 import { SideBarHeader } from "../components/SideBarHeader";
 import { Footer } from "../components/Footer";
 import { formatMoney } from "../utils/money.js";
 import { ScrollingInfo } from "../components/ScrollingInfo.jsx";
+import { OrderCardSkeleton } from "../components/Skeleton.jsx";
 import dayjs from "dayjs";
 
 import "./OrderPage.css";
 
 export function OrderPage({cartLength, onResults}) {
   const [orders, setOrders] = useState([]);
+  const [ordersLoading, setOrdersLoading ] = useState(false)
 
   useEffect(() => {
+    setOrdersLoading(true);
     const handleGetOrders = async () => {
       try {
         const res = await api.get(
@@ -21,6 +23,8 @@ export function OrderPage({cartLength, onResults}) {
         setOrders(res.data);
       } catch (err) {
         console.log(err);
+      }finally{
+        setOrdersLoading(false);
       }
     };
 
@@ -38,7 +42,11 @@ export function OrderPage({cartLength, onResults}) {
    
          <br />
       <main>
-        {orders?.map((order) => {
+        {ordersLoading && Array(5).fill(0).map((_, i) => <OrderCardSkeleton key={i} />)}
+
+      {!ordersLoading && (!orders || orders.length === 0) && <h4>No orders yet</h4>}
+
+        {!ordersLoading && orders && orders.length > 0 &&orders?.map((order) => {
           return (
             <div className="order-container bg-white ">
               <div className="upper-container">
