@@ -19,9 +19,8 @@ export function OrderPage({ cartLength, onResults }) {
       try {
         const res = await api.get("/api/cart/my-orders");
         setOrders(res.data);
-        console.log(res.data);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       } finally {
         setOrdersLoading(false);
       }

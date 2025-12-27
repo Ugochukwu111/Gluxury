@@ -9,6 +9,7 @@ import {
 import { Trash2 } from "lucide-react";
 import dayjs from "dayjs";
 import axios from "axios";
+import api from "../../utils/api";
 
 export function OrdersCard({ order, setRefreshOrders }) {
   const [isDeleting, setIsDeleting] = useState(false);
@@ -24,10 +25,9 @@ export function OrdersCard({ order, setRefreshOrders }) {
   const handleDeleteOrders = async (orderId) => {
     setIsDeleting(true);
     try {
-      const res = await axios.delete(
-        `http://localhost:5000/api/cart/orders/delete/${orderId}`
+      const res = await api.delete(
+        `/api/cart/orders/delete/${orderId}`
       );
-      console.log(res);
       setdelMsg(res.data.message);
       setIsDeleted(true);
     } catch (err) {
@@ -44,8 +44,8 @@ export function OrdersCard({ order, setRefreshOrders }) {
   const handleDeliverOrders = async (orderId) => {
     setIsDelivering(true);
     try {
-      const res = await axios.patch(
-        `http://localhost:5000/api/cart/orders/${orderId}/deliver`
+      const res = await api.patch(
+        `/api/cart/orders/${orderId}/deliver`
       );
       setDeliveredMsg(res.data.message);
       setIsDelivered(true);

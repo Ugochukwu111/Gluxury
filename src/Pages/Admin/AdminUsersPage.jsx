@@ -7,6 +7,7 @@ import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 import { AdminLayout } from "../../components/Admin/AdminLayout"
 
 import './AdminUsersPage.css'
+import api from "../../utils/api";
 
 
 export function AdminUsersPage(){
@@ -23,10 +24,10 @@ export function AdminUsersPage(){
   const getUsers = async()=>{
     setIsLoading(true);
     try{
-      const res = await axios.get("http://localhost:5000/api/user/");
+      const res = await api.get("/api/user/");
       setUsers(res.data);
     }catch(err){
-      console.log(err);
+      console.error(err);
     }finally{
     setIsLoading(false);
     }
@@ -40,13 +41,12 @@ export function AdminUsersPage(){
      setIsDeleting(true);
      setIsSuccessful(false);
      try{
-        const res = await axios.delete(`http://localhost:5000/api/user/${id}`);
-        console.log(res.data.message);
+        const res = await api.delete(`/api/user/${id}`);
         setDeleteStatusMessage(res.data.message || "User deleted successfully.");
         setIsSuccessful(true);
         getUsers();
      }catch(err){
-      console.log(err);
+      console.error(err);
       setIsSuccessful(false);
       setDeleteStatusMessage(err.message ||"Failed to delete user.");
      }finally{

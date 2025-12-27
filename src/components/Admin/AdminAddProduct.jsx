@@ -7,7 +7,7 @@ import { X, Save, ArrowLeft, LoaderCircle } from "lucide-react";
 import "./AdminAddProduct.css";
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../utils/api";
 
 export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelete, adminAnalytics}) {
   const [openEdithProduct, setOpenEdithProduct] = useState(false);
@@ -52,8 +52,8 @@ const [adminResults, setAdminResults] = useState([]);
     setIsLoading(true);
     console.log("save hit");
     try {
-      let res = await axios.put(
-        `http://localhost:5000/api/products/${edithProduct._id}`,
+      let res = await api.put(
+        `/api/products/${edithProduct._id}`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
@@ -117,8 +117,8 @@ const [adminResults, setAdminResults] = useState([]);
 
     if (searchQuery) {
       // Optional: fetch results immediately
-      axios
-        .get(`http://localhost:5000/api/products/search?query=${searchQuery}`)
+      api
+        .get(`/api/products/search?query=${searchQuery}`)
         .then(res => setAdminResults(res.data))
         .catch(() => setAdminResults([]));
     } else {

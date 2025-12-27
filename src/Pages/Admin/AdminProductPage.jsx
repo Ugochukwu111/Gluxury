@@ -13,6 +13,7 @@ import { AdminLayout } from "../../components/Admin/AdminLayout";
 import { AdminAddProduct } from "../../components/Admin/AdminAddProduct";
 import { DeletePopUp } from "../../components/DeletePopUp";
 import "./AdminProductPage.css";
+import api from "../../utils/api";
 
 export function AdminProductPage({ allProducts, refreshProducts }) {
   const productMetrics = [
@@ -90,7 +91,7 @@ export function AdminProductPage({ allProducts, refreshProducts }) {
   useEffect(() => {
     const handleMetricsAPI = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/analytics");
+        const res = await api.get("/api/analytics");
         setAdminAnalytics(res.data);
         const enriched = (res.data.products || []).map((product, index) => ({
           ...product,
@@ -100,7 +101,7 @@ export function AdminProductPage({ allProducts, refreshProducts }) {
         }));
         setEnrichedProducts(enriched);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
     handleMetricsAPI();

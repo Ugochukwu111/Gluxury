@@ -20,7 +20,6 @@ import api from "../utils/api";
 
 export function ProfilePage() {
   const { user, loading, setUser } = useAuth();
-  console.log(user)
 
     const initialFormValues = {
     fullName:  "John Doe",

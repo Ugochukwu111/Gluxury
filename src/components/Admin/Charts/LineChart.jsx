@@ -11,6 +11,7 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import api from "../../../utils/api";
 
 export function LineCharts() {
     const[isLoadingAnalytics, setIsLoadingAnalytics] = useState(false);
@@ -20,7 +21,7 @@ export function LineCharts() {
     const getUserAnalytics = async ()=>{
       setIsLoadingAnalytics(true);
        try{
-        const res = await axios.get("http://localhost:5000/api/analytics/users-weekly");
+        const res = await api.get("/api/analytics/users-weekly");
         setUserDataAnalytics(res.data);
         setSuccessMessage( res.data || "User analytics fetched successfully");
        }catch(err){

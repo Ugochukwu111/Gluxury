@@ -44,7 +44,7 @@ export function CCard({ cartItem, setRefreshCart }) {
       });
       setRefreshCart((prev) => !prev);
     } catch (err) {
-      console.log("delete cart error ", err);
+      console.error("delete cart error ", err);
     }
   };
 

@@ -1,4 +1,4 @@
-import axios  from "axios";
+
 import { useEffect, useState } from "react";
 
 import {
@@ -11,6 +11,7 @@ import {
   Legend,
   Tooltip,
 } from "recharts";
+import api from "../../../utils/api";
 
 export function BarCharts() {
   const[isLoadingAnalytics, setIsLoadingAnalytics] = useState(false);
@@ -20,16 +21,14 @@ export function BarCharts() {
   const getProductAnalytics = async ()=>{
     setIsLoadingAnalytics(true);
      try{
-      const res = await axios.get("http://localhost:5000/api/analytics/product-chart-data");
-      console.log(res.data);
+      const res = await api.get("/api/analytics/product-chart-data");
       setProductDataAnalytics(res.data);
       setSuccessMessage( res.data || "Product analytics fetched successfully");
      }catch(err){
       setSuccessMessage(err.successMessage || "Failed to fetch product analytics");
-       console.log(err);
+       console.error(err);
      }finally{
       setIsLoadingAnalytics(false);
-      console.log("Product analytics fetched || not");
      }
   }
 

@@ -3,6 +3,7 @@ import { useState } from "react";
 import { X, TriangleAlert,LoaderCircle } from "lucide-react";
 import { BackgroundCover, GluxNotification } from "../utils/utilsFunctions";
 import "./DeletePopUp.css";
+import api from "../utils/api";
 
 export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refreshProducts}) {
 
@@ -13,7 +14,7 @@ export function DeletePopUp({ isDelPopUp, handleCloseDelete, deleteProduct ,refr
   const deleteProductApi = async (id) => {
     setDeleteLoading(true);
     try {
-      const res = await axios.delete(`http://localhost:5000/api/products/delete/${id}`);
+      const res = await api.delete(`/api/products/delete/${id}`);
       console.log(res.data.message);
        refreshProducts();
        setIsSuccessful(true);

@@ -6,6 +6,7 @@ import { OrdersCard } from "./OrdersCard";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "./AdminOrdersPage.css";
+import api from "../../utils/api";
 
 export function AdminOrdersPage() {
   const [orders, setOrders] = useState([]);
@@ -15,12 +16,11 @@ export function AdminOrdersPage() {
   const handleGetOrders = async () => {
 
       try{
-        const res = await axios.get('http://localhost:5000/api/cart/orders')
+        const res = await api.get('/api/cart/orders')
         if(!res){console.error('get orders admin error'); return}
         setOrders(res.data.orders);
-        console.log(res.data.orders)
       }catch(err){
-        console.log(err)
+        console.error(err)
       }
   }
 

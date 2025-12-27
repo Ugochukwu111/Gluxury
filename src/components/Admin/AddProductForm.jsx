@@ -4,6 +4,7 @@ import axios from "axios";
 import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
+import api from "../../utils/api";
 
 export function AddProductForm({refreshProducts}) {
   const [isFormActive, setIsFormActive] = useState(false);
@@ -81,8 +82,8 @@ export function AddProductForm({refreshProducts}) {
         if (key !== "image") formData.append(key, formValues[key]);
       });
 
-      const res = await axios.post(
-        "http://localhost:5000/api/products/upload",
+      const res = await api.post(
+        "/api/products/upload",
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },
