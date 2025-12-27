@@ -22,7 +22,7 @@ export function ProfilePage() {
   const { user, loading, setUser } = useAuth();
   console.log(user)
 
-  const initialFormValues = {
+    const initialFormValues = {
     fullName:  "John Doe",
     email:"johndoe@gmail.com",
     phoneNumber:  '',
@@ -33,6 +33,7 @@ export function ProfilePage() {
   const isEditMode = searchParams.get("edit") === "true";
   const [isSubmiting, setIsSubmiting] = useState(false);
   const [phoneNumberError, setPhoneNumberError] = useState("");
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -91,7 +92,6 @@ export function ProfilePage() {
       // Call API (replace with your endpoint)
       const res = await api.put("/api/user/update-profile", { payload });
       setSearchParams({});
-      console.log(res);
       setUser(res.data);
     } catch (error) {
       console.error("Error updating profile:", error);
@@ -287,30 +287,7 @@ export function ProfilePage() {
             </div>
           </div>
 
-          {/* pf stands for profile(you can see i use it in class naming) */}
-          {/* <div className="pf-cart-order-container f-wrap">
-            <div className="pf-items">
-              <ShoppingBag />
-              &nbsp;&nbsp;
-              <div>
-                <p>Cart Items</p>
-              </div>
-              <div className="circle">
-                <span>4</span>
-              </div>
-            </div>
-
-            <div className="pf-items">
-              <BaggageClaim />
-              &nbsp;&nbsp;
-              <div>
-                <p>Order Total</p>
-              </div>
-              <div className="circle">
-                <span>4</span>
-              </div>
-            </div>
-          </div> */}
+          {/* pf stands for profile(you can see i use it in class */}
 
           <div className="cart-order-link-container">
             <Link to="/cart">
