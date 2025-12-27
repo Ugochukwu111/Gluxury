@@ -18,7 +18,6 @@ export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelet
 const [adminResults, setAdminResults] = useState([]);
   const [query, setQuery] = useState("");
 
-console.log('adminResults', adminResults);
 
   const location = useLocation();
   const navigate = useNavigate();

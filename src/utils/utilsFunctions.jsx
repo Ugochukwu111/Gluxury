@@ -1,6 +1,8 @@
 
 import api from "./api";
 import { Star, StarHalf, StarOff, Activity } from "lucide-react";
+import dayjs from "dayjs";
+import { formatMoney } from "./money";
 
 export function renderStars(count) {
   const stars = [];
@@ -76,4 +78,35 @@ export const AddToCartAPI = async (productId, quantity = 1) => {
   } catch (err) {
     return err;
   }
+};
+
+export const GenerateWhatsAppMessage = (order) => {
+  const header = `GLUXURY Notification
+\nHello ${order.user.fullName},
+
+Your order has been received and an email has been sent with the details.
+
+Date Ordered: ${dayjs(order.placedAt).format("MMM D, YYYY")}
+Order Id: ${order.orderId}
+Order Total: ${formatMoney(order.total)}
+
+`;
+
+  const itemsText = order.items
+    .map(
+      (item, index) => `
+Item ${index + 1}:
+Product: ${item.name}
+Selected delivery date: ${dayjs(item.deliveryDate).format("MMM D, YYYY")}
+Delivery price : ${formatMoney(item.deliveryPrice)}
+Price: ${formatMoney(item.price)}
+Quantity: ${item.quantity}
+Total: ${formatMoney(item.total)}
+`
+    )
+    .join("\n");
+
+  const footer = `\nThank you for shopping with GLUXURY!`;
+
+  return header + itemsText + footer;
 };

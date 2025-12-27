@@ -86,7 +86,7 @@ export function OrderPage({ cartLength, onResults }) {
 
                         <div className="order-product-card-info">
                           <div>
-                            <p className="FWB">Name: {item.title}</p>
+                            <p className="FWB">Name: {item.name}</p>
                             <p className="FWB">
                               Delivery date:{" "}
                               {dayjs(item.deliveryDate).format("DD MMM YYYY")}
