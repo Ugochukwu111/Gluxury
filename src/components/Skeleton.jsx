@@ -88,9 +88,6 @@ export function CCardSkeleton() {
   );
 }
 
-
-
-
 export function OrderCardSkeleton() {
   return (
     <div className="order-container is-skeleton">

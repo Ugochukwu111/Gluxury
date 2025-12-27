@@ -144,24 +144,48 @@
 
 }
 
-.edith-pf-container{
+.edit-pf-container{
   background-color: var(--white);
   padding: 2em 1em;
   border-radius: .5rem;
   position: relative;
+  width: 100%;
+  max-width: 600px;
 }
 
-.edith-pf-container label{
+.edit-pf-container label{
   font-weight: 700;
   color: var(--text-muted);
   font-size: .8rem;
   margin-left: .5em;
 }
 
-.close-edith-pf-btn{
+.close-edit-pf-btn{
   position: absolute;
   top: 0;
   right: 0;
   padding: .5em;
   background-color: transparent;
+}
+
+.phone-wrapper{
+  display: flex;
+  align-items: center;
+  border-radius: 2rem ;
+}
+
+.phone-wrapper input{
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  padding-inline: .5em;
+}
+
+.phone-wrapper  span{
+  padding: 0 .7em;
+}
+
+.phone-number-error{
+  font-size: .8rem;
+  font-weight: 600;
+  text-align: end;
 }

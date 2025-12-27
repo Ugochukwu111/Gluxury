@@ -5,12 +5,16 @@ import "./CartDetails.css";
 import { formatMoney } from "../utils/money";
 import api from "../utils/api";
 
-export function CartDetails({cartItems, handleGetCartAPI,loadingCart}) {
+export function CartDetails({cartItems, handleGetCartAPI,loadingCart, handleUserPhoneNumber, isPhoneNumber}) {
   const [summary, setSummary] = useState({});
   const [refreshCart, setRefreshCart] = useState(false);
   const navigate = useNavigate();
 
   const placeOrder = async ()=>{
+    if(!isPhoneNumber){
+      handleUserPhoneNumber();
+      return;
+    }
     try{
      const res = await api.post(`/api/cart/place-order`,
      )
