@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 
 import "./OrderPage.css";
 
-export function OrderPage({ cartLength, onResults }) {
+export function OrderPage({ cartLength,  handleGetCartAPI }) {
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
 
@@ -27,11 +27,12 @@ export function OrderPage({ cartLength, onResults }) {
     };
 
     handleGetOrders();
+    handleGetCartAPI(); // this gets cart in orderspage,which updates cartlength and updates cartlength
   }, []);
 
   return (
     <div className="layout-container ">
-      <SideBarHeader cartLength={cartLength} onResults={onResults} />
+      <SideBarHeader cartLength={cartLength}  />
 
       <div className=" hidden hr">
         <ScrollingInfo className="hidden" />
@@ -54,7 +55,7 @@ export function OrderPage({ cartLength, onResults }) {
           orders.length > 0 &&
           orders?.map((order) => {
             return (
-              <div className="order-container bg-white ">
+              <div key={order.orderId} className="order-container bg-white ">
                 <div className="upper-container">
                   <div className="d-flex order-total-content-container">
                     <p>
@@ -78,7 +79,10 @@ export function OrderPage({ cartLength, onResults }) {
                 <div className="bottom-container">
                   {order.items.map((item) => {
                     return (
-                      <div className="order-product-card">
+                      <div
+                        key={crypto.randomUUID()}
+                        className="order-product-card"
+                      >
                         <figure>
                           <img src={item.image} alt={item.title} />
                         </figure>

@@ -20,10 +20,7 @@ export const verifyOtp = async (email, otp, type) => {
       otp,
       type,
     });
-    saveToLocalStorage("user", res.data);
-    let data = res.data;
-    saveToLocalStorage("user", data.user);
-    saveToLocalStorage("token", data.accessToken);
+    saveToLocalStorage("token", res.data.accessToken);
     return res.data.message;
   } catch (err) {
     const serverMessage =

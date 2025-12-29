@@ -12,6 +12,7 @@ import { saveToLocalStorage } from "../../utils/storage.js";
 import "./Auth.css";
 import GoogleIcon from "/images/google.png";
 import { motion } from "framer-motion";
+import { useAuth } from "../../context/useContext.jsx";
 
 export function SignInPage() {
   const initialValues = { email: "", password: "" };
@@ -23,9 +24,11 @@ export function SignInPage() {
   const [isSending, setIsSending] = useState(false);
   const [isSuccess, setIsSuccess] = useState(null);
   const navigate = useNavigate();
+   const { fetchUser , user} = useAuth();
   
   const handleChange = (e) => {
     const { name, value } = e.target;
+   
 
     setFormValues({ ...formValues, [name]: value });
   };
@@ -62,9 +65,8 @@ export function SignInPage() {
             formValues,
              { withCredentials: true }
           );
-          let data = res.data;
-          saveToLocalStorage("user", data.user);
-          saveToLocalStorage('token', data.accessToken);
+          saveToLocalStorage('token', res.data.accessToken);
+          fetchUser();
           setIsSuccess(true);
           setLoading(false);
     

@@ -12,6 +12,7 @@ import { useLocation } from "react-router-dom";
 import { containerStagger, itemFadeUp } from "../../utils/Animations.jsx";
 import { verifyOtp, sendOtp } from "../../utils/sendOtp.js";
 import { BackgroundCover } from "../../utils/utilsFunctions.jsx";
+import { useAuth } from "../../context/useContext.jsx";
 import "./ConfirmOtpPage.css";
 
 export function ConfirmOtpPage() {
@@ -22,6 +23,7 @@ export function ConfirmOtpPage() {
   const location = useLocation();
   const { email, type } = location.state || {};
   const navigate = useNavigate();
+   const {fetchUser, user} = useAuth();
 
 
   const handleSendRefreshOtp = async () => {
@@ -91,10 +93,12 @@ export function ConfirmOtpPage() {
         message === "OTP verified successfully" &&
         type === "Confirm Email"
       ) {
-        console.log('navigating to home')
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
+        fetchUser();
+        console.log(user)
+        console.log('otp confirm success')
+        // setTimeout(() => {
+        //   navigate("/");
+        // }, 1500);
       } else if (
         message === "OTP verified successfully" &&
         type === "Forgot Password"

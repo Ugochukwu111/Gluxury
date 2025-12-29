@@ -5,7 +5,6 @@ import { PackageSearch } from "lucide-react";
 
 export function ProductSearchPage({ handleGetCartAPI, cartLength}){
    const [results, onResults] = useState([]);
-  console.log(results)
   return(
     <div className="product-search-page-container">
       <SideBarHeader 
@@ -20,7 +19,8 @@ export function ProductSearchPage({ handleGetCartAPI, cartLength}){
          <h2 className="text-center">
           Search for products
          </h2>
-        </div>:
+        </div>
+        :
           <ProductCardsGrid allProducts={results} handleGetCartAPI={handleGetCartAPI} />
        }
          </div>

@@ -199,7 +199,7 @@ function App() {
           />
           <Route
             path="/order"
-            element={<OrderPage cartLength={cartLength} />}
+            element={<OrderPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI} />}
           />
         </Route>
 
