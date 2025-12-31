@@ -94,11 +94,10 @@ export function ConfirmOtpPage() {
         type === "Confirm Email"
       ) {
         fetchUser();
-        console.log(user)
         console.log('otp confirm success')
-        // setTimeout(() => {
-        //   navigate("/");
-        // }, 1500);
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } else if (
         message === "OTP verified successfully" &&
         type === "Forgot Password"

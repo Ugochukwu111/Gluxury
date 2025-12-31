@@ -1,5 +1,5 @@
 import { NavLink } from "react-router";
-import { ShoppingCart,ClipboardClock,UserRound,} from "lucide-react";
+import { ShoppingCart,ClipboardClock,UserRound,House} from "lucide-react";
 import { useAuth } from "../context/useContext";
 import "./SideBar.css";
 
@@ -47,6 +47,12 @@ export function SideBar({onToggleSideBar, ref}) {
         </div>
         <br />
         <ul>
+            <li>
+            <NavLink to="/">
+            <House />
+              Home
+            </NavLink>
+          </li>
           <li>
             <NavLink to="/cart">
             <ShoppingCart />

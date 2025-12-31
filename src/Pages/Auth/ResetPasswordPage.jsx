@@ -2,8 +2,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import axios from "axios";
 import  { BackgroundCover } from "../../utils/utilsFunctions.jsx"
+import { LoaderCircle } from "lucide-react"; 
 
 import "./ForgotPasswordPage.css";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function ResetPasswordPage() {
   const initialValues = { password: "", confirmPassword: "" };
@@ -46,9 +49,9 @@ export function ResetPasswordPage() {
       setIsSubmitting(true);
        const email = localStorage.getItem('fg-email');
       try {
-         const res = await axios.post('http://localhost:5000/api/user/reset-password',{...formValues, email} );
+        const res = await axios.post(`http://localhost:5000/api/user/reset-password`,{...formValues, email} );
         setIsSuccess(true);
-        setTimeout(() => navigate("/login"), 2000); // redirect to login after success
+        setTimeout(() => navigate("/login"), 2000); 
       } catch (err) {
         console.log(err);
         setIsSuccess(false);

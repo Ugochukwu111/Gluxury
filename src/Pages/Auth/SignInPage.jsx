@@ -14,6 +14,8 @@ import GoogleIcon from "/images/google.png";
 import { motion } from "framer-motion";
 import { useAuth } from "../../context/useContext.jsx";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export function SignInPage() {
   const initialValues = { email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
@@ -61,7 +63,7 @@ export function SignInPage() {
         setLoading(true);
         try {
           let res = await axios.post(
-            "http://localhost:5000/api/user/login",
+            `${API_BASE_URL}/api/user/login`,
             formValues,
              { withCredentials: true }
           );
@@ -119,13 +121,13 @@ export function SignInPage() {
       >
         <div>
           <motion.h1 className="logo" variants={itemFadeUp}>
-            Gluxury | Sign In
+            Gluxury | Log In
           </motion.h1>
           <motion.p
             variants={itemFadeUp}
             className="FWB text-heading text-center"
           >
-            <strong>Welcome Back Woman!</strong>
+            <strong>Welcome back. Your next statement piece is waiting.</strong>
           </motion.p>
           <br />
 

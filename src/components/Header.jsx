@@ -10,7 +10,7 @@ export function Header({onToggleSideBar, cartLength,  onResults}){
   
   return(
      <header className="d-flex flex-column">
-      <NavLink to= "/home">
+      <NavLink to= "/">
         <h1 className='logo'>G Luxury</h1>
       </NavLink>
       <div className='d-flex justify-s-between align-center lower-container f-wrap container'>

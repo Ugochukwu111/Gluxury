@@ -1,9 +1,11 @@
 import { ArrowLeft, Send, LoaderCircle } from "lucide-react";
-import { Link , useNavigate, useLocation} from "react-router-dom";
+import { useNavigate, useLocation} from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { BackgroundCover } from "../../utils/utilsFunctions";
 import "./ForgotPasswordPage.css";
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 export function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
@@ -32,7 +34,7 @@ export function ForgotPasswordPage() {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/user/forgot-password", // change this to your endpoint
+        `http://localhost:5000/api/user/forgot-password`, 
         { email }
       );
 
@@ -58,11 +60,13 @@ export function ForgotPasswordPage() {
         <LoaderCircle size={52} strokeWidth={2.75} className="spin text-white" />
       </BackgroundCover>
 
-      <Link to="/sign-in">
-        <button className="back-button">
+        <button 
+         onClick={()=>{
+          navigate(-1)
+         }}
+         className="back-button">
           <ArrowLeft />
         </button>
-      </Link>
 
       <h1>Forgot Password</h1>
 

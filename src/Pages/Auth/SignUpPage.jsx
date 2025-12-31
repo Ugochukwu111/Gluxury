@@ -11,6 +11,8 @@ import { BackgroundCover } from '../../utils/utilsFunctions.jsx'
 import GoogleIcon from "/images/google.png";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export function SignUpPage() {
   const intialValues = { fullName: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(intialValues);
@@ -55,7 +57,7 @@ export function SignUpPage() {
         setIsSending(true);
         try {
           let res = await axios.post(
-            "http://localhost:5000/api/user/signup",
+            `${API_BASE_URL}/api/user/signup`,
             formValues, 
             { withCredentials: true }
           );
@@ -125,7 +127,7 @@ export function SignUpPage() {
       >
         <div>
           <motion.h1 variants={itemFadeUp} className="logo">
-            Gluxury | Sign Up
+            Gluxury | Create Your Profile
           </motion.h1>
 
           <motion.p
@@ -133,7 +135,7 @@ export function SignUpPage() {
             className="FWB text-heading text-center"
           >
             <strong>
-              Made for women who value care, quality, and confidence.
+              Curated for the woman who values exceptional craftsmanship, timeless quality, and the power of confidence.
             </strong>
           </motion.p>
 
@@ -221,7 +223,7 @@ export function SignUpPage() {
             variants={itemFadeUp}
             className="text-center FWB text-heading"
           >
-            Already Have an account ?<NavLink to="/login">Sign in</NavLink>
+            Already Have an account ?<NavLink to="/login">Log in</NavLink>
           </motion.p>
         </div>
 

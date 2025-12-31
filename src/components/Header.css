@@ -53,8 +53,7 @@ header ul li a.active svg{
 
  .searchProduct-container{
   max-width: 600px;
-   margin-inline: .5em;
-   position: relative;
+  position: relative;
 }
 
 #searchProduct{
@@ -80,7 +79,7 @@ header ul li a.active svg{
   left: 1.5em;
 }
 #sidebar-btn{
-  padding: .5em;
+  padding: .25em;
   background-color: transparent;
 }
 
@@ -96,7 +95,7 @@ header ul li a.active svg{
     display: none;
   }
    .nav-container a{
-    padding: .8em;
+    padding: .5em;
    }
    .nav-container a svg{
     margin-right: 0;
