@@ -4,6 +4,10 @@
   background-color: var(--white);
 }
 
+.admin-profile-btn{
+  font-size: .7rem;
+}
+
 svg{
   flex-shrink: 0; 
 }

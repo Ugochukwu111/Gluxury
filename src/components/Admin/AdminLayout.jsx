@@ -115,7 +115,7 @@ export function AdminLayout({children}) {
             </span>
           </p>
 
-          <button>
+          <button className="admin-profile-btn d-flex align-center">
             <figure>
                 <img src={adminProfilePic} alt="admin profile pic"/>
             </figure>

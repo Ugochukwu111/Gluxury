@@ -187,8 +187,8 @@ export function AddProductForm({refreshProducts}) {
                 className="M-auto"
                 value={formValues.name}
                 onChange={(e) => updateField("name", e.target.value)}
-                minLength={10}
-                maxLength={25}
+                minLength={5}
+                maxLength={125}
                 required
               />
             </div>
@@ -201,8 +201,8 @@ export function AddProductForm({refreshProducts}) {
                 id="product-description"
                 value={formValues.description}
                 onChange={(e) => updateField("description", e.target.value)}
-                minLength={30}
-                maxLength={50}
+                minLength={5}
+                maxLength={250}
                 required
               />
             </div>
