@@ -26,8 +26,10 @@ export function ProductDetailsPage() {
   const [notifKey, setNotifKey] = useState(0);
   const [addedToCart, setAddedToCart] = useState(false);
 
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/products/${id}`).then((res) => {
+    axios.get(`${API_BASE_URL}/api/products/${id}`).then((res) => {
     setProduct(res.data);
     });
   }, [id]);

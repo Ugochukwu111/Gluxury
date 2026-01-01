@@ -35,11 +35,12 @@ function App() {
   const [cartItems, setCartItems] = useState([]);
   const [cartLength, setCartLength] = useState(0);
   const [loadingCart, setLoadingCart] = useState(false)
+  const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   let getAllProductData = async () => {
     setProductLoading(true);
     try {
-      const res = await axios.get("http://localhost:5000/api/products");
+      const res = await axios.get(`${API_BASE_URL}/api/products`);
       setAllProducts(res.data.products);
     } catch (err) {
       console.log(err || "nextwork try again later");

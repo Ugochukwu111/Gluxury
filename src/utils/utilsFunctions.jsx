@@ -55,11 +55,6 @@ export function GetGreeting() {
 }
 
 export const AddToCartAPI = async (productId, quantity = 1) => {
-  const accessToken = localStorage.getItem("token");
-  if (!accessToken) {
-    console.error("user not loggen in");
-    return;
-  }
   try {
     let res = await api.post(
       "/api/cart/add",
@@ -67,12 +62,6 @@ export const AddToCartAPI = async (productId, quantity = 1) => {
         productId,
         quantity,
       },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-        withCredentials: true,
-      }
     );
     return res?.data.message;
   } catch (err) {

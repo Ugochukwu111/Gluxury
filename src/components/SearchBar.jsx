@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import "./SearchBar.css";
 
@@ -14,6 +15,7 @@ export function SearchBar({ placeholder = "Search", onResults }) {
   const navigate = useNavigate();
   const location = useLocation();
   const inputRef = useRef(null);
+
 
   // Get user role once
   const userRole = localStorage.getItem("user");
@@ -72,7 +74,7 @@ export function SearchBar({ placeholder = "Search", onResults }) {
       try {
         setLoading(true);
         const res = await axios.get(
-          `http://localhost:5000/api/products/search?query=${queryFromURL}`
+          `${API_BASE_URL}/api/products/search?query=${queryFromURL}`
         );
         onResults(res.data);
       } catch (err) {

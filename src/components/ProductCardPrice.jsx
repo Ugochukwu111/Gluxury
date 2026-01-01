@@ -3,6 +3,7 @@ import { ProductCard } from "../Pages/Product/ProductCard";
 import axios from "axios";
 import { formatMoney } from "../utils/money";
 import { ProductCardSkeleton } from "./Skeleton";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 import './ProductCardPrice.css'
 
@@ -15,7 +16,7 @@ export function ProductCardPrice({handleGetCartAPI}) {
 
   const handleGetPriceRange = async () =>{
    try{
-      const res = await axios.get("http://localhost:5000/api/products/price-range", );
+      const res = await axios.get(`${API_BASE_URL}/api/products/price-range`, );
       setPriceRange(res.data);
    }catch(err){
     console.error(err);
@@ -26,7 +27,7 @@ export function ProductCardPrice({handleGetCartAPI}) {
 const handleGetProductPriceRange = async(priceRangeValue = 10000) =>{
   setLoading(true);
      try{
-      const res = await axios.get(`http://localhost:5000/api/products?maxPrice=${priceRangeValue}`, );
+      const res = await axios.get(`${API_BASE_URL}/api/products?maxPrice=${priceRangeValue}`, );
       setProductPriceRange(res.data.products);
    }catch(err){
     console.error(err);

@@ -13,6 +13,7 @@ export function ForgotPasswordPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState("");
   const navigate = useNavigate();
+
   
 
   const validateEmail = (email) => {
@@ -34,7 +35,7 @@ export function ForgotPasswordPage() {
 
     try {
       const res = await axios.post(
-        `http://localhost:5000/api/user/forgot-password`, 
+        `${API_BASE_URL}/api/user/forgot-password`, 
         { email }
       );
 
