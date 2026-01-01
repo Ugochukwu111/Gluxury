@@ -135,8 +135,6 @@ export function AddProductForm({refreshProducts}) {
           </button>
         </div>
 
-        <br />
-
         <form
           ref={formRef}
           onSubmit={handleSubmit}

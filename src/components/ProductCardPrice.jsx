@@ -93,7 +93,6 @@ useEffect(()=>{
         })
         }
        </div>
-       <br />
     </div>
   );
 }

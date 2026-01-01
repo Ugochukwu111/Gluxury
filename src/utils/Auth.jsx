@@ -18,7 +18,7 @@ export function AdminRoute() {
   if (loading) return <div>Loading...</div>;
 
 
-  if (!user || user.role !== 'admin') return <Navigate to="/login" replace />; // block non-admins
+    if (!user || user?.role.trim().toLowerCase() !== 'admin'){ console.log(`Access Denied!\nUser: ${user.email}\nRole in State: "${user.role}";`);return}; // block non-admins
 
   return <Outlet />;
 }

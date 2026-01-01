@@ -15,7 +15,13 @@
 }
 
 .relative-time{
-  font-size: .8rem;
+  font-size: .7rem;
   font-weight: 600;
   color: var(--text-subtle);
+}
+
+.product-price-container{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
 }

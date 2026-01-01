@@ -21,7 +21,6 @@ export function ProductPage({
         <ScrollingInfo />
       </div>
       <br />
-      <br />
       <ProductCardPrice 
         handleGetCartAPI={handleGetCartAPI}
          />

@@ -153,16 +153,16 @@ const [adminResults, setAdminResults] = useState([]);
 
       <AddProductForm refreshProducts={refreshProducts} />
       <div>
-        <h3 className="text-center">Product Collections:</h3>
-        <br />
         <div className="admin-product-section">
+           <h3 className="text-center">Product Collections:</h3>
+           <br />
           <SearchBar
             placeholder="Search in admin..."
             onResults={setAdminResults}
             query={query}
             setQuery={setQuery}
            />
-          <FilterProducts />
+           <br />
           <AdminProductGrid
             handleOpenEdit={handleOpenEdit}
             allProducts={adminResults.length > 0 ? adminResults : allProducts}
@@ -242,7 +242,7 @@ const [adminResults, setAdminResults] = useState([]);
                     />
                   </div>
 
-                  <div className="grid-input-container">
+                  <div className="grid-input-container ">
                     <div>
                       <label htmlFor="edith-price">Price</label>
                       <input
@@ -337,7 +337,7 @@ const [adminResults, setAdminResults] = useState([]);
                     </div>
 
                     <div
-                      className={`${
+                      className={` ${
                         edithProduct.category == "shoe" ? "" : "d-none"
                       }`}
                     >
@@ -363,7 +363,7 @@ const [adminResults, setAdminResults] = useState([]);
                   </div>
                 </div>
 
-                <div className="d-flex justify-s-between align-center f-wrap">
+                <div className="d-flex justify-s-between align-center f-wrap  edith-form-btns-container">
                   <button
                     className="bg-red text-white"
                     type="button"

@@ -32,6 +32,8 @@ export function ProductCard({ product, handleGetCartAPI }) {
 
   const daysAgo = dayjs().diff(dayjs(product.createdAt), "day");
   const isNew = daysAgo <= 14;
+
+
   return (
     <div
       className={`product-card ${
@@ -64,13 +66,15 @@ export function ProductCard({ product, handleGetCartAPI }) {
       <div className="product-info">
         <div onClick={handleClick} tabIndex={0}>
           <p className="product-name">{product.name}</p>
-          <span className="product-stars">{renderStars(product.rating)}</span>
-          <p className="product-short-description">{product.description}</p>
+          <span className="product-stars d-flex align-center">{renderStars(product.rating)} &nbsp; (<span>{product.rating }</span>) </span>
+          <p className="product-description">
+            {product.description}</p>
         </div>
 
-        <div className="d-flex justify-s-between align-center product-price-container">
-          <p className="product-discount-price">
-            <span className="product-price"> {formatMoney(product.price)}</span>{" "}
+        <div className="d-flex justify-s-between align-center ">
+          <p className="product-discount-price product-price-container">
+            <span className="product-price"> {formatMoney(product.price)}
+            </span>
             &nbsp;
             <span>
               <del>{formatMoney(product.offPrice)}</del>

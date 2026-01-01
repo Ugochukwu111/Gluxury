@@ -46,7 +46,7 @@ export function AdminProductCard({
       </figure>
       <div className="product-info">
         <p className="product-name">{product.name}</p>
-        <p className="product-short-description">{product.description}</p>
+        <p className="product-description">{product.description}</p>
         <span className="product-stars d-flex justify-s-between">
           <span className="relative-time">
             {dayjs(product.createdAt).fromNow()}
@@ -54,15 +54,15 @@ export function AdminProductCard({
           <span> {renderStars(product.rating)}</span>
         </span>
         <div className="d-flex justify-s-between">
-          <p className="d-flex flex-column">
-            <span className="">Price</span>
+          <p className="d-flex flex-column product-price-container">
             <span className="text-green FWB product-price f-wrap">
               {formatMoney(product.price)}
+              </span>
               <span className="text-muted product-discount-price">
                 &nbsp;
                 <del>{formatMoney(product.offPrice)}</del>
               </span>
-            </span>
+            
           </p>
 
           <p className="d-flex flex-column align-center">

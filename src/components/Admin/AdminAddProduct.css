@@ -2,7 +2,7 @@
   background-color: var(--white);
   position: fixed;
   height: 100%;
-  padding: 1em 2em;
+  padding: 1em .5em;
   right: 0;
   box-shadow: -2px -2px 4px var(--text-muted);
   display: flex;
@@ -39,6 +39,8 @@
   position: relative;
 }
 
+
+
 .edith-product-image-container .edith-product-photo-btn{
    position: absolute;
    bottom: .25rem;
@@ -58,7 +60,7 @@
 
 .admin-product-section{
   background-color: var(--white);
-  padding: 2em .5em;
+  padding: 2em .2em;
   border-radius: .5rem;
   box-shadow: 2px 2px 4px var(--text-muted);
 }
