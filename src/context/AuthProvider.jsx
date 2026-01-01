@@ -8,9 +8,7 @@ export function AuthProvider({children}){
 
      const fetchUser = async () => {
     try {
-      const res = await api.get("/api/user/me", {
-        withCredentials: true,
-      });
+      const res = await api.get("/api/user/me", );
       setUser(res.data.user);
     } catch (err) {
       setUser(null);
@@ -24,11 +22,17 @@ export function AuthProvider({children}){
     fetchUser();
   }, []);
 
-    const logOut = () => {
+const logOut = async () => {
+  try {
+    await api.post("/api/user/logout"); 
+  } catch (error) {
+    console.error("Backend logout failed:", error);
+  } finally {
     localStorage.removeItem("token");
     setUser(null);
-    window.location.href = "/login"; // optional: redirect
-  };
+    window.location.href = "/login";
+  }
+};
 
 
    return(
