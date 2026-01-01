@@ -5,7 +5,8 @@ import {
   UserRound,
   PackageSearch,
   Crown,
-  ChevronDown
+  ChevronDown,
+  House
  } from "lucide-react"
  import dayjs from "dayjs";
  import { GetGreeting } from "../../utils/utilsFunctions";
@@ -16,8 +17,12 @@ import {
  import adminProfilePic from '../../assets/images/Admin/admin-profile-photo.png'
 
 import "./AdminLayout.css";
+import { useAuth } from "../../context/useContext"; 
 
 export function AdminLayout({children}) {
+  const { user } = useAuth();
+
+
   return (
     <div className="admin-layout-container">
       <div className="admin-sidebar">
@@ -29,6 +34,17 @@ export function AdminLayout({children}) {
           </h1>
 
           <ul>
+              <li>
+              <NavLink 
+              to="/"
+               className={({ isActive }) => isActive ? "active" : ""}
+              >
+                <House />
+                <span>
+                  Home
+                </span>
+              </NavLink>
+            </li>
             <li>
               <NavLink 
               to="/admin/dashboard"
@@ -78,7 +94,7 @@ export function AdminLayout({children}) {
           </figure>
           <p>
             <span className="FWB">
-                   Gift Ugo
+               {user?.fullName.split(" ")[0] || "Admin User"}
             </span>
        
             <span className="text-muted">
@@ -105,7 +121,7 @@ export function AdminLayout({children}) {
             </figure>
             <p>
               <span>
-                gift ugo
+                {user?.fullName.split(" ")[0] || "Admin User"}
               </span>
               <span className="text-muted d-block">
                 Admin

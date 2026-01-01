@@ -11,10 +11,11 @@ export function ProductSearchPage({ handleGetCartAPI, cartLength}){
         onResults = {onResults}
         cartLength ={cartLength}
         />
-        <div className="bd d-flex flex-column align-center justify-center search-result-container">
+        <div className="d-flex flex-1 flex-column  justify-center">
        {
         results.length === 0 ?
-        <div className="d-flex flex-column align-center justify-center">
+        <div className="d-flex flex-1 flex-column align-center justify-center">
+
          <PackageSearch size={100} />
          <h2 className="text-center">
           Search for products
