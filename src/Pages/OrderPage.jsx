@@ -30,6 +30,10 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
     handleGetCartAPI(); // this gets cart in orderspage,which updates cartlength and updates cartlength
   }, []);
 
+    useEffect(() => {
+    document.title = "My Orders | Gluxury";
+  }, []);
+
   return (
     <div className="layout-container ">
       <SideBarHeader cartLength={cartLength}  />

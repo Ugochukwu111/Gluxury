@@ -1,9 +1,9 @@
-import { Header } from '../components/Header'
+
 import { Footer } from '../components/Footer'
 import { CartDetails } from '../components/CartDetails'
 import { SideBarHeader } from '../components/SideBarHeader';
 import { useAuth } from '../context/useContext';
-import { useState } from 'react';
+import { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { BackgroundCover } from '../utils/utilsFunctions';
 
@@ -27,6 +27,11 @@ your phone number to proceed , which will take them to profile page with edith p
       setIsPhoneNumber(true);
     }
   }
+
+
+  useEffect(() => {
+    document.title = "My Cart | Gluxury";
+  }, []);
 
 
 

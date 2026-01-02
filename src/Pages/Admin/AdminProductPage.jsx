@@ -107,6 +107,10 @@ export function AdminProductPage({ allProducts, refreshProducts }) {
     handleMetricsAPI();
   }, [allProducts]);
 
+  useEffect(() => {
+    document.title = "Product Management | Admin | Gluxury";
+  }, []);
+
   return (
     <AdminLayout>
       <DeletePopUp

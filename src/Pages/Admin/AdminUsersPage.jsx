@@ -34,6 +34,7 @@ export function AdminUsersPage(){
   }
 
   useEffect(()=>{
+    document.title = "User Management | Admin | Gluxury";
     getUsers();
   }, []);
 

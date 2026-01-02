@@ -143,9 +143,11 @@ export function OrdersCard({ order, setRefreshOrders }) {
           </p>
           <br />
           <div className=" d-flex f-wrap">
-            {order?.items.map((item) => {
+            {order?.items.map((item, index) => {
               return (
-                <div key={item.productId} className="d-flex order-card-item">
+                <div 
+                key={`${order._id}-item-${index}`}
+                className="d-flex order-card-item">
                   <figure>
                     <img src={item.image} alt={item.name} />
                   </figure>

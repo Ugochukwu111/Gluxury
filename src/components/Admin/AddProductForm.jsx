@@ -151,6 +151,7 @@ export function AddProductForm({refreshProducts}) {
             <label htmlFor="image-input">Product Image:</label>
             <input
               type="file"
+              accept="image/*"
               id="image-input"
               onChange={(e) => updateField("image", e.target.files[0])}
               required

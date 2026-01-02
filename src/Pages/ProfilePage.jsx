@@ -99,6 +99,10 @@ export function ProfilePage() {
     }
   };
 
+    useEffect(() => {
+    document.title = "My Profile | Gluxury";
+  }, []);
+
   return (
     <>
       {isEditMode ? (

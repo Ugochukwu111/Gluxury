@@ -5,6 +5,7 @@ import { ProductCardsGrid } from "./ProductCardsGrid";
 import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { ProductCardPrice } from "../../components/ProductCardPrice";
+import { useEffect } from "react";
 
 export function ProductPage({
   allProducts,
@@ -13,6 +14,8 @@ export function ProductPage({
   onResults,
   productLoading,
 }) {
+
+
   return (
     <div className="d-flex flex-column ">
       <SideBarHeader cartLength={cartLength} onResults={onResults} />

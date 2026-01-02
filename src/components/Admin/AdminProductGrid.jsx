@@ -2,11 +2,12 @@ import {ShoppingCart} from 'lucide-react'
 import { AdminProductCard } from "./AdminProductCard"
 
 import '../../Pages/Product/ProductCardsGrid'
+import { all } from 'axios'
 
 
 export function AdminProductGrid({allProducts, setOpenEdithProduct,  handleOpenEdit, setIsDelPopUp,handleOpenDelete}){
   return(
-    
+    console.log(allProducts),
     <div className='container  products-container'>
 
         {allProducts.length === 0 && (
