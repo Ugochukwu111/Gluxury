@@ -1,0 +1,15 @@
+.product-container{
+  border-radius: .5rem;
+  box-shadow: 1px 1px 2px var(--text-muted);
+  margin: 1em auto;
+  min-height: 350px;
+  background-color: var(--white);
+}
+
+h2{
+  padding-top: .5em ;
+  padding-bottom: .25em;
+  padding-left: 1em;
+  border-top-left-radius: .4rem;
+  border-top-right-radius: .4rem;
+}

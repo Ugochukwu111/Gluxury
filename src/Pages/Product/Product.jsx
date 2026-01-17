@@ -6,6 +6,8 @@ import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { ProductCardPrice } from "../../components/ProductCardPrice";
 import { useEffect } from "react";
+  
+import { ProductContainer } from '../../components/ProductContainer';
 
 export function ProductPage({
   allProducts,
@@ -19,11 +21,12 @@ export function ProductPage({
   return (
     <div className="d-flex flex-column ">
       <SideBarHeader cartLength={cartLength} onResults={onResults} />
-      <Announcement />
-      <div className="hidden">
+      {/* <div className="hidden">
         <ScrollingInfo />
-      </div>
+      </div> */}
       <br />
+      <ProductContainer/>
+      <ProductContainer headerColor = 'bg-red '/>
       <ProductCardPrice 
         handleGetCartAPI={handleGetCartAPI}
          />
