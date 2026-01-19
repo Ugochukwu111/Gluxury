@@ -7,8 +7,9 @@ export function ProductCardsGrid({ allProducts , handleGetCartAPI, productLoadin
   return (
     
     <main>
-      <h3>All Products</h3>
-      <br />
+      
+      <div className="products-container-wrapper">
+        <h3 className="bg-heading text-white">All Products</h3>
       <div className="container  products-container">
         {
           productLoading
@@ -23,6 +24,7 @@ export function ProductCardsGrid({ allProducts , handleGetCartAPI, productLoadin
             handleGetCartAPI = {handleGetCartAPI}
           />
         ))}
+      </div>
       </div>
     </main>
   );

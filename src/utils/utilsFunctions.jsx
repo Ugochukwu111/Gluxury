@@ -1,8 +1,10 @@
-
+const BASE_URL = import.meta.env.VITE_API_BASE_URL
 import api from "./api";
 import { Star, StarHalf, StarOff, Activity } from "lucide-react";
 import dayjs from "dayjs";
 import { formatMoney } from "./money";
+
+console.log(BASE_URL)
 
 export function renderStars(count) {
   const stars = [];
@@ -99,3 +101,24 @@ Total: ${formatMoney(item.total)}
 
   return header + itemsText + footer;
 };
+
+export async function FilterProducts(endpoint, limit = null) {
+  if (!endpoint) {
+    throw new Error("filterProducts: endpoint is required");
+  }
+
+  let url = `${BASE_URL}/api/products/${endpoint}`;
+  console.log(url)
+
+  if (limit !== null && limit !== undefined) {
+    url += `?limit=${limit}`;
+  }
+
+  try {
+    const response = await api.get(url);
+    return  response.data.products
+  } catch (error) {
+    console.error("filterProducts error:", error);
+    return [];
+  }
+}

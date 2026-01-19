@@ -20,7 +20,7 @@ export function SideBarHeader({cartLength, onResults}){
   return(   
     <div 
      className="header-side-bar-container">
-      <Header onToggleSideBar = {toggleSideBar} 
+      <Header toggleSideBar = {toggleSideBar} 
       cartLength = {cartLength} 
        onResults = {onResults} />
       <SideBar   

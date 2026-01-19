@@ -46,25 +46,7 @@
   align-self: stretch;
   position: relative;
 }
-.off-percent{
-  position: absolute;
-  color: var(--white);
-  top: .2em;
-  right: .8em;
-  border-radius: 50%;
-  width: clamp(50px , 20vw, 70px);
-  aspect-ratio: 1;
-  display: grid;
-  font-weight: 700;
-  place-items: center;
-    background: radial-gradient(
-    circle,
-    rgba(73, 220, 73, 1) 0%,     /* bright green center */
-    rgba(73, 220, 73, 0.6) 40%,  /* soft mid glow */
-    rgba(73, 220, 73, 0.1) 80%,  /* almost transparent edge */
-    transparent 100%              /* fades out completely */
-  );
-}
+
 .select-quantity{
   padding: .8em 1.2em;
   border: 3px solid var(--text-heading);

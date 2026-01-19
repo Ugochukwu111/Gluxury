@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import {
   Menu,
   UserRound,
@@ -7,13 +7,29 @@ import {
   ChevronDown,
   Package,
   Heart,
+   // Place an Order
+  XCircle,        // Cancel an Order
+  RotateCcw,      // Returns & Refunds
+  CreditCard
 } from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
+import { useAuth } from "../context/useContext";
 
 import "./Header.css";
 import { useState } from "react";
 
-export function Header({ onToggleSideBar, cartLength, onResults }) {
+export function Header({  cartLength, onResults,toggleSideBar }) {
+  const navigate = useNavigate()
+  const { user, logOut } = useAuth();
+
+  const handleLogOutOrLogIn = async() =>{
+      if (user) {
+    await logOut();
+  } else {
+    navigate('/log-in');
+  }
+  }
 
   return (
     <header className="d-flex flex-column">
@@ -22,7 +38,9 @@ export function Header({ onToggleSideBar, cartLength, onResults }) {
       <nav className="container">
         <div>
         <div className="d-flex align-center">
-          <button className="menu-btn">
+          <button
+           onClick={toggleSideBar} 
+           className="menu-btn">
             <Menu />
           </button>
           <h1>GLUXURY</h1>
@@ -40,8 +58,10 @@ export function Header({ onToggleSideBar, cartLength, onResults }) {
             </span>
             <ul className={`dropdown-box  "show" : ""}`}>
               <li>
-                <button className="bg-heading text-white">
-                  Sign In
+                <button
+                  onClick={handleLogOutOrLogIn} 
+                  className="bg-heading text-white">
+                  {user?'Log out': 'Sign In'}
                 </button>
               </li>
               <hr />
@@ -69,10 +89,22 @@ export function Header({ onToggleSideBar, cartLength, onResults }) {
             </span>
             <ul className="dropdown-box">
               <li>
-                <a href="">my Profile</a>
+                <a href=""><ShoppingCart/>Place an Order</a>
               </li>
               <li>
-                <a href="">my Account</a>
+                <a href=""> <XCircle/> Cancel an Order</a>
+              </li>
+               <li>
+                <a href=""> <RotateCcw/> Returns and Refunds</a>
+               </li>
+                <li>
+                <a href=""> <CreditCard/> Make Payments</a>
+               </li>
+               <li>
+                <button className="bg-whatsapp ">
+                   <FaWhatsapp size={20} />
+                  Whats app
+                </button>
               </li>
             </ul>
           </li>
