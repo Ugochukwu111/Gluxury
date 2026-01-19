@@ -67,7 +67,7 @@ export const AddToCartAPI = async (productId, quantity = 1) => {
     );
     return res?.data.message;
   } catch (err) {
-    return err;
+    return err.response?.data?.message || "Something went wrong";
   }
 };
 

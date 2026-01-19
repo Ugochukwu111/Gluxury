@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { toast } from "react-toastify";
 import { useState } from "react";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { renderStars } from "../../utils/utilsFunctions.jsx";
@@ -24,8 +25,10 @@ export function ProductCard({ product, handleGetCartAPI }) {
       // handleGetCartAPI() was define in app
       handleGetCartAPI(); // this lets me update cartlength and diplay at the header
       setIsAddedToCart("true");
+      toast.success("Added to cart");
     } catch (err) {
       console.log(err);
+      toast.error("Failed to add to cart");
       setIsAddedToCart("false");
     }
   };
