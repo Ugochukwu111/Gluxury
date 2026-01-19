@@ -19,6 +19,10 @@ main{
   border-radius: .5rem;
 }
 
+.products-container-wrapper{
+  border: 5px solid red;
+}
+
 .empty-cart-container{
   display: grid;
   place-items: center;

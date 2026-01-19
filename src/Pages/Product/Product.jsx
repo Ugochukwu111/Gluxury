@@ -15,7 +15,6 @@ export function ProductPage({
   cartLength,
   handleGetCartAPI,
   productLoading,
-  setSearchResult
 }) {
   const [shoes, setShoes] = useState([]);
   const [bags, setBags] = useState([]);
@@ -41,7 +40,7 @@ useEffect(() => {
 
   return (
     <div className="d-flex flex-column padding-top ">
-      <SideBarHeader setSearchResult={setSearchResult} cartLength={cartLength} />
+      <SideBarHeader cartLength={cartLength} />
       {/* <div className="hidden">
         <ScrollingInfo />
       </div> */}

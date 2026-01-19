@@ -7,7 +7,7 @@ import { useNavigate } from "react-router";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 
-export function SearchBar({ placeholder, setSearchResult }) {
+export function SearchBar({ placeholder }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
@@ -58,17 +58,14 @@ export function SearchBar({ placeholder, setSearchResult }) {
     if (!searchQuery.trim()) return;
     // update URL
     navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
-    try {
-      const { data } = await axios.get(`${API_BASE_URL}/api/products/search`, { params: { q: searchQuery } });
-      setSearchResult?.(data);
-      setSearchResult(data);
-      console.log(data)
-      setIsFocused(false);
-      setSuggestions([]);
-      setQuery(searchQuery);
-    } catch (err) {
-      console.error(err);
-    }
+    // try {
+    //   const { data } = await axios.get(`${API_BASE_URL}/api/products/search`, { params: { q: searchQuery } });
+    //   setIsFocused(false);
+    //   setSuggestions([]);
+    //   setQuery(searchQuery);
+    // } catch (err) {
+    //   console.error(err);
+    // }
   };
 
   return (

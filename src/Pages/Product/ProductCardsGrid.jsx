@@ -6,7 +6,7 @@ import "./ProductCards.css";
 export function ProductCardsGrid({ allProducts , handleGetCartAPI, productLoading}) {
   return (
     
-    <main>
+    <div >
       
       <div className="products-container-wrapper">
         <h3 className="bg-heading text-white container">All Products</h3>
@@ -26,6 +26,6 @@ export function ProductCardsGrid({ allProducts , handleGetCartAPI, productLoadin
         ))}
       </div>
       </div>
-    </main>
+    </div>
   );
 }

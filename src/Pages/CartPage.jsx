@@ -7,7 +7,7 @@ import { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { BackgroundCover } from '../utils/utilsFunctions';
 
-export function CartPage({cartItems, handleGetCartAPI, cartLength, setSearchResult, loadingCart}){
+export function CartPage({cartItems, handleGetCartAPI, cartLength,  loadingCart}){
   const [isPhoneNumber, setIsPhoneNumber] = useState(null);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -61,7 +61,7 @@ your phone number to proceed , which will take them to profile page with edith p
     )}
 
      <div>
-       <SideBarHeader cartLength = {cartLength} setSearchResult={setSearchResult} />
+       <SideBarHeader cartLength = {cartLength}  />
        <CartDetails 
          cartItems={cartItems} 
          handleGetCartAPI = { handleGetCartAPI }

@@ -38,8 +38,6 @@ function App() {
   const [cartLength, setCartLength] = useState(0);
   const [loadingCart, setLoadingCart] = useState(false)
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const [searchResult, setSearchResult] = useState([]);
-  console.log(searchResult)
 
   let getAllProductData = async () => {
     setProductLoading(true);
@@ -189,7 +187,6 @@ function App() {
               allProducts={allProducts}
               cartLength={cartLength}
               handleGetCartAPI={handleGetCartAPI}
-              setSearchResult={setSearchResult}
             />
           }
         />
@@ -202,13 +199,12 @@ function App() {
                 handleGetCartAPI={handleGetCartAPI}
                 cartLength={cartLength}
                 loadingCart = {loadingCart}
-                setSearchResult = {setSearchResult}
               />
             }
           />
           <Route
             path="/order"
-            element={<OrderPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI} setSearchResult={setSearchResult} />}
+            element={<OrderPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI}  />}
           />
         </Route>
 
@@ -219,8 +215,6 @@ function App() {
             <ProductSearchPage
               handleGetCartAPI={handleGetCartAPI}
               cartLength={cartLength}
-              setSearchResult={setSearchResult}
-              searchResult= {searchResult}
             />
           }
         />
