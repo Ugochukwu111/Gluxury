@@ -303,6 +303,9 @@ img{
 }
 /* because header is fixed contents hide under so i use this util to push down */
 .padding-top{padding-top: 3em;}
+@media(max-width: 800px){
+.padding-top{padding-top: 5em;}
+}
 /*
  this contains lets the main content of the page strech
  thereby keeping the footer always at the top and the footer always at the bottom
