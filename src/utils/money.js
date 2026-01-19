@@ -1,12 +1,15 @@
 
-export function formatMoney(ammout){
-  if (ammout == null || isNaN(ammout)) {
-    return "₦0"
+export function formatMoney(amount) {
+  if (amount == null || isNaN(amount)) {
+    return "₦ 0.00"
   }
-  return  new Intl.NumberFormat('en-NG', {
-    style: 'currency',
-    currency: 'NGN',
+
+  return new Intl.NumberFormat("en-NG", {
+    style: "currency",
+    currency: "NGN",
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
-  }).format(ammout)
+  })
+    .format(amount)
+    .replace("₦", "₦ ");
 }

@@ -109,8 +109,9 @@
 }
 .product-card .product-price{
   font-weight: 700;
-  font-size: 1rem;
-  color: var(--green);
+  font-size: 1.2rem;
+  font-family: var(--font-heading);
+  color: var(--black);
 }
 
 .product-card  .off-percent{
