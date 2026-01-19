@@ -9,7 +9,7 @@ export function ProductCardsGrid({ allProducts , handleGetCartAPI, productLoadin
     <main>
       
       <div className="products-container-wrapper">
-        <h3 className="bg-heading text-white">All Products</h3>
+        <h3 className="bg-heading text-white container">All Products</h3>
       <div className="container  products-container">
         {
           productLoading

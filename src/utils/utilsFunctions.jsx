@@ -108,7 +108,6 @@ export async function FilterProducts(endpoint, limit = null) {
   }
 
   let url = `${BASE_URL}/api/products/${endpoint}`;
-  console.log(url)
 
   if (limit !== null && limit !== undefined) {
     url += `?limit=${limit}`;

@@ -9,7 +9,7 @@ import dayjs from "dayjs";
 
 import "./OrderPage.css";
 
-export function OrderPage({ cartLength,  handleGetCartAPI }) {
+export function OrderPage({ cartLength,  handleGetCartAPI, setSearchResult }) {
   const [orders, setOrders] = useState([]);
   const [ordersLoading, setOrdersLoading] = useState(false);
 
@@ -36,7 +36,7 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
 
   return (
     <div className="layout-container ">
-      <SideBarHeader cartLength={cartLength}  />
+      <SideBarHeader cartLength={cartLength} setSearchResult={setSearchResult}  />
 
       <div className=" hidden hr">
         <ScrollingInfo className="hidden" />

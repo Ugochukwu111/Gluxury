@@ -3,17 +3,17 @@ import { useState } from "react";
 import { ProductCardsGrid  } from "./ProductCardsGrid"
 import { PackageSearch } from "lucide-react";
 
-export function ProductSearchPage({ handleGetCartAPI, cartLength}){
-   const [results, onResults] = useState([]);
+export function ProductSearchPage({ handleGetCartAPI, cartLength,searchResult, setSearchResult}){
+   
   return(
     <div className="product-search-page-container">
       <SideBarHeader 
-        onResults = {onResults}
+       setSearchResult = {setSearchResult}
         cartLength ={cartLength}
         />
         <div className="d-flex flex-1 flex-column  justify-center">
        {
-        results.length === 0 ?
+        searchResult.length === 0 ?
         <div className="d-flex flex-1 flex-column align-center justify-center">
 
          <PackageSearch size={100} />
@@ -22,7 +22,7 @@ export function ProductSearchPage({ handleGetCartAPI, cartLength}){
          </h2>
         </div>
         :
-          <ProductCardsGrid allProducts={results} handleGetCartAPI={handleGetCartAPI} />
+          <ProductCardsGrid allProducts={searchResult} handleGetCartAPI={handleGetCartAPI} />
        }
          </div>
     </div>

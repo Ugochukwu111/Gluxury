@@ -3,11 +3,15 @@ import { Search,CircleX  } from "lucide-react";
 import axios from "axios";
 import api from "../utils/api.js";
 import "./SearchBar.css";
+import { useNavigate } from "react-router";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 
 export function SearchBar({ placeholder, setSearchResult }) {
   const [query, setQuery] = useState("");
   const [suggestions, setSuggestions] = useState([]);
   const [isFocused, setIsFocused] = useState(false);
+  const navigate = useNavigate()
 
   const cancelSourceRef = useRef(null);
   const containerRef = useRef(null);
@@ -23,7 +27,7 @@ export function SearchBar({ placeholder, setSearchResult }) {
       try {
         cancelSourceRef.current?.cancel();
         cancelSourceRef.current = axios.CancelToken.source();
-        const { data } = await api.get("/api/products/suggestions", {
+        const { data } = await axios.get(`${API_BASE_URL}/api/products/suggestions`, {
           params: { q: query },
           cancelToken: cancelSourceRef.current.token,
         });
@@ -52,9 +56,13 @@ export function SearchBar({ placeholder, setSearchResult }) {
 
   const handleSearch = async (searchQuery = query) => {
     if (!searchQuery.trim()) return;
+    // update URL
+    navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     try {
-      const { data } = await api.get("/api/search", { params: { q: searchQuery } });
+      const { data } = await axios.get(`${API_BASE_URL}/api/products/search`, { params: { q: searchQuery } });
       setSearchResult?.(data);
+      setSearchResult(data);
+      console.log(data)
       setIsFocused(false);
       setSuggestions([]);
       setQuery(searchQuery);

@@ -19,7 +19,7 @@ import { useAuth } from "../context/useContext";
 import "./Header.css";
 import { useState } from "react";
 
-export function Header({ cartLength, onResults, toggleSideBar }) {
+export function Header({ cartLength, setSearchResult, toggleSideBar }) {
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
 
@@ -43,7 +43,7 @@ export function Header({ cartLength, onResults, toggleSideBar }) {
             </button>
             <h1>GLUXURY</h1>
           </div>
-          <SearchBar placeholder="Search for products, bags, and shoes" />
+          <SearchBar setSearchResult={setSearchResult} placeholder="Search for products, bags, and shoes" />
           <ul>
             <li className={`account-list-container `} tabIndex={0}>
               <UserRound />
@@ -128,7 +128,7 @@ export function Header({ cartLength, onResults, toggleSideBar }) {
           </ul>
         </div>
         <div className="d-flex justify-center nav-lower-container">
-          <SearchBar placeholder="Search for products, bags, and shoes" />
+          <SearchBar setSearchResult={setSearchResult} placeholder="Search for products, bags, and shoes" />
         </div>
       </nav>
     </header>

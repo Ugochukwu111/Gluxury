@@ -62,7 +62,7 @@
  margin: 0;
  background-color: var(--text-heading);
  color: var(--white);
- transform: translateY(110%) ;
+ transform: translateY(110%);
  will-change: transform ;
  font-size: .9rem;
  padding-top: .25em;
@@ -70,6 +70,12 @@
 
 .product-card:hover .product-cart-btn{
   transform: translateY(0%)
+}
+
+@media(max-width:800px){
+.product-card  .product-cart-btn{
+transform: translateY(0%);
+}
 }
 
 
