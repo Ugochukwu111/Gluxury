@@ -21,16 +21,17 @@
   position: absolute;
   display: grid;
   top: .6em;
-  left: 1em;
+  left: .7em;
   color: var( --text-muted);
 }
 
-.search-input-container input:focus  .search-input-container svg{
-  color: red;
+.search-input-container:focus-within svg {
+  color: var(--text-link);
+   left: 1em;
 }
 
 .search-input-container input{
   flex: 1;
   padding-left: 2.5em; /*so that  the icon dosent  overlay on the place holder*/
-  
+  box-shadow: 1px 1px 2px var(--text-muted);
 }

@@ -50,14 +50,24 @@ header nav ul li a{
   border-radius: .5rem;
 }
 
-header nav ul svg{
-  /* margin-right: .5em; */
+header nav ul li a.active{
+  background-color: var(--text-light-grey);
+  color: var(--text-heading);
+}
+header nav ul li a.active svg{
+  color: var(--text-heading);
 }
 
 .account-list-container,.help-container{
   position: relative;
   padding: .5em .9em;
   border-radius: .5rem;
+  cursor: pointer;
+}
+
+.account-list-container:hover,
+.help-container:hover{
+  background-color: var(--text-light-grey);
 }
 
 .help-container:focus-within,
@@ -65,9 +75,18 @@ header nav ul svg{
   background-color: var(--text-light-grey);
 }
 
+.help-container:focus-within svg,
+.account-list-container:focus-within svg{
+  color: var(--text-heading);
+}
+
 .help-container:focus-within .drop-down-icon,
 .account-list-container:focus-within .drop-down-icon{
   transform: rotate(-180deg);
+}
+
+.help-container .dropdown-box{
+  left: -8em;
 }
 
 .help-container:focus-within .dropdown-box,
@@ -113,6 +132,8 @@ header nav ul svg{
   transform: scale(1.05);
  
 }
+
+.dropdown-box svg{margin-right: .5em;}
 
 @media(max-width:1200px){
   .hide-mobile{

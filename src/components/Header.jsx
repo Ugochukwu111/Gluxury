@@ -119,11 +119,11 @@ export function Header({ cartLength, onResults, toggleSideBar }) {
               </ul>
             </li>
             <li>
-              <a href="#">
+              <NavLink to="/cart">
                 <span className="cart-number">{cartLength || 0}</span>
                 <ShoppingCart />
                 <span className="hide-mobile d-flex align-center">Cart</span>
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>
