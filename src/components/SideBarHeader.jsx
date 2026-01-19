@@ -23,7 +23,8 @@ export function SideBarHeader({cartLength, onResults}){
       <Header toggleSideBar = {toggleSideBar} 
       cartLength = {cartLength} 
        onResults = {onResults} />
-      <SideBar   
+      <SideBar 
+      cartLength = {cartLength}  
       ref={sideBarNotifier}
       onToggleSideBar = {toggleSideBar} />
     </div>

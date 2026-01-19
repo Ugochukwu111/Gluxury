@@ -530,3 +530,17 @@ img{
 .text-start{text-align: start;}
 .w100{ width: 100%;}
 .M-auto{margin: 0 auto;}
+
+/* number css for cart quantity */
+.cart-number{
+   background-color: var(--red); 
+   color: var(--white);
+   width: 20px;
+   border-radius: 50%;
+   text-align: center;
+   justify-content: center;
+   align-items: center;
+   height: 20px;
+   font-weight: 800;
+   font-size: .9rem;
+  }

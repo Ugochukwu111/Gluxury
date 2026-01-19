@@ -6,7 +6,7 @@ import "./SideBar.css";
 
 import UserIcon from "/images/user.png";
 
-export function SideBar({ref}) {
+export function SideBar({ref, cartLength}) {
 
     const { user ,loading, logOut}= useAuth();
 
@@ -39,7 +39,8 @@ export function SideBar({ref}) {
           <li>
             <NavLink to="/cart">
             <ShoppingCart />
-              Cart
+              Cart &nbsp;
+             <span className="cart-number"> {cartLength || 0}</span>
             </NavLink>
           </li>
           <li>
