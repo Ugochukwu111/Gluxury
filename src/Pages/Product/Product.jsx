@@ -4,7 +4,6 @@ import { Footer } from "../../components/Footer";
 import { ProductCardsGrid } from "./ProductCardsGrid";
 import { SideBarHeader } from "../../components/SideBarHeader";
 import { ScrollingInfo } from "../../components/ScrollingInfo";
-import { ProductCardPrice } from "../../components/ProductCardPrice";
 import { useEffect, useState } from "react";
   
 import { ProductContainer } from '../../components/ProductContainer';
@@ -46,15 +45,17 @@ useEffect(() => {
       </div> */}
       <br />
       <ProductContainer 
-        productCategory='Shoes'
+        productCategory = 'Shoes'
         products = {shoes}
         handleGetCartAPI={handleGetCartAPI}
+        searchQuery = 'shoe'
         />
         <ProductContainer 
-        productCategory='Bags'
+        productCategory = 'Bags'
         headerColor = 'bg-accent-pink'
         products={bags}
         handleGetCartAPI={handleGetCartAPI}
+        searchQuery = 'bag'
         />
       {/* <ProductContainer 
         productCategory="Flash Sales" 

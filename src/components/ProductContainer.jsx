@@ -1,14 +1,22 @@
 
 import { ChevronRight } from 'lucide-react'
 import { ProductCard } from '../Pages/Product/ProductCard'
+import { useNavigate } from 'react-router'
 import './ProductContainer.css'
+import { useState } from 'react'
 
-export  function ProductContainer({productCategory = 'product Category', headerColor= 'bg-heading',handleGetCartAPI, products }) {
+export  function ProductContainer({productCategory = 'product Category', headerColor= 'bg-heading',handleGetCartAPI, products , searchQuery}) {
+  const navigate = useNavigate();
   return (
     <div className=" container product-container ">
       <div className={` ${headerColor} d-flex align-center justify-s-between product-container-header `}>
       <h2 className='text-white'>{productCategory}</h2>
-      <button className='text-white bg-transparent'>See All <ChevronRight /></button>
+      <button
+       onClick={()=>{navigate(`/search?q=${encodeURIComponent(searchQuery)}`);}} 
+       className='text-white bg-transparent'>
+        See All 
+        <ChevronRight />
+      </button>
       </div>
       <div className="product-wrapper">
 
