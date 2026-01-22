@@ -6,7 +6,7 @@ import { renderStars } from "../../utils/utilsFunctions.jsx";
 import { useNavigate } from "react-router-dom";
 import { AddToCartAPI } from "../../utils/utilsFunctions.jsx";
 import { formatMoney } from "../../utils/money.js";
-import { BadgeCheck, CircleX , ShoppingCart  } from "lucide-react";
+import { Heart, ShoppingCart  } from "lucide-react";
 import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
@@ -45,21 +45,8 @@ export function ProductCard({ product, handleGetCartAPI }) {
     >
       <figure>
         {isNew && <span className="product-card-bage">new</span>}
-        <button className="product-like-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.25"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className=""
-          >
-            <path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" />
-          </svg>
+        <button className="product-like-btn d-none">
+          <Heart size={20} />
         </button>
         <img loading="lazy" src={product?.image} alt={product?.name} />
         <figcaption className="off-percent">

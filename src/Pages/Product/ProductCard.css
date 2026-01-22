@@ -99,7 +99,7 @@ transform: translateY(0%);
   background-color: rgba(208, 88, 150, 0.409);
   color: var(--white);
   padding: 0;
-  width: 40px;
+  width: 30px;
   aspect-ratio: 1;
   border-radius: 50% ;
   z-index: 10;
