@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/Footer";
@@ -13,26 +14,28 @@ import { formatMoney } from "../../utils/money";
 import { renderStars } from "../../utils/utilsFunctions";
 import { AddToCartAPI } from "../../utils/utilsFunctions";
 import { GluxNotification } from "../../utils/utilsFunctions";
+import { SideBarHeader } from "../../components/SideBarHeader";
 
 import "./ProductDetailsPage.css";
 
-export function ProductDetailsPage() {
+export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [addToCartMsg, setAddToCartMsg] = useState("");
-  const [notifKey, setNotifKey] = useState(0);
-  const [addedToCart, setAddedToCart] = useState(false);
+
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/api/products/${id}`).then((res) => {
-    setProduct(res.data);
+    axios.get(`${API_BASE_URL}/api/products/id/${id}`).then((res) => {
+      setProduct(res.data);
+      handleGetCartAPI()
     });
   }, [id]);
+
+  
 
   const handleQuantityChange = (e) => {
     setQuantity(Number(e.target.value));
@@ -42,122 +45,118 @@ export function ProductDetailsPage() {
     setIsAddingToCart(true);
     try {
       const res = await AddToCartAPI(productId, quantity);
-      if (!res) {
-        setAddedToCart(false);
-        console.error("No response from AddToCartAPI");
-        return;
-      }
-      setAddedToCart(true);
-      setAddToCartMsg(`${quantity}, Added`);
+      toast.success(`${quantity} item(s) added to cart!`);
     } catch (err) {
-      setAddedToCart(false);
       console.error("Error adding to cart:", err);
-      setAddToCartMsg(`Error adding to cart`);
+      toast.error("Error adding to cart");
     } finally {
       setIsAddingToCart(false);
-      setNotifKey((prev) => prev + 1);
+      handleGetCartAPI()
     }
   };
   return (
     <div>
-      {notifKey > 0 && (
-        <GluxNotification
-          key={notifKey}
-          className={addedToCart ? "success" : "fail"}
-        >
-          {isAddingToCart ? addToCartMsg : addToCartMsg}
-        </GluxNotification>
-      )}
+      <SideBarHeader  cartLength={cartLength}/>
+      <main className="product-details-page-main container">
+        {/* left container || top ( for mobile)*/}
+        <div className="product-details-card">
+          <figure>
+            <img src={product?.image} alt={product?.name} />
+            <button
+              className="previous-btn"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              <ArrowLeft />
+            </button>
+          </figure>
 
-      <main className="product-details-page-main">
-        <div className="container product-details-container">
-          <div className="product-details-card">
-            <figure>
-              <img src={product?.image} alt={product?.name} />
-              <button
-                className="previous-btn"
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowLeft />
-              </button>
-            </figure>
-
-            <div className="text-container">
-              <h2 className="FWB">{product?.name}</h2>
+          <div className="text-container">
+            <div>
+              <h2 className="FWB">
+                {product?.name}
+              </h2>
               <p className="FWB">
-                Description: &nbsp;
                 <span className="text-muted">{product?.description}</span>
               </p>
-              <p className="off-percent">{product?.offPercent * 100}%</p>
-              <br />
-              <div className="d-flex justify-s-between f-wrap product-price-rate-category-container">
-                <div>
-                  <p className="FWB">
-                    Price: &nbsp;
-                    <span className="text-green">
-                      {formatMoney(product?.price)}
-                    </span>
-                    &nbsp; &nbsp;
-                    <del className="text-light-red">
-                      {formatMoney(product?.offPrice)}
-                    </del>
-                  </p>
-                  <span className="FWB">
-                    Rattings: &nbsp;
-                    {renderStars(product?.rating)}
-                  </span>
-                </div>
-                <div>
-                  <p className="FWB">Category: {product?.category}</p>
-                  <p className="FWB">size: {product?.size}</p>
-                </div>
-              </div>
-              <br />
-              <br />
-              <div className="d-flex justify-s-around align-center f-wrap">
-                <button
-                  onClick={() => {
-                    handelAddToCartAPI(product?._id, quantity);
-                  }}
-                  className="bg-heading text-white"
-                >
-                  {isAddingToCart ? (
-                    <>
-                      <LoaderCircle size={20} className={`spin text-white `} />
-                      adding
-                    </>
-                  ) : (
-                    <>
-                      <ShoppingCart size={18} />
-                      Add to cart
-                    </>
-                  )}
-                </button>
+            </div>
+            <hr />
+            <div>
+            <p className="d-flex f-wrap align-center">
+              <span className="FWB details-product-price">
+                {formatMoney(product?.price)}
+              </span>
+              &nbsp; &nbsp;
+              <del className="text-muted">
+                {formatMoney(product?.offPrice)}
+              </del>
+              <span className="off-percent">
+                 {product?.discount * 100 || 0} %
+              </span>
+            </p>
+              <span className="FWB">
+                  {renderStars(product?.rating)}
+                </span>
+                <p className="FWB">Category: {product?.category}
+                </p>
+            </div>
+            <hr />
 
-                <select
-                  onChange={handleQuantityChange}
-                  value={quantity}
-                  name=""
-                  id=""
-                  className="select-quantity"
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                </select>
+            <div className="d-flex justify-s-between f-wrap product-price-rate-category-container">
+              <div>
+                <p className="">
+                  Available sizes :
+                </p>
+                <button>{product?.size}</button>
               </div>
             </div>
+            <div className="d-flex justify-s-around align-center f-wrap">
+              <button
+                onClick={() => {
+                  handelAddToCartAPI(product?._id, quantity);
+                }}
+                className="bg-heading text-white details-add-to-cart-btn"
+              >
+                {isAddingToCart ? (
+                  <>
+                    <LoaderCircle size={20} className={`spin text-white `} />
+                    adding
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart size={18} />
+                    Add to cart
+                  </>
+                )}
+              </button>
+              <select
+                onChange={handleQuantityChange}
+                value={quantity}
+                name=""
+                id=""
+                className="select-quantity"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            <p>
+              <a href="">
+                <u>call +2347045253045 to place an order</u>
+              </a>
+            </p>
           </div>
         </div>
 
+        {/* right container || bottom ( for mobile)*/}
         <div className="shipping-details-container">
           <br />
           <div>

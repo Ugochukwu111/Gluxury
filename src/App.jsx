@@ -208,7 +208,7 @@ function App() {
           />
         </Route>
 
-        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI} />} />
         <Route
           path="/search"
           element={
