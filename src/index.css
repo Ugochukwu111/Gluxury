@@ -87,11 +87,11 @@ h1 {
 }
 
 h2 {
-  font-size: clamp(1.8rem, 3vw + 0.8rem, 3.5rem);
+  font-size: clamp(1.5rem, 3vw + 0.8rem, 2rem);
 }
 
 h3 {
-  font-size: clamp(1.5rem, 2.5vw + 0.6rem, 2.5rem);
+  font-size: clamp(1rem, 2.5vw + 0.6rem, 1.5rem);
 }
 
 h4 {

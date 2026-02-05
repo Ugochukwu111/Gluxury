@@ -1,4 +1,4 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link ,NavLink, useNavigate } from "react-router-dom";
 import {
   Menu,
   UserRound,
@@ -41,7 +41,11 @@ export function Header({ cartLength,  toggleSideBar }) {
             <button onClick={toggleSideBar} className="menu-btn">
               <Menu />
             </button>
+
+            <Link className="logo" to="/">
             <h1>GLUXURY</h1>
+            </Link>
+
           </div>
           <SearchBar  placeholder="Search for products, bags, and shoes" />
           <ul>
@@ -94,19 +98,16 @@ export function Header({ cartLength,  toggleSideBar }) {
                 </li>
                 <li>
                   <a href="">
-                    {" "}
                     <XCircle /> Cancel an Order
                   </a>
                 </li>
                 <li>
                   <a href="">
-                    {" "}
                     <RotateCcw /> Returns and Refunds
                   </a>
                 </li>
                 <li>
                   <a href="">
-                    {" "}
                     <CreditCard /> Make Payments
                   </a>
                 </li>

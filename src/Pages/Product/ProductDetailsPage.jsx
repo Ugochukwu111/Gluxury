@@ -77,9 +77,6 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
               <h2 className="FWB">
                 {product?.name}
               </h2>
-              <p className="FWB">
-                <span className="text-muted">{product?.description}</span>
-              </p>
             </div>
             <hr />
             <div>
