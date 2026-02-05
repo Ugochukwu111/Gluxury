@@ -93,26 +93,26 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
 
                         <div className="order-product-card-info">
                           <div>
-                            <p className="FWB">Name: {item.name}</p>
-                            <p className="FWB">
+                            <p className="">{item.name}</p>
+                            <p className="">
                               Delivery date:{" "}
                               {dayjs(item.deliveryDate).format("DD MMM YYYY")}
                             </p>
-                            <p className="FWB"> Quantity: {item.quantity}</p>
-                            <p className="FWB">
+                            <p className=""> Quantity: {item.quantity}</p>
+                            <p className="">
                               Pice:{" "}
                               <span className="text-green">
                                 {formatMoney(item.price)}
                               </span>{" "}
                             </p>
-                            <p className="FWB">
+                            <p className="">
                               Delivery price:{" "}
                               <span className="text-green">
                                 {formatMoney(item.deliveryPrice)}
                               </span>
                             </p>
-                            <p className="FWB">
-                              Item total:{" "}
+                            <p className="">
+                              Item total:{""}
                               <span className="text-green">
                                 {formatMoney(item.total)}
                               </span>
