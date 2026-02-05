@@ -60,7 +60,9 @@ your phone number to proceed , which will take them to profile page with edith p
       </BackgroundCover>
     )}
 
-     <div>
+     <div   style={{
+          paddingTop:'5em',
+        }}>
        <SideBarHeader cartLength = {cartLength}  />
        <CartDetails 
          cartItems={cartItems} 

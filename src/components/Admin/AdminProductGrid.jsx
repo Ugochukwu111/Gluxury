@@ -7,7 +7,6 @@ import { all } from 'axios'
 
 export function AdminProductGrid({allProducts, setOpenEdithProduct,  handleOpenEdit, setIsDelPopUp,handleOpenDelete}){
   return(
-    console.log(allProducts),
     <div className='container  products-container'>
 
         {allProducts.length === 0 && (

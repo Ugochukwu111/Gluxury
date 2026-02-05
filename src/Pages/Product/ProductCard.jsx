@@ -6,7 +6,7 @@ import { renderStars } from "../../utils/utilsFunctions.jsx";
 import { useNavigate } from "react-router-dom";
 import { AddToCartAPI } from "../../utils/utilsFunctions.jsx";
 import { formatMoney } from "../../utils/money.js";
-import { Heart, ShoppingCart  } from "lucide-react";
+import { Heart, ShoppingCart} from "lucide-react";
 import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
