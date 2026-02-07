@@ -27,13 +27,13 @@ export function AddProductForm({ refreshProducts }) {
     stockquantity: "",
     category: "bag",
     size: "",
-    colors: [],
+    colors: ['#000000'],
   });
 
   const [activePercent, setActivePercent] = useState(null);
   const discountOptions = [0.1, 0.15, 0.2, 0.3, 0.4];
   const [loading, setLoading] = useState(false);
-  const [pendingColor, setPendingColor] = useState("#000000"); 
+  const [pendingColor, setPendingColor] = useState("#ffffff"); 
 
   const updateField = (field, value) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
@@ -53,7 +53,7 @@ export function AddProductForm({ refreshProducts }) {
       stockquantity: "",
       category: "bag",
       size: "",
-      colors: [],
+      colors: ['#000000'],
     });
 
     setActivePercent(null);
