@@ -1,68 +1,69 @@
-import { Upload, Plus, LoaderCircle } from "lucide-react";
+import { Upload, Plus, LoaderCircle, X } from "lucide-react";
 import { useRef, useState } from "react";
-import axios from "axios";
 import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 import api from "../../utils/api";
+import { SketchPicker } from "react-color";
+import { formatMoney } from "../../utils/money";
+import { AvailableColor } from '../../components/AvailableColor'
 
-export function AddProductForm({refreshProducts}) {
+export function AddProductForm({ refreshProducts }) {
   const [isFormActive, setIsFormActive] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
-  const formRef = useRef(null)
+  const [showPicker, setShowPicker] = useState(false);
+  const formRef = useRef(null);
+  const [isSelectingColors, setIsSelectingColors] = useState(false);
 
   const [formValues, setFormValues] = useState({
     image: null,
     rating: 3,
     name: "",
-    description: "",
-    price: "",
-    offPrice: "",
-    offPercent : 0,
-    discount: 0,
-    stockquantity: "",
-    category: "bag",
-    width: "",
-    height: "",
-    size: "",
-  });
-
-  const [activePercent, setActivePercent] = useState(null);
-  const discountOptions = [0.1, 0.15, 0.2, 0.3, 0.4];
-  const [loading, setLoading] = useState(false);
-
-  const updateField = (field, value) => {
-    setFormValues((prev) => ({ ...prev, [field]: value }));
-  };
-
-  const resetForm = () => {
-  formRef.current.reset();
-
-  setFormValues({
-    image: null,
-    rating: 3,
-    name: "",
-    description: "",
     price: "",
     offPrice: "",
     offPercent: 0,
     discount: 0,
     stockquantity: "",
     category: "bag",
-    width: "",
-    height: "",
     size: "",
+    colors: [],
   });
 
-  setActivePercent(null);
-};
+  const [activePercent, setActivePercent] = useState(null);
+  const discountOptions = [0.1, 0.15, 0.2, 0.3, 0.4];
+  const [loading, setLoading] = useState(false);
+  const [pendingColor, setPendingColor] = useState("#000000"); 
+
+  const updateField = (field, value) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+  };
+
+  const resetForm = () => {
+    formRef.current.reset();
+
+    setFormValues({
+      image: null,
+      rating: 3,
+      name: "",
+      price: "",
+      offPrice: "",
+      offPercent: 0,
+      discount: 0,
+      stockquantity: "",
+      category: "bag",
+      size: "",
+      colors: [],
+    });
+
+    setActivePercent(null);
+  };
 
   const handleDiscountClick = (percent) => {
     setActivePercent(percent);
     updateField("discount", percent);
-     formValues.offPercent = percent;
-     console.log(formValues.offPercent)
+    formValues.offPercent = percent;
+    console.log(formValues.offPercent);
     const off = Number(formValues.price) + Number(formValues.price * percent);
     updateField("offPrice", off.toFixed(2));
   };
@@ -82,14 +83,10 @@ export function AddProductForm({refreshProducts}) {
         if (key !== "image") formData.append(key, formValues[key]);
       });
 
-      const res = await api.post(
-        "/api/products/upload",
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      await refreshProducts()
+      const res = await api.post("/api/products/upload", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      await refreshProducts();
       setNotifKey((prev) => prev + 1);
       setIsSuccessful(true);
       resetForm();
@@ -100,6 +97,20 @@ export function AddProductForm({refreshProducts}) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const confirmColorAdd = () => {
+    if (!formValues.colors.includes(pendingColor)) {
+      updateField("colors", [...formValues.colors, pendingColor]);
+    }
+  };
+
+  const removeColor = (hex) => {
+    updateField(
+      "colors",
+      (formValues.colors = formValues.colors.filter((c) => c !== hex)),
+    );
+    console.log(hex);
   };
 
   return (
@@ -117,7 +128,9 @@ export function AddProductForm({refreshProducts}) {
           key={notifKey}
           className={isSuccessful ? "success" : "fail"}
         >
-          {isSuccessful ? "Product Added to Inventory" : "Upload Failed. Please try again"}
+          {isSuccessful
+            ? "Product Added to Inventory"
+            : "Upload Failed. Please try again"}
         </GluxNotification>
       )}
       <div>
@@ -141,208 +154,224 @@ export function AddProductForm({refreshProducts}) {
           onKeyDown={(e) => e.key === "Enter" && e.preventDefault()}
           className={`${isFormActive ? "form-active" : "closed-form"}`}
         >
-          <div className="image-input-container">
-            <div className="image-upload-text-content">
-              <Upload className="M-auto" />
-              <p>Drop your image here or click to browse</p>
-              <span className="text-muted">PNG, JPG up to 10MB</span>
-            </div>
+          <div className="form-content-container">
+            <div className="image-input-container">
+              <div className="image-upload-text-content">
+                <Upload className="M-auto" />
+                <p>Drop your image here or click to browse</p>
+                <span className="text-muted">PNG, JPG up to 10MB</span>
+              </div>
 
-            <label htmlFor="image-input">Product Image:</label>
-            <input
-              type="file"
-              accept="image/*"
-              id="image-input"
-              onChange={(e) => updateField("image", e.target.files[0])}
-              required
-            />
-          </div>
-
-          <br />
-
-          <div className="d-flex align-center justify-center">
-            <span>{renderStars(formValues.rating)}</span>
-
-            <input
-              type="number"
-              step={0.5}
-              min={0}
-              max={5}
-              value={formValues.rating}
-              onChange={(e) =>
-                updateField("rating", Math.min(Number(e.target.value), 5))
-              }
-              id="product-rate-count"
-            />
-          </div>
-
-          <br />
-
-          <div className="d-flex product-name-details-container justify-s-around f-wrap ">
-            <div className="w100">
-              <label htmlFor="product-name">Product name</label>
+              <label htmlFor="image-input">Product Image:</label>
               <input
-                type="text"
-                id="product-name"
-                placeholder="Eg: etheral silk green bag"
-                className="M-auto"
-                value={formValues.name}
-                onChange={(e) => updateField("name", e.target.value)}
-                minLength={5}
-                maxLength={125}
+                type="file"
+                accept="image/*"
+                id="image-input"
+                onChange={(e) => updateField("image", e.target.files[0])}
                 required
               />
+              {/* <img src={formValues.image} alt={formValues.name} /> */}
             </div>
 
-            <div className="w100">
-              <label htmlFor="product-description">Description:</label>
-              <input
-                type="text"
-                className="w-100"
-                id="product-description"
-                value={formValues.description}
-                onChange={(e) => updateField("description", e.target.value)}
-                minLength={5}
-                maxLength={250}
-                required
-              />
-            </div>
-          </div>
+            <div className="form-input-container">
 
-          <br />
+              <div className="d-flex product-name-details-container f-wrap align-center  ">
+                <div className="">
+                  <label htmlFor="product-name">Product name</label>
+                  <input
+                    type="text"
+                    id="product-name"
+                    placeholder="Eg: etheral silk green bag"
+                    className="M-auto"
+                    value={formValues.name}
+                    onChange={(e) => updateField("name", e.target.value)}
+                    minLength={5}
+                    maxLength={125}
+                    required
+                  />
+                </div>
+                <div className="d-flex align-center justify-center">
+                  <span>{renderStars(formValues.rating)}</span>
 
-          <div>
-            <div className="d-flex justify-center off-price-btn-container">
-              {discountOptions.map((percent) => (
-                <button
-                  key={percent}
-                  type="button"
-                  onClick={() => handleDiscountClick(percent)}
-                  className={
-                    activePercent === percent ? "bg-green text-white" : ""
-                  }
-                >
-                  {percent * 100}%
-                </button>
-              ))}
-            </div>
-
-            <div className="d-flex justify-s-around align-center f-wrap">
-              <div>
-                <label htmlFor="product-price">Price($)</label>
-                <input
-                  type="number"
-                  step={1}
-                  id="product-price"
-                  placeholder="5000$"
-                  value={formValues.price}
-                  onChange={(e) => {
-                    const value = e.target.value;
-                    updateField("price", value);
-
-                    if (activePercent && value !== "") {
-                      const off = Number(value) + Number(value) * activePercent;
-                      updateField("offPrice", off.toFixed(2));
-                    } else {
-                      updateField("offPrice", "");
+                  <input
+                    type="number"
+                    step={0.5}
+                    min={0}
+                    max={5}
+                    value={formValues.rating}
+                    onChange={(e) =>
+                      updateField("rating", Math.min(Number(e.target.value), 5))
                     }
-                  }}
-                  required
-                />
+                    id="product-rate-count"
+                  />
+                </div>
               </div>
 
-              <p className="FWB">
-                $<del>{formValues.offPrice}</del>
-              </p>
-            </div>
-          </div>
+              <div className="d-flex justify-s-around align-center f-wrap">
+                <div>
+                  <label htmlFor="product-price">Price(₦)</label>
+                  <input
+                    type="number"
+                    step={1}
+                    id="product-price"
+                    placeholder="5000$"
+                    value={formValues.price}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      updateField("price", value);
 
-          <br />
+                      if (activePercent && value !== "") {
+                        const off =
+                          Number(value) + Number(value) * activePercent;
+                        updateField("offPrice", off.toFixed(2));
+                      } else {
+                        updateField("offPrice", "");
+                      }
+                    }}
+                    required
+                  />
+                </div>
 
-          <div className="d-flex align-center justify-s-evenly f-wrap">
-            <div>
-              <label htmlFor="product-stock">Stock Quantity:</label>
-              <input
-                type="number"
-                step={1}
-                placeholder="50"
-                id="product-stock"
-                value={formValues.stockquantity}
-                onChange={(e) => {
-                  const value = e.target.value;
-                  updateField("stockquantity", value === "" ? "" : value);
-                }}
-                required
-              />
-            </div>
-
-            <div className="category-container">
-              <label htmlFor="product-category">Category:</label>
-              <select
-                id="product-category"
-                value={formValues.category}
-                onChange={(e) => updateField("category", e.target.value)}
-              >
-                <option value="bag">Bag</option>
-                <option value="shoe">Shoe</option>
-              </select>
-            </div>
-          </div>
-
-          <br />
-
-          {formValues.category === "shoe" && (
-            <div className="">
-              <label className="text-center">Size</label>
-              <select
-                id="product-size"
-                className=" "
-                value={formValues.size}
-                onChange={(e) => updateField("size", e.target.value)}
-              >
-                {[35, 36, 37, 38, 39, 40].map((s) => (
-                  <option key={s} value={s}>
-                    {s}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
-
-          {formValues.category === "bag" && (
-            <div className="justify-s-around d-flex f-wrap">
-              <div>
-                <label htmlFor="product-width">width:</label>
-                <input
-                  type="number"
-                  id="product-width"
-                  value={formValues.width}
-                  onChange={(e) => updateField("width", e.target.value)}
-                />
+                <p className="">
+                <del> { formatMoney(formValues.offPrice) }</del>
+                </p>
               </div>
 
               <div>
-                <label htmlFor="product-height">height:</label>
-                <input
-                  type="number"
-                  id="product-height"
-                  value={formValues.height}
-                  onChange={(e) => updateField("height", e.target.value)}
-                />
+                <div className="d-flex justify-center off-price-btn-container">
+                  {discountOptions.map((percent) => (
+                    <button
+                      key={percent}
+                      type="button"
+                      onClick={() => handleDiscountClick(percent)}
+                      className={
+                        activePercent === percent ? "bg-green text-white" : ""
+                      }
+                    >
+                      {percent * 100}%
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              <div className="d-flex align-center justify-s-evenly f-wrap">
+                <div>
+                  <label htmlFor="product-stock">Stock Quantity:</label>
+                  <input
+                    type="number"
+                    step={1}
+                    placeholder="50"
+                    id="product-stock"
+                    value={formValues.stockquantity}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      updateField("stockquantity", value === "" ? "" : value);
+                    }}
+                    required
+                  />
+                </div>
+
+                <div className="category-container">
+                  <label htmlFor="product-category">Category:</label>
+                  <select
+                    id="product-category"
+                    value={formValues.category}
+                    onChange={(e) => updateField("category", e.target.value)}
+                  >
+                    <option value="bag">Bag</option>
+                    <option value="shoe">Shoe</option>
+                  </select>
+                </div>
+              </div>
+
+
+              {formValues.category === "shoe" && (
+                <div className="">
+                  <label className="text-center">Size</label>
+                  <select
+                    id="product-size"
+                    className=" "
+                    value={formValues.size}
+                    onChange={(e) => updateField("size", e.target.value)}
+                  >
+                    {[35, 36, 37, 38, 39, 40].map((s) => (
+                      <option key={s} value={s}>
+                        {s}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
+
+              <div className="picker-container">
+                <button
+                  className="bg-accent-pink text-white"
+                  type="button"
+                  onClick={() => setIsSelectingColors(!isSelectingColors)}
+                >
+                  {isSelectingColors
+                    ? "Close Color Picker"
+                    : "Select available colors"}
+                </button>
+                <div
+                  className={` ${isSelectingColors ? "d-flex" : "d-none"} flex-column`}
+                >
+                  <SketchPicker
+                    color={pendingColor}
+                    onChangeComplete={(color) => setPendingColor(color.hex)}
+                    disableAlpha={true}
+                  />
+
+                  <button
+                    style={{ backgroundColor: `${pendingColor}` }}
+                    className="add-btn"
+                    type="button"
+                    onClick={confirmColorAdd}
+                  >
+                    Add Color
+                  </button>
+                </div>
+
+                {/* <div className="product-colors-container">
+                  {formValues.colors.map((color, index) => {
+                    return (
+                      <div
+                        key={color + index}
+                        style={{ backgroundColor: `${color}` }}
+                        className="color-box"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => removeColor(color)}
+                        >
+                          <X size={13} />
+                        </button>
+                      </div>
+                    );
+                  })}
+                </div> */}
+              <div className="product-colors-container">
+               {
+                formValues.colors.map((color)=>(
+                  <AvailableColor key={color} color={color}  removeColor={removeColor} 
+                  isAdmin={true}   />
+                ))
+               }
+               </div>
+
+                <br />
+              </div>
+
+              <button
+                type="submit"
+                className="add-product-button  text-white"
+                disabled={loading}
+              >
+                Add Product
+                <Plus />
+              </button>
             </div>
-          )}
-
-          <br />
-
-          <button
-            type="submit"
-            className="add-product-button bg-green text-white"
-            disabled={loading}
-          >
-            Add Product
-            <Plus />
-          </button>
+          </div>
         </form>
       </div>
 

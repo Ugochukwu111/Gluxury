@@ -2,6 +2,73 @@
   padding: 2em 0em;
 }
 
+.form-content-container{
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  gap: 1em;
+  flex-wrap: wrap;
+
+
+}
+
+
+.form-content-container .form-input-container{
+  flex: 1;
+  padding: .8em;
+  border-radius: .5rem;
+   display: flex;
+   flex-direction: column;
+   justify-content: start;
+   align-items: start;
+}
+
+.form-input-container >div{
+  margin-bottom: .5em;
+}
+
+.picker-container{
+  display: flex;
+  gap: .5em;
+  align-items: start;
+  background-color: var( --bg-gradient-start);
+  padding: 1em .5em;
+  border-radius: .5rem;
+  margin: .5em 0;
+}
+
+.product-colors-container{
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.product-colors-container .color-box{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  position: relative;
+}
+
+.product-colors-container .color-box button{
+  position: absolute;
+  padding: .15em .001em;
+  right: -.8em;
+  top: -.8em;
+  background-color: var(--white);
+  border: 1px solid var(--text-muted);
+}
+
+.picker-container .add-btn{
+  padding: .5em 1em;
+  color: var(--white);
+  border: none;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+
 .add-products-section .text-content{
   max-width: 500px;
 }
@@ -41,10 +108,9 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .image-input-container{
-  width:  100%;
-  max-width: 800px;
-  margin: 0 auto;
   height: 300px;
+   max-width: 400px;
+   min-width: 200px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -94,9 +160,11 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .add-products-section .add-product-button{
-  margin: 0 auto;
   width: 100%;
   max-width: 600px;
+  border-radius: .5rem;
+  background-color: var(--text-heading);
+  color: var(--bg-gradient-end);
  
 }
 #product-size{
@@ -124,7 +192,8 @@ input[type="file"]::-webkit-file-upload-button {
 }
 
 .add-products-section form.form-active{
-    height: auto;
+  height: auto;
   overflow: auto;
   opacity: 1;
 }
+
