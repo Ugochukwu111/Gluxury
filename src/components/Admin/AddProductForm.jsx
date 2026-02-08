@@ -25,7 +25,7 @@ export function AddProductForm({ refreshProducts }) {
     discount: 0,
     stockquantity: "",
     category: "bag",
-    size: ['38'],
+    size: [],
     colors: ["#000000"],
   });
 
@@ -51,7 +51,7 @@ export function AddProductForm({ refreshProducts }) {
       discount: 0,
       stockquantity: "",
       category: "bag",
-      size: ['38'],
+      size: [],
       colors: ["#000000"],
     });
 
@@ -288,25 +288,9 @@ export function AddProductForm({ refreshProducts }) {
                 </div>
               </div>
 
-              {formValues.category === "shoe" && (
-                <div className="">
-                  <label className="text-center">Size</label>
-                  <select
-                    id="product-size"
-                    className=" "
-                    value={formValues.size}
-                    onChange={(e) => updateField("size", e.target.value)}
-                  >
-                    {[35, 36, 37, 38, 39, 40].map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
 
-              <SelectSize
+             {formValues.category === "shoe" && (
+                            <SelectSize
                 sizes={sizes} // all available sizes
                 selectedSizes={formValues.size} // the currently selected sizes
                 onAddSize={(size) =>
@@ -319,6 +303,8 @@ export function AddProductForm({ refreshProducts }) {
                   )
                 }
               />
+             )}
+
 
               <SelectColor
                 colors={formValues.colors}
