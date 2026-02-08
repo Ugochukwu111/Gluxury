@@ -14,6 +14,7 @@ export function AddProductForm({ refreshProducts }) {
   const [notifKey, setNotifKey] = useState(0);
   const formRef = useRef(null);
   const sizes = [35, 36, 37, 38, 39, 40];
+  const [imagePreview, setImagePreview] = useState(null);
 
   const [formValues, setFormValues] = useState({
     image: null,
@@ -101,22 +102,10 @@ export function AddProductForm({ refreshProducts }) {
       setIsSuccessful(false);
     } finally {
       setLoading(false);
+      setImagePreview(null)
     }
   };
 
-  const confirmColorAdd = () => {
-    if (!formValues.colors.includes(pendingColor)) {
-      updateField("colors", [...formValues.colors, pendingColor]);
-    }
-  };
-
-  const removeColor = (hex) => {
-    updateField(
-      "colors",
-      (formValues.colors = formValues.colors.filter((c) => c !== hex)),
-    );
-    console.log(hex);
-  };
 
   return (
     <section className="add-products-section">
@@ -166,16 +155,28 @@ export function AddProductForm({ refreshProducts }) {
                 <p>Drop your image here or click to browse</p>
                 <span className="text-muted">PNG, JPG up to 10MB</span>
               </div>
-
-              <label htmlFor="image-input">Product Image:</label>
               <input
                 type="file"
                 accept="image/*"
                 id="image-input"
-                onChange={(e) => updateField("image", e.target.files[0])}
+                onChange={(e) => {
+                  const file = e.target.files[0];
+                  if (file) {
+                    updateField("image", file); // store file for upload
+                    const previewUrl = URL.createObjectURL(file); // create preview
+                    setImagePreview(previewUrl);
+                  }
+                }}
                 required
               />
-              {/* <img src={formValues.image} alt={formValues.name} /> */}
+              {imagePreview && (
+                <div className="image-preview-container">
+                  <img
+                    src={imagePreview}
+                    alt={formValues.name || "Product Preview"}
+                  />
+                </div>
+              )}
             </div>
 
             <div className="form-input-container">
@@ -288,23 +289,21 @@ export function AddProductForm({ refreshProducts }) {
                 </div>
               </div>
 
-
-             {formValues.category === "shoe" && (
-                            <SelectSize
-                sizes={sizes} // all available sizes
-                selectedSizes={formValues.size} // the currently selected sizes
-                onAddSize={(size) =>
-                  updateField("size", [...formValues.size, size])
-                }
-                onRemoveSize={(size) =>
-                  updateField(
-                    "size",
-                    formValues.size.filter((s) => s !== size),
-                  )
-                }
-              />
-             )}
-
+              {formValues.category === "shoe" && (
+                <SelectSize
+                  sizes={sizes} // all available sizes
+                  selectedSizes={formValues.size} // the currently selected sizes
+                  onAddSize={(size) =>
+                    updateField("size", [...formValues.size, size])
+                  }
+                  onRemoveSize={(size) =>
+                    updateField(
+                      "size",
+                      formValues.size.filter((s) => s !== size),
+                    )
+                  }
+                />
+              )}
 
               <SelectColor
                 colors={formValues.colors}

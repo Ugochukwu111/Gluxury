@@ -27,6 +27,12 @@
   margin-bottom: .5em;
 }
 
+.image-preview-container{
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+}
+
 .picker-container{
   display: flex;
   gap: .5em;
@@ -119,11 +125,13 @@ input[type="file"]::-webkit-file-upload-button {
 #image-input{
   flex: 1;
   padding: 0;
-  border: 5px dotted var(--text-link);
+  border: 5px solid var(--text-muted);
   border-radius: 0;
   display: grid;
   place-items: center;
   max-width: 800px;
+  position: relative;
+  outline: none;
 }
 
 .add-products-section input{
