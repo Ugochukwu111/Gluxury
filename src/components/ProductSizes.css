@@ -1,0 +1,25 @@
+
+
+.selected-size{
+  position: relative;
+  height: 30px;
+  width: 30px;
+  padding: .5em;
+  border: 1px solid var(--text-muted);
+  border-radius: 50%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-weight: 700;
+  background-color: var(--text-heading);
+  color: var(--white);
+}
+
+.selected-size button{
+  position: absolute;
+  padding: .15em .001em;
+  right: -.8em;
+  top: -.8em;
+  background-color: var(--white);
+  border: 1px solid var(--text-heading);
+}

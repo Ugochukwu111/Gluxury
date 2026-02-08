@@ -13,8 +13,9 @@ import {
 import { formatMoney } from "../../utils/money";
 import { renderStars } from "../../utils/utilsFunctions";
 import { AddToCartAPI } from "../../utils/utilsFunctions";
-import { GluxNotification } from "../../utils/utilsFunctions";
 import { SideBarHeader } from "../../components/SideBarHeader";
+import { AvailableColor } from "../../components/AvailableColor";
+import { ProductSizes } from "../../components/ProductSizes";
 
 import "./ProductDetailsPage.css";
 
@@ -31,6 +32,7 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
   useEffect(() => {
     axios.get(`${API_BASE_URL}/api/products/id/${id}`).then((res) => {
       setProduct(res.data);
+      console.log(res.data);
       handleGetCartAPI()
     });
   }, [id]);
@@ -55,7 +57,7 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
     }
   };
   return (
-    <div>
+    <div className="bg-main">
       <SideBarHeader  cartLength={cartLength}/>
       <main className="product-details-page-main container">
         {/* left container || top ( for mobile)*/}
@@ -105,9 +107,43 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
                 <p className="">
                   Available sizes :
                 </p>
-                <button>{product?.size}</button>
+                <div className="d-flex available-sizes-container">
+                 {
+                  product?.size && product.size.length > 0 ? (
+                    product.size.map((size) => (
+                      <ProductSizes 
+                      key={size} 
+                      size={size} 
+                      onRemoveSize={() => {}} 
+                      isAdmin={false}
+                        />
+                    ))
+                  ) : (
+                    <p className="text-muted">No sizes available</p>
+                  )
+                 }
+                 </div>
               </div>
             </div>
+
+            <div>
+              {product?.colors && product.colors.length > 0 && (
+                <div>
+                  <p>Available colors:</p>
+                  <div className="d-flex f-wrap">
+                    {product.colors.map((color, index) => (
+                      <AvailableColor 
+                        key={index} 
+                        color={color} 
+                        removeColor={()=>{}}
+                        isAdmin={false} 
+                        />
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
             <div className="d-flex justify-s-around align-center f-wrap">
               <button
                 onClick={() => {

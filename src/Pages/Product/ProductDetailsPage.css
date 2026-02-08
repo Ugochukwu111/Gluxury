@@ -89,6 +89,16 @@
   flex: .3;
 }
 
+.available-sizes-container {
+  gap: .25em;
+}
+
+.available-sizes-container span{
+  background-color: var(--bg-gradient-start);
+  color: var(--text-heading);
+  border: 2px solid var(--text-heading);
+}
+
 
 
 

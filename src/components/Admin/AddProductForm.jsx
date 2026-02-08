@@ -4,17 +4,16 @@ import { renderStars } from "../../utils/utilsFunctions";
 import "./AddProductForm.css";
 import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 import api from "../../utils/api";
-import { SketchPicker } from "react-color";
 import { formatMoney } from "../../utils/money";
-import { AvailableColor } from '../../components/AvailableColor'
+import { SelectColor } from "../../components/SelectColor";
+import { SelectSize } from "../../components/SelectSize";
 
 export function AddProductForm({ refreshProducts }) {
   const [isFormActive, setIsFormActive] = useState(false);
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
-  const [showPicker, setShowPicker] = useState(false);
   const formRef = useRef(null);
-  const [isSelectingColors, setIsSelectingColors] = useState(false);
+  const sizes = [35, 36, 37, 38, 39, 40];
 
   const [formValues, setFormValues] = useState({
     image: null,
@@ -26,14 +25,14 @@ export function AddProductForm({ refreshProducts }) {
     discount: 0,
     stockquantity: "",
     category: "bag",
-    size: "",
-    colors: ['#000000'],
+    size: ['38'],
+    colors: ["#000000"],
   });
 
   const [activePercent, setActivePercent] = useState(null);
   const discountOptions = [0.1, 0.15, 0.2, 0.3, 0.4];
   const [loading, setLoading] = useState(false);
-  const [pendingColor, setPendingColor] = useState("#ffffff"); 
+  const [pendingColor, setPendingColor] = useState("#ffffff");
 
   const updateField = (field, value) => {
     setFormValues((prev) => ({ ...prev, [field]: value }));
@@ -52,8 +51,8 @@ export function AddProductForm({ refreshProducts }) {
       discount: 0,
       stockquantity: "",
       category: "bag",
-      size: "",
-      colors: ['#000000'],
+      size: ['38'],
+      colors: ["#000000"],
     });
 
     setActivePercent(null);
@@ -80,7 +79,13 @@ export function AddProductForm({ refreshProducts }) {
       }
 
       Object.keys(formValues).forEach((key) => {
-        if (key !== "image") formData.append(key, formValues[key]);
+        if (key === "image") return;
+
+        if (Array.isArray(formValues[key])) {
+          formData.append(key, JSON.stringify(formValues[key]));
+        } else {
+          formData.append(key, formValues[key]);
+        }
       });
 
       const res = await api.post("/api/products/upload", formData, {
@@ -174,7 +179,6 @@ export function AddProductForm({ refreshProducts }) {
             </div>
 
             <div className="form-input-container">
-
               <div className="d-flex product-name-details-container f-wrap align-center  ">
                 <div className="">
                   <label htmlFor="product-name">Product name</label>
@@ -233,7 +237,7 @@ export function AddProductForm({ refreshProducts }) {
                 </div>
 
                 <p className="">
-                <del> { formatMoney(formValues.offPrice) }</del>
+                  <del> {formatMoney(formValues.offPrice)}</del>
                 </p>
               </div>
 
@@ -284,7 +288,6 @@ export function AddProductForm({ refreshProducts }) {
                 </div>
               </div>
 
-
               {formValues.category === "shoe" && (
                 <div className="">
                   <label className="text-center">Size</label>
@@ -303,64 +306,33 @@ export function AddProductForm({ refreshProducts }) {
                 </div>
               )}
 
-              <div className="picker-container">
-                <button
-                  className="bg-accent-pink text-white"
-                  type="button"
-                  onClick={() => setIsSelectingColors(!isSelectingColors)}
-                >
-                  {isSelectingColors
-                    ? "Close Color Picker"
-                    : "Select available colors"}
-                </button>
-                <div
-                  className={` ${isSelectingColors ? "d-flex" : "d-none"} flex-column`}
-                >
-                  <SketchPicker
-                    color={pendingColor}
-                    onChangeComplete={(color) => setPendingColor(color.hex)}
-                    disableAlpha={true}
-                  />
+              <SelectSize
+                sizes={sizes} // all available sizes
+                selectedSizes={formValues.size} // the currently selected sizes
+                onAddSize={(size) =>
+                  updateField("size", [...formValues.size, size])
+                }
+                onRemoveSize={(size) =>
+                  updateField(
+                    "size",
+                    formValues.size.filter((s) => s !== size),
+                  )
+                }
+              />
 
-                  <button
-                    style={{ backgroundColor: `${pendingColor}` }}
-                    className="add-btn"
-                    type="button"
-                    onClick={confirmColorAdd}
-                  >
-                    Add Color
-                  </button>
-                </div>
-
-                {/* <div className="product-colors-container">
-                  {formValues.colors.map((color, index) => {
-                    return (
-                      <div
-                        key={color + index}
-                        style={{ backgroundColor: `${color}` }}
-                        className="color-box"
-                      >
-                        <button
-                          type="button"
-                          onClick={() => removeColor(color)}
-                        >
-                          <X size={13} />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div> */}
-              <div className="product-colors-container">
-               {
-                formValues.colors.map((color)=>(
-                  <AvailableColor key={color} color={color}  removeColor={removeColor} 
-                  isAdmin={true}   />
-                ))
-               }
-               </div>
-
-                <br />
-              </div>
+              <SelectColor
+                colors={formValues.colors}
+                isAdmin={true}
+                onAddColor={(color) =>
+                  updateField("colors", [...formValues.colors, color])
+                }
+                onRemoveColor={(hex) =>
+                  updateField(
+                    "colors",
+                    formValues.colors.filter((c) => c !== hex),
+                  )
+                }
+              />
 
               <button
                 type="submit"

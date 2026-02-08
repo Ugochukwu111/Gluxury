@@ -186,6 +186,7 @@ ul{
   background-color: #25D366; /* WhatsApp green */
   color: #ffffff;           /* WhatsApp text color */
 }
+.bg-main{background-color: var(--bg-main);}
 
 
 
