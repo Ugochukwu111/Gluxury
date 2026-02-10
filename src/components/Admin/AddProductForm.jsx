@@ -102,10 +102,9 @@ export function AddProductForm({ refreshProducts }) {
       setIsSuccessful(false);
     } finally {
       setLoading(false);
-      setImagePreview(null)
+      setImagePreview(null);
     }
   };
-
 
   return (
     <section className="add-products-section">

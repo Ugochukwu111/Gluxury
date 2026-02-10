@@ -16,6 +16,7 @@ import { AddToCartAPI } from "../../utils/utilsFunctions";
 import { SideBarHeader } from "../../components/SideBarHeader";
 import { AvailableColor } from "../../components/AvailableColor";
 import { ProductSizes } from "../../components/ProductSizes";
+import { ShareProduct } from "../../components/ShareProduct";
 
 import "./ProductDetailsPage.css";
 
@@ -32,7 +33,7 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
   useEffect(() => {
     axios.get(`${API_BASE_URL}/api/products/id/${id}`).then((res) => {
       setProduct(res.data);
-      console.log(res.data);
+
       handleGetCartAPI()
     });
   }, [id]);
@@ -58,7 +59,34 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
   };
   return (
     <div className="bg-main">
+        {product && (
+        <>
+          <title>{`${product.name} | Gluxury - Bags & Shoes for the Modern Woman`}</title>
+          <meta name="description" content={`Shop ${product.name} at Gluxury. Premium quality ${product.category} for the stylish Nigerian woman. Get yours for ${formatMoney(product.price)}.`} />
+          
+          {/* Social Media / WhatsApp Rich Previews */}
+          <meta property="og:type" content="product" />
+          <meta property="og:site_name" content="Gluxury" />
+          <meta property="og:title" content={`${product.name} - Gluxury Collection`} />
+          <meta property="og:description" content={`Elevate your look with this ${product.name}. High-end fashion delivered across Nigeria.`} />
+          <meta property="og:image" content={product.image} />
+          <meta property="og:url" content={window.location.href} />
+          
+          {/* Product Specific Metadata */}
+          <meta property="product:price:amount" content={product.price} />
+          <meta property="product:price:currency" content="NGN" />
+          <meta property="product:availability" content="instock" />
+          <meta property="product:condition" content="new" />
+
+          {/* Twitter / X */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={product.name} />
+          <meta name="twitter:description" content={`Check out the ${product.name} on Gluxury.`} />
+          <meta name="twitter:image" content={product.image} />
+        </>)
+      }
       <SideBarHeader  cartLength={cartLength}/>
+
       <main className="product-details-page-main container">
         {/* left container || top ( for mobile)*/}
         <div className="product-details-card">
@@ -72,6 +100,7 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
             >
               <ArrowLeft />
             </button>
+             <ShareProduct product={product}/>
           </figure>
 
           <div className="text-container">
@@ -103,9 +132,10 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
             <hr />
 
             <div className="d-flex justify-s-between f-wrap product-price-rate-category-container">
-              <div>
+              <div className="d-flex f-wrap align-center">
+                
                 <p className="">
-                  Available sizes :
+                  Available sizes: &nbsp;
                 </p>
                 <div className="d-flex available-sizes-container">
                  {
@@ -128,9 +158,9 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
 
             <div>
               {product?.colors && product.colors.length > 0 && (
-                <div>
+                <div className="d-flex f-wrap align-center">
                   <p>Available colors:</p>
-                  <div className="d-flex f-wrap">
+                  <div className="d-flex f-wrap "> &nbsp; &nbsp;
                     {product.colors.map((color, index) => (
                       <AvailableColor 
                         key={index} 
