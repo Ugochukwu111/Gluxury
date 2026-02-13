@@ -136,7 +136,7 @@ header nav ul li a.active svg{
 .dropdown-box svg{margin-right: .5em;}
 
 @media(max-width:1200px){
-  .hide-mobile{
+  header .hide-mobile{
     display: none;
   }
 }
@@ -146,14 +146,14 @@ header nav ul li a.active svg{
   padding:  0;
   padding-top: .15em;
 }
-.search-input-container{
+header .search-input-container{
   display: none;
 }
-.nav-lower-container{
+header .nav-lower-container{
   display: flex;
   padding-bottom: .5em;
 }
-.nav-lower-container .search-input-container{
+header .nav-lower-container .search-input-container{
   display: flex;
 }
 }
