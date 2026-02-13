@@ -132,7 +132,6 @@ export function OrdersCard({ order, setRefreshOrders }) {
               handleDeleteOrders(order?._id);
             }}
             className={`bg-red text-white del-order-btn`}
-            disabled={order.orderStatus == "ready_for_pickup" ? true : false}
           >
             {isDeleting ? (
               <LoaderCircle size={20} className={`spin text-white `} />
