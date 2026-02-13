@@ -6,6 +6,8 @@ import { useAuth } from '../context/useContext';
 import { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { BackgroundCover } from '../utils/utilsFunctions';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
+
 
 export function CartPage({cartItems, handleGetCartAPI, cartLength,  loadingCart}){
   const [isPhoneNumber, setIsPhoneNumber] = useState(null);
@@ -37,6 +39,7 @@ your phone number to proceed , which will take them to profile page with edith p
 
   return (
     <>
+    <WhatsAppIcon/>
     {isPhoneNumber === false && (
       <BackgroundCover>
         <div className="popup"

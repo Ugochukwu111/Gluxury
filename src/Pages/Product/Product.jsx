@@ -1,10 +1,9 @@
 import { useAuth } from "../../context/useContext";
-import { Announcement } from "../../components/Announcement";
 import { Footer } from "../../components/Footer";
 import { ProductCardsGrid } from "./ProductCardsGrid";
 import { SideBarHeader } from "../../components/SideBarHeader";
-import { ScrollingInfo } from "../../components/ScrollingInfo";
 import { useEffect, useState } from "react";
+import { WhatsAppIcon } from "../../components/WhatsAppIcon.jsx";
   
 import { ProductContainer } from '../../components/ProductContainer';
 import { FilterProducts } from "../../utils/utilsFunctions";
@@ -40,10 +39,9 @@ useEffect(() => {
   return (
     <div className="d-flex flex-column padding-top ">
       <SideBarHeader cartLength={cartLength} />
-      {/* <div className="hidden">
-        <ScrollingInfo />
-      </div> */}
+
       <br />
+      <WhatsAppIcon/>
       <ProductContainer 
         productCategory = 'Shoes'
         products = {shoes}

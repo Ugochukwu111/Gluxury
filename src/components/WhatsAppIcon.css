@@ -1,0 +1,43 @@
+.whatsapp-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #25D366;
+  color: white;
+  border-radius: 50%;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+   width: clamp(50px, 5vw, 74px);
+  height: clamp(50px, 5vw, 74px);
+  animation: twinkleJump 4s ease-in-out infinite;
+  z-index: 100;
+}
+
+/* ✨ Twinkle Jump */
+@keyframes twinkleJump {
+  0% {
+    transform: translateY(0) scale(1) rotate(0);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  8% {
+    transform: translateY(-6px) scale(1.05) rotate(-8deg);
+  }
+
+  16% {
+    transform: translateY(-16px) scale(1.1) rotate(8deg);
+    box-shadow: 0 12px 30px rgba(37, 211, 102, 0.6);
+  }
+
+  24% {
+    transform: translateY(0) scale(1) rotate(0);
+  }
+
+  100% {
+    transform: translateY(0) scale(1) rotate(0);
+  }
+}

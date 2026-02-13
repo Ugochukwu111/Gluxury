@@ -6,6 +6,8 @@ import { formatMoney } from "../utils/money.js";
 import { ScrollingInfo } from "../components/ScrollingInfo.jsx";
 import { OrderCardSkeleton } from "../components/Skeleton.jsx";
 import dayjs from "dayjs";
+import { WhatsAppIcon } from "../components/WhatsAppIcon.jsx";
+
 
 import "./OrderPage.css";
 
@@ -42,6 +44,7 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
         <ScrollingInfo className="hidden" />
         <br />
       </div>
+      <WhatsAppIcon/>
 
       <br />
       <main>
