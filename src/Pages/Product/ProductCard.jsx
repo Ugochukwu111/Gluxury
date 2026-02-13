@@ -35,14 +35,20 @@ export function ProductCard({ product, handleGetCartAPI }) {
 
   const daysAgo = dayjs().diff(dayjs(product?.createdAt), "day");
   const isNew = daysAgo <= 14;
-
-
+  console.log(product.stockquantity)
   return (
     <div
       className={`product-card ${
         isAddedToCart === "true" ? "added" : "failed"
       }`}
     >
+      <div className={`low-quantity-overlay ${product?.
+stockquantity
+ <= 0 ? 'show' : ''}`}>
+        <span>Out</span>
+        <span>Of</span>
+        <span>Stock</span>
+      </div>
       <figure>
         {isNew && <span className="product-card-bage">new</span>}
         <button className="product-like-btn d-none">
