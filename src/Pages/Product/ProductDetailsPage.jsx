@@ -172,6 +172,8 @@ export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
                   </div>
                 </div>
               )}
+               <p className="text-end">
+                 In stock &#8594; {product?.stockquantity || 0}</p>
             </div>
 
             <div className="d-flex justify-s-around align-center f-wrap">
