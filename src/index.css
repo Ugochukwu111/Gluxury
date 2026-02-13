@@ -187,6 +187,7 @@ ul{
   color: #ffffff;           /* WhatsApp text color */
 }
 .bg-main{background-color: var(--bg-main);}
+.bg-muted{background-color: var(--text-muted);}
 
 
 
