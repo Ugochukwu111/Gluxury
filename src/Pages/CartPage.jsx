@@ -6,8 +6,10 @@ import { useAuth } from '../context/useContext';
 import { useState , useEffect} from 'react';
 import { useNavigate } from 'react-router';
 import { BackgroundCover } from '../utils/utilsFunctions';
+import { WhatsAppIcon } from '../components/WhatsAppIcon';
 
-export function CartPage({cartItems, handleGetCartAPI, cartLength, onResults, loadingCart}){
+
+export function CartPage({cartItems, handleGetCartAPI, cartLength,  loadingCart}){
   const [isPhoneNumber, setIsPhoneNumber] = useState(null);
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -37,6 +39,7 @@ your phone number to proceed , which will take them to profile page with edith p
 
   return (
     <>
+    <WhatsAppIcon/>
     {isPhoneNumber === false && (
       <BackgroundCover>
         <div className="popup"
@@ -60,8 +63,10 @@ your phone number to proceed , which will take them to profile page with edith p
       </BackgroundCover>
     )}
 
-     <div>
-       <SideBarHeader cartLength = {cartLength} onResults={onResults} />
+     <div   style={{
+          paddingTop:'5em',
+        }}>
+       <SideBarHeader cartLength = {cartLength}  />
        <CartDetails 
          cartItems={cartItems} 
          handleGetCartAPI = { handleGetCartAPI }

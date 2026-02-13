@@ -1,4 +1,5 @@
 import axios from "axios";
+import { toast } from "react-toastify";
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Footer } from "../../components/Footer";
@@ -12,27 +13,32 @@ import {
 import { formatMoney } from "../../utils/money";
 import { renderStars } from "../../utils/utilsFunctions";
 import { AddToCartAPI } from "../../utils/utilsFunctions";
-import { GluxNotification } from "../../utils/utilsFunctions";
+import { SideBarHeader } from "../../components/SideBarHeader";
+import { AvailableColor } from "../../components/AvailableColor";
+import { ProductSizes } from "../../components/ProductSizes";
+import { ShareProduct } from "../../components/ShareProduct";
 
 import "./ProductDetailsPage.css";
 
-export function ProductDetailsPage() {
+export function ProductDetailsPage({cartLength, handleGetCartAPI}) {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState(1);
   const [isAddingToCart, setIsAddingToCart] = useState(false);
-  const [addToCartMsg, setAddToCartMsg] = useState("");
-  const [notifKey, setNotifKey] = useState(0);
-  const [addedToCart, setAddedToCart] = useState(false);
+
 
   const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
   useEffect(() => {
-    axios.get(`${API_BASE_URL}/api/products/${id}`).then((res) => {
-    setProduct(res.data);
+    axios.get(`${API_BASE_URL}/api/products/id/${id}`).then((res) => {
+      setProduct(res.data);
+
+      handleGetCartAPI()
     });
   }, [id]);
+
+  
 
   const handleQuantityChange = (e) => {
     setQuantity(Number(e.target.value));
@@ -42,122 +48,180 @@ export function ProductDetailsPage() {
     setIsAddingToCart(true);
     try {
       const res = await AddToCartAPI(productId, quantity);
-      if (!res) {
-        setAddedToCart(false);
-        console.error("No response from AddToCartAPI");
-        return;
-      }
-      setAddedToCart(true);
-      setAddToCartMsg(`${quantity}, Added`);
+      toast.success(`${quantity} item(s) added to cart!`);
     } catch (err) {
-      setAddedToCart(false);
       console.error("Error adding to cart:", err);
-      setAddToCartMsg(`Error adding to cart`);
+      toast.error("Error adding to cart");
     } finally {
       setIsAddingToCart(false);
-      setNotifKey((prev) => prev + 1);
+      handleGetCartAPI()
     }
   };
   return (
-    <div>
-      {notifKey > 0 && (
-        <GluxNotification
-          key={notifKey}
-          className={addedToCart ? "success" : "fail"}
-        >
-          {isAddingToCart ? addToCartMsg : addToCartMsg}
-        </GluxNotification>
-      )}
+    <div className="bg-main">
+        {product && (
+        <>
+          <title>{`${product.name} | Gluxury - Bags & Shoes for the Modern Woman`}</title>
+          <meta name="description" content={`Shop ${product.name} at Gluxury. Premium quality ${product.category} for the stylish Nigerian woman. Get yours for ${formatMoney(product.price)}.`} />
+          
+          {/* Social Media / WhatsApp Rich Previews */}
+          <meta property="og:type" content="product" />
+          <meta property="og:site_name" content="Gluxury" />
+          <meta property="og:title" content={`${product.name} - Gluxury Collection`} />
+          <meta property="og:description" content={`Elevate your look with this ${product.name}. High-end fashion delivered across Nigeria.`} />
+          <meta property="og:image" content={product.image} />
+          <meta property="og:url" content={window.location.href} />
+          
+          {/* Product Specific Metadata */}
+          <meta property="product:price:amount" content={product.price} />
+          <meta property="product:price:currency" content="NGN" />
+          <meta property="product:availability" content="instock" />
+          <meta property="product:condition" content="new" />
 
-      <main className="product-details-page-main">
-        <div className="container product-details-container">
-          <div className="product-details-card">
-            <figure>
-              <img src={product?.image} alt={product?.name} />
-              <button
-                className="previous-btn"
-                onClick={() => {
-                  navigate(-1);
-                }}
-              >
-                <ArrowLeft />
-              </button>
-            </figure>
+          {/* Twitter / X */}
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:title" content={product.name} />
+          <meta name="twitter:description" content={`Check out the ${product.name} on Gluxury.`} />
+          <meta name="twitter:image" content={product.image} />
+        </>)
+      }
+      <SideBarHeader  cartLength={cartLength}/>
 
-            <div className="text-container">
-              <h2 className="FWB">{product?.name}</h2>
-              <p className="FWB">
-                Description: &nbsp;
-                <span className="text-muted">{product?.description}</span>
-              </p>
-              <p className="off-percent">{product?.offPercent * 100}%</p>
-              <br />
-              <div className="d-flex justify-s-between f-wrap product-price-rate-category-container">
-                <div>
-                  <p className="FWB">
-                    Price: &nbsp;
-                    <span className="text-green">
-                      {formatMoney(product?.price)}
-                    </span>
-                    &nbsp; &nbsp;
-                    <del className="text-light-red">
-                      {formatMoney(product?.offPrice)}
-                    </del>
-                  </p>
-                  <span className="FWB">
-                    Rattings: &nbsp;
-                    {renderStars(product?.rating)}
-                  </span>
-                </div>
-                <div>
-                  <p className="FWB">Category: {product?.category}</p>
-                  <p className="FWB">size: {product?.size}</p>
-                </div>
-              </div>
-              <br />
-              <br />
-              <div className="d-flex justify-s-around align-center f-wrap">
-                <button
-                  onClick={() => {
-                    handelAddToCartAPI(product?._id, quantity);
-                  }}
-                  className="bg-heading text-white"
-                >
-                  {isAddingToCart ? (
-                    <>
-                      <LoaderCircle size={20} className={`spin text-white `} />
-                      adding
-                    </>
+      <main className="product-details-page-main container">
+        {/* left container || top ( for mobile)*/}
+        <div className="product-details-card">
+          <figure>
+            <img src={product?.image} alt={product?.name} />
+            <button
+              className="previous-btn"
+              onClick={() => {
+                navigate(-1);
+              }}
+            >
+              <ArrowLeft />
+            </button>
+             <ShareProduct product={product}/>
+          </figure>
+
+          <div className="text-container">
+            <div>
+              <h2 className="FWB">
+                {product?.name}
+              </h2>
+            </div>
+            <hr />
+            <div>
+            <p className="d-flex f-wrap align-center">
+              <span className="FWB details-product-price">
+                {formatMoney(product?.price)}
+              </span>
+              &nbsp; &nbsp;
+              <del className="text-muted">
+                {formatMoney(product?.offPrice)}
+              </del>
+              <span className="off-percent">
+                 {product?.discount * 100 || 0} %
+              </span>
+            </p>
+              <span className="FWB">
+                  {renderStars(product?.rating)}
+                </span>
+                <p className="FWB">Category: {product?.category}
+                </p>
+            </div>
+            <hr />
+
+            <div className="d-flex justify-s-between f-wrap product-price-rate-category-container">
+              <div className="d-flex f-wrap align-center">
+                
+                <p className="">
+                  Available sizes: &nbsp;
+                </p>
+                <div className="d-flex available-sizes-container">
+                 {
+                  product?.size && product.size.length > 0 ? (
+                    product.size.map((size) => (
+                      <ProductSizes 
+                      key={size} 
+                      size={size} 
+                      onRemoveSize={() => {}} 
+                      isAdmin={false}
+                        />
+                    ))
                   ) : (
-                    <>
-                      <ShoppingCart size={18} />
-                      Add to cart
-                    </>
-                  )}
-                </button>
-
-                <select
-                  onChange={handleQuantityChange}
-                  value={quantity}
-                  name=""
-                  id=""
-                  className="select-quantity"
-                >
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                  <option value="6">6</option>
-                  <option value="7">7</option>
-                  <option value="8">8</option>
-                  <option value="9">9</option>
-                </select>
+                    <p className="text-muted">No sizes available</p>
+                  )
+                 }
+                 </div>
               </div>
             </div>
+
+            <div>
+              {product?.colors && product.colors.length > 0 && (
+                <div className="d-flex f-wrap align-center">
+                  <p>Available colors:</p>
+                  <div className="d-flex f-wrap "> &nbsp; &nbsp;
+                    {product.colors.map((color, index) => (
+                      <AvailableColor 
+                        key={index} 
+                        color={color} 
+                        removeColor={()=>{}}
+                        isAdmin={false} 
+                        />
+                    ))}
+                  </div>
+                </div>
+              )}
+               <p className="text-end">
+                 In stock &#8594; {product?.stockquantity || 0}</p>
+            </div>
+
+            <div className="d-flex justify-s-around align-center f-wrap">
+              <button
+                onClick={() => {
+                  handelAddToCartAPI(product?._id, quantity);
+                }}
+                className="bg-heading text-white details-add-to-cart-btn"
+              >
+                {isAddingToCart ? (
+                  <>
+                    <LoaderCircle size={20} className={`spin text-white `} />
+                    adding
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart size={18} />
+                    Add to cart
+                  </>
+                )}
+              </button>
+              <select
+                onChange={handleQuantityChange}
+                value={quantity}
+                name=""
+                id=""
+                className="select-quantity"
+              >
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+            </div>
+            <p>
+              <a href="">
+                <u>call +2347045253045 to place an order</u>
+              </a>
+            </p>
           </div>
         </div>
 
+        {/* right container || bottom ( for mobile)*/}
         <div className="shipping-details-container">
           <br />
           <div>

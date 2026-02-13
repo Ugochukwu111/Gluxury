@@ -14,6 +14,13 @@ aside{
   box-shadow: 1px 1px 4px var(--text-light-grey);
   transform: translateX(-100%);
   transition: all 300ms ease;
+  padding-top: 5em;
+}
+
+@media(max-width:800px){
+  aside{
+    padding-top: 7em;
+  }
 }
 
 /* overide default margins of buttons @ index.css */

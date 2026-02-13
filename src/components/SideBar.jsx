@@ -6,31 +6,14 @@ import "./SideBar.css";
 
 import UserIcon from "/images/user.png";
 
-export function SideBar({onToggleSideBar, ref}) {
+export function SideBar({ref, cartLength}) {
 
     const { user ,loading, logOut}= useAuth();
 
   return (
     <aside ref = {ref} aria-label = "sidebar closed">
+       
       <div>
-        <button onClick={onToggleSideBar} type="button" className="close-side-bar-btn">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="lucide lucide-x-icon lucide-x"
-          >
-            <path d="M18 6 6 18" />
-            <path d="m6 6 12 12" />
-          </svg>
-        </button>
-
         <div className="user-details-container">
           <figure>
             <img src={UserIcon} alt={user?.fullName|| "profile"} />
@@ -56,7 +39,8 @@ export function SideBar({onToggleSideBar, ref}) {
           <li>
             <NavLink to="/cart">
             <ShoppingCart />
-              Cart
+              Cart &nbsp;
+             <span className="cart-number"> {cartLength || 0}</span>
             </NavLink>
           </li>
           <li>
@@ -80,6 +64,7 @@ export function SideBar({onToggleSideBar, ref}) {
         className="bg-red FWB text-white">
         Log Out
       </button>
+
     </aside>
   );
 }

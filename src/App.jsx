@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import api from "./utils/api";
 import { ProductPage } from "./Pages/Product/Product";
 import { CartPage } from "./Pages/CartPage";
@@ -170,9 +172,11 @@ function App() {
       image: bag2,
     },
   ];
+  
 
   return (
     <>
+    <ToastContainer />
       <Routes>
         <Route
           path="/"
@@ -200,11 +204,11 @@ function App() {
           />
           <Route
             path="/order"
-            element={<OrderPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI} />}
+            element={<OrderPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI}  />}
           />
         </Route>
 
-        <Route path="/product/:id" element={<ProductDetailsPage />} />
+        <Route path="/product/:id" element={<ProductDetailsPage cartLength={cartLength} handleGetCartAPI={handleGetCartAPI} />} />
         <Route
           path="/search"
           element={

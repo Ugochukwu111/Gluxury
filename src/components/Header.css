@@ -1,103 +1,159 @@
-header{
-background-color: var(--text-heading);
-box-shadow: 4px 4px 10px var(--text-muted);
-}
 
-header .lower-container{
-  padding: .6em 1.2em;
-  border-top: 1px solid var(--white);
-}
 
-header ul{
-  list-style: none;
-}
-
-header ul li{
-  margin: 0 .25em;
-  border-radius: .8rem;
-}
-
-header ul li a{
-  align-items: center;
+header nav > div{
   display: flex;
-  border-radius: inherit;
-  transition: all 250ms ease;
-  position: relative;
-  border: 2px solid transparent;
-}
-header ul li a:hover{
-  background-color: var(--text-light-grey);
-}
-header ul li a:hover svg{
-  transform: scale(.9);
-}
-header ul li a svg{
-  margin-right: .5rem;
+  justify-content: space-between;
+  padding: 1em 0;
+  top: 0;
+  background-color: var(--white);
+ 
 }
 
-header ul li a.active{
-  border: 2px solid var(--white);
-}
-header ul li a.active svg{
-  transform: scale(.9);
+.nav-lower-container{
+  display:  none; /* hide container holding mobile search bar on desktop*/
 }
 
-
-.storage-number{
-  font-weight: 700;
-  position: absolute;
-  font-size: 1.1rem;
-  top: -.5em;
-  padding: .2em .3em;
-}
-
- .searchProduct-container{
-  max-width: 600px;
-  position: relative;
-}
-
-#searchProduct{
-  padding: .8em 4em;
-  padding-right: 0;
+header{
+  box-shadow: 2px 2px 2px var(--text-muted);
+  position: fixed;
   width: 100%;
-  border-radius: 2rem;
-  border: 1px solid var(--text-muted);
-  transform: all 250ms ease;
-}
-#searchProduct:focus{
-  outline: 1.5px solid var(--text-link);
+  top: 0;
+  z-index: 200;
+  background-color: var(--white);
 }
 
-.lucide-search-icon{
-  color:  var(--text-muted);
-  position: absolute;
-  top: .6em;
-  left: 1em;
-}
-.searchProduct-container:focus-within .lucide-search-icon{
-  color: var(--text-link);
-  left: 1.5em;
-}
-#sidebar-btn{
-  padding: .25em;
+
+
+header .menu-btn{
+  padding: .15em;
   background-color: transparent;
 }
 
-.header-side-bar-container{
-  position: relative;
+header h1{
+font-size: clamp(1.8rem, 2vw, 2rem);}
+
+header nav ul{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5em;
+  align-items: stretch;
+  font-weight: 700;
 }
 
-@media (max-width: 700px) {
-  header .lower-container{
-  padding: .3em .25em;
+header nav ul li,
+header nav ul li a{
+  width: 100%;
+  text-wrap: nowrap;
+  display: flex;
+  align-items: center;
+  border-radius: .5rem;
 }
-  .nav-container a span  {
+
+header nav ul li a.active{
+  background-color: var(--text-light-grey);
+  color: var(--text-heading);
+}
+header nav ul li a.active svg{
+  color: var(--text-heading);
+}
+
+.account-list-container,.help-container{
+  position: relative;
+  padding: .5em .9em;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.account-list-container:hover,
+.help-container:hover{
+  background-color: var(--text-light-grey);
+}
+
+.help-container:focus-within,
+.account-list-container:focus-within {
+  background-color: var(--text-light-grey);
+}
+
+.help-container:focus-within svg,
+.account-list-container:focus-within svg{
+  color: var(--text-heading);
+}
+
+.help-container:focus-within .drop-down-icon,
+.account-list-container:focus-within .drop-down-icon{
+  transform: rotate(-180deg);
+}
+
+.help-container .dropdown-box{
+  left: -8em;
+}
+
+.help-container:focus-within .dropdown-box,
+.account-list-container:focus-within 
+.dropdown-box{
+     opacity: 1;
+   pointer-events: all;
+}
+
+
+.dropdown-box{
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--white);
+  border-radius: .5rem;
+  box-shadow: 1px 1px 2px var(--text-heading);
+  border: none;
+  text-wrap: nowrap;
+  left: -.8em;
+  opacity: 0;
+  padding: .5em ;
+  pointer-events: none;
+  transition: all 200ms ease;
+  top: 3.5em;
+}
+
+
+.dropdown-box button{
+  width: 100%;
+  border-radius: .5rem;
+  margin: .5em 0;
+    box-shadow: 2px 2px 2px var(--text-muted);
+}
+
+.dropdown-box a{
+   border-radius: .5rem;
+}
+
+.dropdown-box a:hover{
+  background-color: var(--text-light-grey);
+  transform: scale(1.05);
+ 
+}
+
+.dropdown-box svg{margin-right: .5em;}
+
+@media(max-width:1200px){
+  header .hide-mobile{
     display: none;
   }
-   .nav-container a{
-    padding: .5em;
-   }
-   .nav-container a svg{
-    margin-right: 0;
-   }
+}
+@media(max-width:800px){
+
+  header nav > div{
+  padding:  0;
+  padding-top: .15em;
+}
+header .search-input-container{
+  display: none;
+}
+header .nav-lower-container{
+  display: flex;
+  padding-bottom: .5em;
+}
+header .nav-lower-container .search-input-container{
+  display: flex;
+}
 }

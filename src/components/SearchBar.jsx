@@ -1,123 +1,133 @@
-import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation, useSearchParams } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
+import { Search, CircleX } from "lucide-react";
 import axios from "axios";
+import "./SearchBar.css";
+import { useNavigate } from "react-router";
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
-import "./SearchBar.css";
-
-export function SearchBar({ placeholder = "Search", onResults }) {
-  const [searchParams] = useSearchParams();
-  const queryFromURL = searchParams.get("query") || "";
-
-  const [query, setQuery] = useState(queryFromURL);
-  const [loading, setLoading] = useState(false);
-
+export function SearchBar({
+  placeholder,
+  endPointSuggestion = "/api/products/suggestions",
+  searchPath = "/search",
+}) {
+  const [query, setQuery] = useState("");
+  const [suggestions, setSuggestions] = useState([]);
+  const [isFocused, setIsFocused] = useState(false);
   const navigate = useNavigate();
-  const location = useLocation();
-  const inputRef = useRef(null);
 
+  const cancelSourceRef = useRef(null);
+  const containerRef = useRef(null);
 
-  // Get user role once
-  const userRole = localStorage.getItem("user");
-
-  /* ----------------------------------------------------
-     Sync input state from URL (fixes back / forward)
-  -----------------------------------------------------*/
+  // 1. FETCH LOGIC (MUST BE PRESENT)
   useEffect(() => {
-    setQuery(queryFromURL);
-  }, [queryFromURL]);
-
-  /* ----------------------------------------------------
-     Focus input when on search page
-  -----------------------------------------------------*/
-  useEffect(() => {
-    if (location.pathname.startsWith("/search")) {
-      inputRef.current?.focus();
+    if (!query.trim()) {
+      setSuggestions([]);
+      return;
     }
-  }, [location.pathname]);
 
-  /* ----------------------------------------------------
-     Navigate to search page on focus (non-admin)
-  -----------------------------------------------------*/
-  const moveToSearchPage = () => {
-    if (userRole !== "admin" && !location.pathname.startsWith("/search")) {
-      navigate(`/search?query=${encodeURIComponent(query)}`);
-    }
-  };
-
-  /* ----------------------------------------------------
-     Input ONLY updates URL
-  -----------------------------------------------------*/
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setQuery(value);
-
-    const params = new URLSearchParams(location.search);
-    params.set("query", value);
-
-    navigate(
-      { pathname: "/search", search: params.toString() },
-      { replace: true }
-    );
-  };
-
-  /* ----------------------------------------------------
-     Debounced search driven by URL (single source of truth)
-  -----------------------------------------------------*/
-  useEffect(() => {
     const timeout = setTimeout(async () => {
-      if (!queryFromURL.trim()) {
-        onResults([]);
-        return;
-      }
-
       try {
-        setLoading(true);
-        const res = await axios.get(
-          `${API_BASE_URL}/api/products/search?query=${queryFromURL}`
+        cancelSourceRef.current?.cancel();
+        cancelSourceRef.current = axios.CancelToken.source();
+        const { data } = await axios.get(
+          `${API_BASE_URL}${endPointSuggestion}`,
+          {
+            params: { q: query },
+            cancelToken: cancelSourceRef.current.token,
+          },
         );
-        onResults(res.data);
+        setSuggestions(data);
       } catch (err) {
-        console.error("Search failed:", err);
-        onResults([]);
-      } finally {
-        setLoading(false);
+        if (!axios.isCancel(err)) console.error(err);
       }
-    }, 500);
+    }, 300);
 
-    return () => clearTimeout(timeout);
-  }, [queryFromURL, onResults]);
+    return () => {
+      clearTimeout(timeout);
+      cancelSourceRef.current?.cancel();
+    };
+  }, [query]);
+
+  // 2. CLICK OUTSIDE LOGIC
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        containerRef.current &&
+        !containerRef.current.contains(event.target)
+      ) {
+        setIsFocused(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleSearch = async (searchQuery = query) => {
+    if (!searchQuery.trim()) return;
+    const encodedQuery = encodeURIComponent(searchQuery);
+
+    if (searchPath === null) {
+      // stay on page, just update query param
+      navigate(`?q=${encodedQuery}`, { replace: false });
+    } else {
+      navigate(`${searchPath}?q=${encodedQuery}`);
+    }
+  };
 
   return (
-    <div className="d-flex flex-1 justify-center">
-      <div className="flex-1 searchProduct-container">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="18"
-          height="18"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className="lucide-search-icon"
-        >
-          <path d="m21 21-4.34-4.34" />
-          <circle cx="11" cy="11" r="8" />
-        </svg>
-
+    <div className="search-input-container" ref={containerRef}>
+      <div className="search-input-wrapper flex-1">
+        <Search className="search-icon" size={18} />
         <input
-          ref={inputRef}
           type="text"
           placeholder={placeholder}
           value={query}
-          onFocus={moveToSearchPage}
-          onChange={handleChange}
+          onChange={(e) => {
+            const value = e.target.value;
+            setQuery(value);
+
+            // Update URL for live admin search
+            const encodedQuery = encodeURIComponent(value.trim());
+            if (value.trim() === "") {
+              navigate(`?`, { replace: false }); // clears query param → shows all orders
+            } else if (searchPath === null) {
+              navigate(`?q=${encodedQuery}`, { replace: false });
+            }
+          }}
+          onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+          onFocus={() => setIsFocused(true)}
+        />
+        <CircleX
+          tabIndex={0}
+          size={17}
+          className={`cancel-search-icon ${query.length > 0 ? "show" : ""}`}
+          onClick={() => {
+            setQuery("");
+            setSuggestions([]); // hide dropdown
+            navigate(`?`, { replace: false }); // reset URL → fetch all orders
+          }}
         />
 
-        {loading && <span className="search-loading-dot"></span>}
+        {/* Use conditional rendering AND absolute positioning */}
+        {isFocused && suggestions.length > 0 && (
+          <div className="search-values-container">
+            {suggestions.map((item) => (
+              <p
+                key={item.id}
+                onMouseDown={(e) => {
+                  e.preventDefault(); // CRITICAL: prevents blur before search
+                  setQuery(item.name);
+                  handleSearch(item.name);
+                  setIsFocused(false);
+                }}
+              >
+                {item.name}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
+      <button onClick={() => handleSearch()}>Search</button>
     </div>
   );
 }

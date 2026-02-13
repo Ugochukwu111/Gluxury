@@ -1,14 +1,20 @@
 import { useState } from "react";
-import { PackageCheck, LoaderCircle, CheckCheck } from "lucide-react";
+import {
+  PackageCheck,
+  LoaderCircle,
+  CheckCheck,
+  BanknoteArrowDown,
+} from "lucide-react";
 import { formatMoney } from "../../utils/money";
 import {
   GluxNotification,
   GenerateWhatsAppMessage,
 } from "../../utils/utilsFunctions";
+import { toast } from "react-toastify";
+
 
 import { Trash2 } from "lucide-react";
 import dayjs from "dayjs";
-import axios from "axios";
 import api from "../../utils/api";
 
 export function OrdersCard({ order, setRefreshOrders }) {
@@ -17,17 +23,18 @@ export function OrdersCard({ order, setRefreshOrders }) {
   const [notifKey, setNotifKey] = useState(0);
   const [deliveryNotifKey, setdeliveryNotifKey] = useState(0);
   const [delMsg, setdelMsg] = useState("");
+  
+  console.log(order);
 
   const [isDelivering, setIsDelivering] = useState(false);
   const [isDelivered, setIsDelivered] = useState(false);
   const [deliveredMsg, setDeliveredMsg] = useState("");
+  const [isLoadingSold, setIsLoadingSold] = useState(false);
 
   const handleDeleteOrders = async (orderId) => {
     setIsDeleting(true);
     try {
-      const res = await api.delete(
-        `/api/cart/orders/delete/${orderId}`
-      );
+      const res = await api.delete(`/api/cart/orders/delete/${orderId}`);
       setdelMsg(res.data.message);
       setIsDeleted(true);
     } catch (err) {
@@ -44,9 +51,7 @@ export function OrdersCard({ order, setRefreshOrders }) {
   const handleDeliverOrders = async (orderId) => {
     setIsDelivering(true);
     try {
-      const res = await api.patch(
-        `/api/cart/orders/${orderId}/deliver`
-      );
+      const res = await api.patch(`/api/cart/orders/${orderId}/deliver`);
       setDeliveredMsg(res.data.message);
       setIsDelivered(true);
     } catch (err) {
@@ -56,6 +61,21 @@ export function OrdersCard({ order, setRefreshOrders }) {
       setIsDelivering(false);
       setdeliveryNotifKey((prev) => !prev);
       setRefreshOrders((prev) => !prev);
+    }
+  };
+
+  const handleSold = async (orderId) => {
+    console.log('sold clicked id >', orderId)
+    setIsLoadingSold(true);
+    try {
+      const res = await api.put(`/api/cart/orders/${orderId}/mark-sold`);
+      console.log(res.data.message);
+      toast.success(res.data.message || 'Sold successfully')
+    } catch (err) {
+      console.error(err);
+      toast.error(err.response.data.message || 'Try again later')
+    } finally {
+      setIsLoadingSold(false);
     }
   };
 
@@ -77,11 +97,7 @@ export function OrdersCard({ order, setRefreshOrders }) {
           {delMsg}
         </GluxNotification>
       )}
-      <div
-        className={`order-card ${
-          order.orderStatus == "ready_for_pickup" ? "delivered" : ""
-        }`}
-      >
+      <div className={`order-card`}>
         <div className="d-flex align-center justify-s-between f-wrap">
           <p className="f-wrap order-user-info ">
             <span>
@@ -116,7 +132,6 @@ export function OrdersCard({ order, setRefreshOrders }) {
               handleDeleteOrders(order?._id);
             }}
             className={`bg-red text-white del-order-btn`}
-            disabled={order.orderStatus == "ready_for_pickup" ? true : false}
           >
             {isDeleting ? (
               <LoaderCircle size={20} className={`spin text-white `} />
@@ -145,18 +160,17 @@ export function OrdersCard({ order, setRefreshOrders }) {
           <div className=" d-flex f-wrap">
             {order?.items.map((item, index) => {
               return (
-                <div 
-                key={`${order._id}-item-${index}`}
-                className="d-flex order-card-item">
+                <div
+                  key={`${order._id}-item-${index}`}
+                  className="d-flex order-card-item"
+                >
                   <figure>
                     <img src={item.image} alt={item.name} />
                   </figure>
 
                   <div className="">
                     <p className="d-flex flex-column">
-                       <span className="FWB">
-                        Name: {item.name}
-                      </span>
+                      <span className="FWB">Name: {item.name}</span>
                       <span className="FWB">
                         selected delivery date:{" "}
                         {dayjs(item.deliveryDate).format("MMM D, YYYY")}
@@ -183,7 +197,6 @@ export function OrdersCard({ order, setRefreshOrders }) {
                 handleDeliverOrders(order?._id);
               }}
               className="bg-heading text-white"
-              disabled={order.orderStatus == "ready_for_pickup" ? true : false}
             >
               {order.orderStatus == "ready_for_pickup" ? (
                 <>
@@ -192,9 +205,24 @@ export function OrdersCard({ order, setRefreshOrders }) {
                 </>
               ) : (
                 <>
-                  {" "}
                   Deliver
                   <PackageCheck />
+                </>
+              )}
+            </button>
+            <button
+              onClick={()=>{handleSold(order.orderId)}}
+              disabled={
+                order.orderStatus !== "ready_for_pickup" ? true : false
+              }
+              className={` text-white ${order.orderStatus == "sold" ? 'bg-muted' : 'bg-green'}`}
+            >
+              {isLoadingSold ? (
+                <LoaderCircle className={`spin text-white `} />
+              ) : (
+                <>
+                  Sold
+                  <BanknoteArrowDown />
                 </>
               )}
             </button>

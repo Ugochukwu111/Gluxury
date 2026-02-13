@@ -108,7 +108,7 @@ svg{
 }
 
 
-.admin-layout-container .admin-header-main-container header{
+.admin-layout-container .admin-header-main-container .header{
   padding: .25em  1em;
   background-color: var(--white);
   display: flex;
@@ -119,14 +119,14 @@ svg{
   backdrop-filter: blur(8px) saturate(150%);
   -webkit-backdrop-filter: blur(12px) saturate(150%);
 }
-.admin-layout-container .admin-header-main-container header figure{
+.admin-layout-container .admin-header-main-container .header figure{
   width: 30px ;
   height: 30px;
   border-radius: 50%;
   background-color: var(--green);
   margin-right:1em ;
 }
-.admin-layout-container .admin-header-main-container header button{
+.admin-layout-container .admin-header-main-container .header button{
   padding: .56em;
   box-shadow: 2px 2px 4px var(--text-muted);
 }

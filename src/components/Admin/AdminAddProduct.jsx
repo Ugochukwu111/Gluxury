@@ -1,23 +1,28 @@
 import { AddProductForm } from "./AddProductForm";
-import { FilterProducts } from "../FilterProducts";
 import { SearchBar } from "../SearchBar";
 import { AdminProductGrid } from "./AdminProductGrid";
-import { BackgroundCover, GluxNotification  } from "../../utils/utilsFunctions";
+import { BackgroundCover, GluxNotification } from "../../utils/utilsFunctions";
 import { X, Save, ArrowLeft, LoaderCircle } from "lucide-react";
 import "./AdminAddProduct.css";
 import { useState, useRef, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import api from "../../utils/api";
+import { SelectColor } from "../../components/SelectColor";
+import { SelectSize } from "../../components/SelectSize";
 
-export function AdminAddProduct({ allProducts, refreshProducts , handleOpenDelete, adminAnalytics}) {
+export function AdminAddProduct({
+  allProducts,
+  refreshProducts,
+  handleOpenDelete,
+  adminAnalytics,
+}) {
   const [openEdithProduct, setOpenEdithProduct] = useState(false);
   const [edithProduct, setEdithProduct] = useState({});
   const [isSuccessful, setIsSuccessful] = useState(false);
   const [notifKey, setNotifKey] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-const [adminResults, setAdminResults] = useState([]);
+  const [adminResults, setAdminResults] = useState([]);
   const [query, setQuery] = useState("");
-
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -45,30 +50,31 @@ const [adminResults, setAdminResults] = useState([]);
   const handleSave = async () => {
     const formData = new FormData();
     Object.entries(edithProduct).forEach(([key, value]) => {
-      if (key !== "image") formData.append(key, value);
+      if (key === "image" || key === "newImageFile") return;
+
+      if (Array.isArray(value)) {
+        formData.append(key, JSON.stringify(value));
+      } else {
+        formData.append(key, value);
+      }
     });
     if (edithProduct.newImageFile)
       formData.append("image", edithProduct.newImageFile);
     setIsLoading(true);
     console.log("save hit");
     try {
-      let res = await api.put(
-        `/api/products/${edithProduct._id}`,
-        formData,
-        {
-          headers: { "Content-Type": "multipart/form-data" },
-        }
-      );
-      setNotifKey((prev) => prev + 1);
+      let res = await api.put(`/api/products/${edithProduct._id}`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
       setIsSuccessful(true);
     } catch (err) {
       console.log(err);
       setIsSuccessful(false);
-      setNotifKey((prev) => prev + 1);
     } finally {
       refreshProducts();
       setIsLoading(false);
       handleCloseEdit();
+      setNotifKey((prev) => prev + 1);
     }
   };
 
@@ -107,8 +113,6 @@ const [adminResults, setAdminResults] = useState([]);
     navigate("", { replace: false });
   };
 
-
-
   // Initialize query from URL
   useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -119,7 +123,7 @@ const [adminResults, setAdminResults] = useState([]);
       // Optional: fetch results immediately
       api
         .get(`/api/products/search?query=${searchQuery}`)
-        .then(res => setAdminResults(res.data))
+        .then((res) => setAdminResults(res.data))
         .catch(() => setAdminResults([]));
     } else {
       setAdminResults([]);
@@ -137,7 +141,6 @@ const [adminResults, setAdminResults] = useState([]);
     navigate(`?${params.toString()}`, { replace: true });
   }, [query, navigate]);
 
-
   return (
     <>
       {notifKey > 0 && (
@@ -154,21 +157,21 @@ const [adminResults, setAdminResults] = useState([]);
       <AddProductForm refreshProducts={refreshProducts} />
       <div>
         <div className="admin-product-section">
-           <h3 className="text-center">Product Collections:</h3>
-           <br />
+          <h3 className="text-center">Product Collections:</h3>
+          <br />
           <SearchBar
             placeholder="Search in admin..."
             onResults={setAdminResults}
             query={query}
             setQuery={setQuery}
-           />
-           <br />
+          />
+          <br />
           <AdminProductGrid
             handleOpenEdit={handleOpenEdit}
             allProducts={adminResults.length > 0 ? adminResults : allProducts}
             setOpenEdithProduct={setOpenEdithProduct}
             setEdithProduct={setEdithProduct}
-            handleOpenDelete = { handleOpenDelete }
+            handleOpenDelete={handleOpenDelete}
           />
 
           {openEdithProduct && (
@@ -299,68 +302,42 @@ const [adminResults, setAdminResults] = useState([]);
                       </select>
                     </div>
 
-                    <div
-                      className={`${
-                        edithProduct.category == "shoe" ? "d-none" : ""
-                      }`}
-                    >
-                      <label htmlFor="edith-product-width">Width:</label>
-                      <input
-                        type="number"
-                        id="edith-product-width"
-                        value={edithProduct?.width || 0}
-                        onChange={(e) =>
-                          setEdithProduct({
-                            ...edithProduct,
-                            width: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
-                    <div
-                      className={`${
-                        edithProduct.category == "shoe" ? "d-none" : ""
-                      }`}
-                    >
-                      <label htmlFor="edith-product-width">Height:</label>
-                      <input
-                        type="number"
-                        id="edith-product-height"
-                        value={edithProduct?.height || 0}
-                        onChange={(e) =>
-                          setEdithProduct({
-                            ...edithProduct,
-                            height: e.target.value,
-                          })
-                        }
-                      />
-                    </div>
 
-                    <div
-                      className={` ${
-                        edithProduct.category == "shoe" ? "" : "d-none"
-                      }`}
-                    >
-                      <label className="text-center">Size</label>
-                      <select
-                        id="product-size"
-                        className=" "
-                        value={edithProduct?.size || 0}
-                        onChange={(e) =>
-                          setEdithProduct({
-                            ...edithProduct,
-                            size: e.target.value,
-                          })
-                        }
-                      >
-                        {[35, 36, 37, 38, 39, 40].map((s) => (
-                          <option key={s} value={s}>
-                            {s}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
                   </div>
+
+                  <SelectSize
+                    sizes={[35, 36, 37, 38, 39, 40]}
+                    selectedSizes={edithProduct.size || []}
+                    onAddSize={(size) =>
+                      setEdithProduct((prev) => ({
+                        ...prev,
+                        size: [...(prev.size || []), size],
+                      }))
+                    }
+                    onRemoveSize={(size) =>
+                      setEdithProduct((prev) => ({
+                        ...prev,
+                        size: (prev.size || []).filter((s) => s !== size),
+                      }))
+                    }
+                  />
+
+                  <SelectColor
+                    colors={edithProduct.colors || []}
+                    isAdmin={true}
+                    onAddColor={(color) =>
+                      setEdithProduct((prev) => ({
+                        ...prev,
+                        colors: [...(prev.colors || []), color],
+                      }))
+                    }
+                    onRemoveColor={(hex) =>
+                      setEdithProduct((prev) => ({
+                        ...prev,
+                        colors: (prev.colors || []).filter((c) => c !== hex),
+                      }))
+                    }
+                  />
                 </div>
 
                 <div className="d-flex justify-s-between align-center f-wrap  edith-form-btns-container">

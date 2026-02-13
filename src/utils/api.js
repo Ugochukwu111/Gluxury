@@ -22,7 +22,7 @@ api.interceptors.response.use(
     const originalRequest = error.config;
 
     const isLoginPage = window.location.pathname === "/login";
-    const isAuthRequest = originalRequest.url.includes("/login") || originalRequest.url.includes("/logout") || originalRequest.url.includes("/refresh");
+    const isAuthRequest = originalRequest?.url.includes("/login") || originalRequest.url.includes("/logout") || originalRequest.url.includes("/refresh");
 
     if (error.response?.status === 401 && !originalRequest._retry && !isLoginPage && !isAuthRequest) {
       originalRequest._retry = true;

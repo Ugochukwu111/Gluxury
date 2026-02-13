@@ -1,0 +1,17 @@
+.color-box{
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--text-muted);
+  position: relative;
+  margin: .1em;
+}
+
+.color-box button{
+  position: absolute;
+  padding: .15em .001em;
+  right: -.8em;
+  top: -.8em;
+  background-color: var(--white);
+  border: 1px solid var(--text-muted);
+}

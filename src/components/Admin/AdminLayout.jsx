@@ -105,7 +105,7 @@ export function AdminLayout({children}) {
       </div>
 
       <div className="admin-header-main-container">
-        <header className="f-wrap">
+        <div className="header f-wrap">
           <p>
             <span className="text-muted">
               {todaysDate}
@@ -129,7 +129,7 @@ export function AdminLayout({children}) {
             </p>
             <ChevronDown />
           </button>
-        </header>
+        </div>
 
         <main className="admin-layout-container-main">
           {children}

@@ -6,6 +6,8 @@ import { formatMoney } from "../utils/money.js";
 import { ScrollingInfo } from "../components/ScrollingInfo.jsx";
 import { OrderCardSkeleton } from "../components/Skeleton.jsx";
 import dayjs from "dayjs";
+import { WhatsAppIcon } from "../components/WhatsAppIcon.jsx";
+
 
 import "./OrderPage.css";
 
@@ -36,12 +38,13 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
 
   return (
     <div className="layout-container ">
-      <SideBarHeader cartLength={cartLength}  />
+      <SideBarHeader cartLength={cartLength}   />
 
       <div className=" hidden hr">
         <ScrollingInfo className="hidden" />
         <br />
       </div>
+      <WhatsAppIcon/>
 
       <br />
       <main>
@@ -93,26 +96,26 @@ export function OrderPage({ cartLength,  handleGetCartAPI }) {
 
                         <div className="order-product-card-info">
                           <div>
-                            <p className="FWB">Name: {item.name}</p>
-                            <p className="FWB">
+                            <p className="">{item.name}</p>
+                            <p className="">
                               Delivery date:{" "}
                               {dayjs(item.deliveryDate).format("DD MMM YYYY")}
                             </p>
-                            <p className="FWB"> Quantity: {item.quantity}</p>
-                            <p className="FWB">
+                            <p className=""> Quantity: {item.quantity}</p>
+                            <p className="">
                               Pice:{" "}
                               <span className="text-green">
                                 {formatMoney(item.price)}
                               </span>{" "}
                             </p>
-                            <p className="FWB">
+                            <p className="">
                               Delivery price:{" "}
                               <span className="text-green">
                                 {formatMoney(item.deliveryPrice)}
                               </span>
                             </p>
-                            <p className="FWB">
-                              Item total:{" "}
+                            <p className="">
+                              Item total:{""}
                               <span className="text-green">
                                 {formatMoney(item.total)}
                               </span>

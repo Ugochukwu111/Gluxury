@@ -1,44 +1,137 @@
-import { NavLink } from 'react-router-dom'
-import { Menu } from 'lucide-react'
-import { SearchBar } from './SearchBar'
+import { Link ,NavLink, useNavigate } from "react-router-dom";
+import {
+  Menu,
+  UserRound,
+  CircleQuestionMark,
+  ShoppingCart,
+  ChevronDown,
+  Package,
+  Heart,
+  // Place an Order
+  XCircle, // Cancel an Order
+  RotateCcw, // Returns & Refunds
+  CreditCard,
+} from "lucide-react";
+import { FaWhatsapp } from "react-icons/fa";
+import { SearchBar } from "./SearchBar";
+import { useAuth } from "../context/useContext";
 
-import './Header.css'
+import "./Header.css";
+import { useState } from "react";
 
-export function Header({onToggleSideBar, cartLength,  onResults}){
+export function Header({ cartLength,  toggleSideBar }) {
+  const navigate = useNavigate();
+  const { user, logOut } = useAuth();
 
+  const handleLogOutOrLogIn = async () => {
+    if (user) {
+      await logOut();
+    } else {
+      navigate("/log-in");
+    }
+  };
 
-  
-  return(
-     <header className="d-flex flex-column">
-      <NavLink to= "/">
-        <h1 className='logo'>G Luxury</h1>
-      </NavLink>
-      <div className='d-flex justify-s-between align-center lower-container f-wrap container'>
-        <div className='d-flex align-center flex-1'>
-          <button
-           onClick={onToggleSideBar}
-           type="button" id='sidebar-btn' aria-label="hambuger menu">
-            <Menu className='text-white' />
-          </button>
-          <div className='d-flex flex-1 justify-center'>
-            <div className='flex-1 searchProduct-container'>
-               <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="lucide-search-icon"><path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/></svg>
-              <SearchBar  onResults={ onResults} />
-            </div>
+  return (
+    <header className="d-flex flex-column">
+      <div></div>
+
+      <nav className="container">
+        <div>
+          <div className="d-flex align-center">
+            <button onClick={toggleSideBar} className="menu-btn">
+              <Menu />
+            </button>
+
+            <Link className="logo" to="/">
+            <h1>GLUXURY</h1>
+            </Link>
+
           </div>
-        </div>
-        <nav>
-          <ul className='d-flex align-center f-wrap nav-container'>
+          <SearchBar  placeholder="Search for products, bags, and shoes" />
+          <ul>
+            <li className={`account-list-container `} tabIndex={0}>
+              <UserRound />
+              <span className="d-flex align-center hide-mobile">
+                account
+                <ChevronDown className="drop-down-icon" />
+              </span>
+              <ul className={`dropdown-box  "show" : ""}`}>
+                <li>
+                  <button
+                    onClick={handleLogOutOrLogIn}
+                    className="bg-heading text-white"
+                  >
+                    {user ? "Log out" : "Sign In"}
+                  </button>
+                </li>
+                <hr />
+                <li>
+                  <NavLink to="/profile">
+                    <UserRound /> My Profile
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/order">
+                    <Package /> Orders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/whishlist">
+                    {" "}
+                    <Heart /> Whislist
+                  </NavLink>
+                </li>
+              </ul>
+            </li>
+            <li className="help-container" tabIndex={0}>
+              <CircleQuestionMark />
+              <span className="hide-mobile d-flex align-center">
+                Help
+                <ChevronDown className="drop-down-icon" />
+              </span>
+              <ul className="dropdown-box">
+                <li>
+                  <a href="">
+                    <ShoppingCart />
+                    Place an Order
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <XCircle /> Cancel an Order
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <RotateCcw /> Returns and Refunds
+                  </a>
+                </li>
+                <li>
+                  <a href="">
+                    <CreditCard /> Make Payments
+                  </a>
+                </li>
+                <li>
+                  <button className="bg-whatsapp ">
+                    <FaWhatsapp size={20} />
+                    Whats app
+                  </button>
+                </li>
+              </ul>
+            </li>
             <li>
-              <NavLink to="/cart" aria-label="My Cart">
-                <svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="cart-icon text-white"><circle cx="8" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12"/></svg>
-                <span>Cart</span>
-                <p className='storage-number text-white'>{cartLength }</p>
+              <NavLink to="/cart">
+                <span className="cart-number">{cartLength || 0}</span>
+                <ShoppingCart />
+                <span className="hide-mobile d-flex align-center">Cart</span>
               </NavLink>
             </li>
           </ul>
-        </nav>
-      </div>
-     </header>
-  )
+        </div>
+        <div className="d-flex justify-center nav-lower-container">
+          <SearchBar  placeholder="Search for products, bags, and shoes" />
+        </div>
+      </nav>
+    </header>
+  );
 }

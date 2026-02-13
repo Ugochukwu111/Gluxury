@@ -60,7 +60,7 @@ export function CCard({ cartItem, setRefreshCart }) {
         }}
         className="del-btn"
       >
-        <Trash />
+        <Trash size={22} />
       </button>
       <h2>
         Delivery date: {dayjs(selectedDeliveryDate).format("dddd MMMM D")}
@@ -76,15 +76,19 @@ export function CCard({ cartItem, setRefreshCart }) {
           </figure>
 
           <div className="product-info-container">
-            <h3>{cartItem.productId.name}</h3>
-            <p>{cartItem.productId.description}</p>
+            <p className="product-name">
+              {cartItem.productId.name}
+            </p>
             <div>
-              <p className="FWB">
-                <span>price: {formatMoney(cartItem.productId.price)}</span>{" "}
+              <p className="">
+                <span>{formatMoney(cartItem.productId.price)}</span>{" "}
                 &nbsp;
-                <del>{formatMoney(cartItem.productId.offPrice)}</del>
+                <del className="text-muted">
+                  {formatMoney(cartItem.productId.offPrice)}</del>
               </p>
-              <p className="FWB">Quantity: {cartItem.quantity}</p>
+              <p className="">
+                Quantity: {cartItem.quantity}
+              </p>
               <p className="FWB text-green">
                 Total:
                 <span>{formatMoney(cartItem.total)}</span>

@@ -9,7 +9,16 @@ main{
   place-items: center;
   gap: .5em;;
   min-height: 70vh;
+  /* background-color: var(--white);
+  border-radius: .5rem;
+  box-shadow: 1px 1px 2px var(--text-muted); */
 }
+
+.products-container-wrapper h3{
+  padding: .5em 1em;
+  border-radius: .5rem;
+}
+
 
 .empty-cart-container{
   display: grid;
