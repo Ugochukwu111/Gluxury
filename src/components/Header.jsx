@@ -1,4 +1,5 @@
 import { Link ,NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   Menu,
   UserRound,
@@ -7,9 +8,8 @@ import {
   ChevronDown,
   Package,
   Heart,
-  // Place an Order
-  XCircle, // Cancel an Order
-  RotateCcw, // Returns & Refunds
+  XCircle, 
+  RotateCcw, 
   CreditCard,
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
@@ -17,7 +17,7 @@ import { SearchBar } from "./SearchBar";
 import { useAuth } from "../context/useContext";
 
 import "./Header.css";
-import { useState } from "react";
+
 
 export function Header({ cartLength,  toggleSideBar }) {
   const navigate = useNavigate();
@@ -119,11 +119,11 @@ export function Header({ cartLength,  toggleSideBar }) {
                 </li>
               </ul>
             </li>
-            <li>
+            <li >
               <NavLink to="/cart">
                 <span className="cart-number">{cartLength || 0}</span>
-                <ShoppingCart />
-                <span className="hide-mobile d-flex align-center">Cart</span>
+                <ShoppingCart className="text-white" />
+                <span className="hide-mobile d-flex align-center text-white">Cart</span>
               </NavLink>
             </li>
           </ul>
