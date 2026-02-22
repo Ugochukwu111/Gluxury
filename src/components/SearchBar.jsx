@@ -127,7 +127,7 @@ export function SearchBar({
           </div>
         )}
       </div>
-      <button onClick={() => handleSearch()}>Search</button>
+      <button className="bg-accent-pink" onClick={() => handleSearch()}><Search /></button>
     </div>
   );
 }
