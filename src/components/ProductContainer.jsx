@@ -3,9 +3,17 @@ import { ChevronRight } from 'lucide-react'
 import { ProductCard } from '../Pages/Product/ProductCard'
 import { useNavigate } from 'react-router'
 import './ProductContainer.css'
-import { useState } from 'react'
+import { ProductCardSkeleton } from './Skeleton'
 
-export  function ProductContainer({productCategory = 'product Category', headerColor= 'bg-heading',handleGetCartAPI, products , searchQuery}) {
+export  function ProductContainer({
+  productCategory = 'product Category', 
+  headerColor= 'bg-heading',
+  handleGetCartAPI, 
+  products , 
+  searchQuery , 
+  loading
+}) {
+
   const navigate = useNavigate();
   return (
     <div className=" container product-container ">
@@ -19,11 +27,10 @@ export  function ProductContainer({productCategory = 'product Category', headerC
       </button>
       </div>
       <div className="product-wrapper">
-
-        {/* <button className='move-product-btn  move-product-back-btn'>prev</button>
-        <button className=' move-product-btn move-product-forward-btn'>next</button> */}
-        {
-         products?.map((product)=>{
+        {loading ?
+          Array(20).fill(0).map((_, i) => <ProductCardSkeleton key={i} productLoading={loading}/>)
+        :
+        products?.map((product)=>{
           return(
             <ProductCard 
              key={product._id}
