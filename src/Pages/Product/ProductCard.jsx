@@ -6,7 +6,7 @@ import { renderStars } from "../../utils/utilsFunctions.jsx";
 import { useNavigate } from "react-router-dom";
 import { AddToCartAPI } from "../../utils/utilsFunctions.jsx";
 import { formatMoney } from "../../utils/money.js";
-import { Heart, ShoppingCart} from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import "./ProductCard.css";
 
 dayjs.extend(relativeTime);
@@ -35,16 +35,18 @@ export function ProductCard({ product, handleGetCartAPI }) {
 
   const daysAgo = dayjs().diff(dayjs(product?.createdAt), "day");
   const isNew = daysAgo <= 14;
-  console.log(product.stockquantity)
+  console.log(product.stockquantity);
   return (
     <div
       className={`product-card ${
         isAddedToCart === "true" ? "added" : "failed"
       }`}
     >
-      <div className={`low-quantity-overlay ${product?.
-stockquantity
- <= 0 ? 'show' : ''}`}>
+      <div
+        className={`low-quantity-overlay ${
+          product?.stockquantity <= 0 ? "show" : ""
+        }`}
+      >
         <span>Out</span>
         <span>Of</span>
         <span>Stock</span>
@@ -56,33 +58,33 @@ stockquantity
         </button>
         <img loading="lazy" src={product?.image} alt={product?.name} />
         <figcaption className="off-percent">
-          -{product?.offPercent * 100 }%
+          -{product?.offPercent * 100}%
         </figcaption>
       </figure>
       <div className="product-info">
         <div onClick={handleClick} tabIndex={0}>
           <p className="product-name">{product?.name}</p>
-          <span className="product-stars d-flex align-center">{renderStars(product?.rating)} &nbsp; (<span>{product?.rating }</span>) </span>
-              <p className="product-discount-price product-price-container">
-            <span className="product-price"> 
-              {formatMoney(product?.price)}
-            </span>
+          <p className="product-discount-price product-price-container">
+            <span className="product-price">{formatMoney(product?.price)}</span>
             <span className="text-grey">
               <del>{formatMoney(product?.offPrice)}</del>
             </span>
           </p>
+          <span className="product-stars d-flex align-center">
+            {renderStars(product?.rating)} &nbsp; (
+            <span>{product?.rating}</span>){" "}
+          </span>
         </div>
-            <button
-              onClick={() => {
-                handleAddToCart(product?._id);
-              }}
-              className="product-icon product-cart-btn"
-              type="button"
-              aria-label="add to cart button"
-            >
-              <ShoppingCart size={22} /> Add To Cart
-            </button>
-
+        <button
+          onClick={() => {
+            handleAddToCart(product?._id);
+          }}
+          className="product-icon product-cart-btn"
+          type="button"
+          aria-label="add to cart button"
+        >
+          <ShoppingCart size={22} /> Add To Cart
+        </button>
       </div>
     </div>
   );

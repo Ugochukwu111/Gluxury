@@ -18,7 +18,7 @@ export function SideBar({ref, cartLength}) {
           <figure>
             <img src={UserIcon} alt={user?.fullName|| "profile"} />
           </figure>
-          <p className={`user-name text-heading FWB ${loading ? "skeleton-text" : ""}`}>
+          <p className={`user-name FWB ${loading ? "skeleton-text" : ""}`}>
             {user?.fullName || 'John Doe'}
             </p>
           <p className="user-state-country">

@@ -1,4 +1,5 @@
-import { Link ,NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import {
   Menu,
   UserRound,
@@ -6,20 +7,18 @@ import {
   ShoppingCart,
   ChevronDown,
   Package,
-  Heart,
-  // Place an Order
-  XCircle, // Cancel an Order
-  RotateCcw, // Returns & Refunds
+  XCircle,
+  RotateCcw,
   CreditCard,
+  LayoutDashboard
 } from "lucide-react";
 import { FaWhatsapp } from "react-icons/fa";
 import { SearchBar } from "./SearchBar";
 import { useAuth } from "../context/useContext";
 
 import "./Header.css";
-import { useState } from "react";
 
-export function Header({ cartLength,  toggleSideBar }) {
+export function Header({ cartLength, toggleSideBar }) {
   const navigate = useNavigate();
   const { user, logOut } = useAuth();
 
@@ -43,11 +42,10 @@ export function Header({ cartLength,  toggleSideBar }) {
             </button>
 
             <Link className="logo" to="/">
-            <h1>GLUXURY</h1>
+              <h1>GLUXURY</h1>
             </Link>
-
           </div>
-          <SearchBar  placeholder="Search for products, bags, and shoes" />
+          <SearchBar placeholder="Search for products, bags, and shoes" />
           <ul>
             <li className={`account-list-container `} tabIndex={0}>
               <UserRound />
@@ -64,6 +62,17 @@ export function Header({ cartLength,  toggleSideBar }) {
                     {user ? "Log out" : "Sign In"}
                   </button>
                 </li>
+                {user?.role.toLowerCase() === "admin" && (
+                  <li>
+                    <NavLink
+                      to="/admin/dashboard"
+                      className="text-center"
+                    >
+                      <LayoutDashboard />
+                      Dashboard
+                    </NavLink>
+                  </li>
+                )}
                 <hr />
                 <li>
                   <NavLink to="/profile">
@@ -73,12 +82,6 @@ export function Header({ cartLength,  toggleSideBar }) {
                 <li>
                   <NavLink to="/order">
                     <Package /> Orders
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to="/whishlist">
-                    {" "}
-                    <Heart /> Whislist
                   </NavLink>
                 </li>
               </ul>
@@ -122,14 +125,16 @@ export function Header({ cartLength,  toggleSideBar }) {
             <li>
               <NavLink to="/cart">
                 <span className="cart-number">{cartLength || 0}</span>
-                <ShoppingCart />
-                <span className="hide-mobile d-flex align-center">Cart</span>
+                <ShoppingCart className="text-white" />
+                <span className="hide-mobile d-flex align-center text-white">
+                  Cart
+                </span>
               </NavLink>
             </li>
           </ul>
         </div>
         <div className="d-flex justify-center nav-lower-container">
-          <SearchBar  placeholder="Search for products, bags, and shoes" />
+          <SearchBar placeholder="Search for products, bags, and shoes" />
         </div>
       </nav>
     </header>

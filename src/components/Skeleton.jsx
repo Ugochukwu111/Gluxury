@@ -1,29 +1,58 @@
-import "../Pages/Product/ProductCard";
+import "../Pages/Product/ProductCard.css";
 import "./Skeleton.css";
 import "./CartDetails.css"; 
 import "../Pages/OrderPage.css"; 
+import { ShoppingCart } from "lucide-react";
 
-export function ProductCardSkeleton({productLoading}) {
+export function ProductCardSkeleton({ productLoading }) {
   return (
     <div className={`product-card is-skeleton ${!productLoading ? "fade-out" : ""}`}>
+      {/* Out of stock overlay */}
+      <div className={`low-quantity-overlay show`}>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+        <span>&nbsp;</span>
+      </div>
+
       <figure>
+        {/* New badge placeholder */}
+        <span className="product-card-bage skeleton skeleton-text">&nbsp;</span>
+
+        {/* Like button placeholder */}
+        <button className="product-like-btn d-none skeleton skeleton-btn">&nbsp;</button>
+
+        {/* Image placeholder */}
         <div className="skeleton skeleton-image"></div>
+
+        {/* Discount placeholder */}
+        <figcaption className="off-percent skeleton skeleton-text">&nbsp;</figcaption>
       </figure>
 
       <div className="product-info">
-        <div>
-          <p className="product-name skeleton skeleton-text"></p>
-          <span className="product-stars skeleton skeleton-stars"></span>
-          <p className="product-short-description skeleton skeleton-text"></p>
+        <div tabIndex={0}>
+          {/* Product name */}
+          <p className="product-name skeleton skeleton-text">&nbsp;</p>
+
+          {/* Price container */}
+          <p className="product-discount-price product-price-container">
+            <span className="product-price skeleton skeleton-text">&nbsp;</span>
+            <span className="text-grey">
+              <del className="skeleton skeleton-text">&nbsp;</del>
+            </span>
+          </p>
+
+          {/* Stars */}
+          <span className="product-stars d-flex align-center skeleton skeleton-stars">&nbsp;</span>
         </div>
 
-        <div className="d-flex justify-s-between align-center product-price-container">
-          <p className="product-discount-price skeleton skeleton-text"></p>
-
-          <div className="d-flex flex-column align-center p-relative">
-            <button className="product-icon product-cart-btn skeleton skeleton-btn"></button>
-          </div>
-        </div>
+        {/* Add to cart button */}
+        <button
+          className="product-icon product-cart-btn skeleton skeleton-btn"
+          type="button"
+          aria-label="add to cart button"
+        >
+          <ShoppingCart size={22} /> &nbsp;
+        </button>
       </div>
     </div>
   );

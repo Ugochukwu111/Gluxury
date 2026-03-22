@@ -5,8 +5,7 @@ header nav > div{
   justify-content: space-between;
   padding: 1em 0;
   top: 0;
-  background-color: var(--white);
- 
+  background-color: var(--text-heading); 
 }
 
 .nav-lower-container{
@@ -19,7 +18,10 @@ header{
   width: 100%;
   top: 0;
   z-index: 200;
-  background-color: var(--white);
+}
+
+header h1{
+  color: var(--white);
 }
 
 
@@ -27,6 +29,7 @@ header{
 header .menu-btn{
   padding: .15em;
   background-color: transparent;
+  color: var(--white);
 }
 
 header h1{
@@ -36,7 +39,7 @@ header nav ul{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: .5em;
+  gap: .15em;
   align-items: stretch;
   font-weight: 700;
 }
@@ -48,7 +51,10 @@ header nav ul li a{
   display: flex;
   align-items: center;
   border-radius: .5rem;
+  padding: .2em;
 }
+
+
 
 header nav ul li a.active{
   background-color: var(--text-light-grey);
@@ -63,6 +69,7 @@ header nav ul li a.active svg{
   padding: .5em .9em;
   border-radius: .5rem;
   cursor: pointer;
+  color: var(--white);
 }
 
 .account-list-container:hover,
@@ -156,4 +163,12 @@ header .nav-lower-container{
 header .nav-lower-container .search-input-container{
   display: flex;
 }
+header svg{
+  width: 20px;
+}
+
+.account-list-container,.help-container{
+  padding: .25em .3em;
+}
+
 }
